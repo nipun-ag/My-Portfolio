@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Training — Nipun Aggarwal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #07080f;
+  --ink: #0c0d16;
+  --surface: #10111c;
+  --surface2: #161724;
+  --border: #1c1d2e;
+  --border2: #252638;
+  --text: #c8cce0;
+  --muted: #52546e;
+  --dim: #2e3048;
+  --white: #eceef8;
+  --accent: #4f7cff;
+  --accent2: #00c8ff;
+  --red: #ff4455;
+  --gold: #f0a050;
+  --green: #30d980;
+  --purple: #9b6ef3;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Crimson Pro', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 17px; line-height: 1.6; overflow-x: hidden; }
+
+/* GRID BG */
+.grid-bg { position:fixed; inset:0; background-image: linear-gradient(rgba(79,124,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(79,124,255,0.03) 1px, transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  display: flex; align-items:center; justify-content:space-between;
+  padding: 1rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(7,8,15,0.95);
+  backdrop-filter: blur(16px);
+}
+.nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
+.nav-logo-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); animation:pulse 2s infinite; }
+.nav-logo-text { font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.15em; color:var(--white); text-transform:uppercase; }
+.nav-back { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:color .2s; }
+.nav-back:hover { color:var(--accent2); }
+.nav-domain-tag { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent2); background:rgba(0,200,255,0.08); border:1px solid rgba(0,200,255,0.2); padding:0.35rem 0.8rem; border-radius:2px; }
+
+/* PAGE HERO */
+.page-hero {
+  padding: 8rem 3rem 5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index:1; overflow:hidden;
+}
+
+.page-hero-bg {
+  position: absolute; inset:0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(0,200,255,0.06) 0%, transparent 60%);
+  pointer-events:none;
+}
+
+.breadcrumb {
+  display: flex; align-items:center; gap:0.5rem;
+  font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.15em;
+  color:var(--muted); text-transform:uppercase; margin-bottom:1.5rem;
+}
+.breadcrumb a { color:var(--muted); text-decoration:none; transition:color .2s; }
+.breadcrumb a:hover { color:var(--accent); }
+.breadcrumb span { color:var(--dim); }
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 10rem);
+  line-height: 0.88; letter-spacing:0.02em;
+  color: var(--white); margin-bottom:1.5rem;
+}
+.page-title span {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.page-hero-meta {
+  display: flex; gap:3rem; flex-wrap:wrap;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.meta-item { display:flex; flex-direction:column; gap:0.3rem; }
+.meta-label { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
+.meta-val { font-size:0.95rem; color:var(--white); font-weight:600; }
+
+/* STICKY TAB NAV */
+.tab-nav {
+  position: sticky; top:57px; z-index:90;
+  background: rgba(7,8,15,0.97); backdrop-filter:blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; gap:0;
+  padding: 0 3rem;
+}
+.tab-btn {
+  font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--muted); background:none; border:none;
+  padding:1rem 1.5rem; cursor:pointer; position:relative;
+  transition:color .2s; text-decoration:none; display:block;
+  border-bottom: 2px solid transparent; margin-bottom:-1px;
+}
+.tab-btn:hover { color:var(--text); }
+.tab-btn.active { color:var(--accent2); border-bottom-color:var(--accent2); }
+
+/* SECTION WRAPPER */
+.content-section {
+  padding: 5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index:1;
+}
+.content-section:last-child { border-bottom:none; }
+
+/* SECTION HEADER */
+.sec-eyebrow {
+  display:flex; align-items:center; gap:0.75rem;
+  font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.3em;
+  text-transform:uppercase; margin-bottom:1rem;
+}
+.sec-eyebrow-dot { width:8px; height:8px; border-radius:50%; }
+
+.sec-heading {
+  font-family:var(--font-display); font-size:clamp(2.5rem,5vw,5.5rem);
+  color:var(--white); letter-spacing:0.03em; line-height:0.9; margin-bottom:1rem;
+}
+
+.sec-desc {
+  font-style:italic; font-weight:300; font-size:1.05rem;
+  color:var(--muted); max-width:640px; line-height:1.8; margin-bottom:3rem;
+}
+
+/* TWO COL LAYOUT */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
+.three-col { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:2rem; }
+
+/* =================== PLACEHOLDER SYSTEM =================== */
+.placeholder-block {
+  border: 1px dashed var(--border2);
+  border-radius:6px;
+  padding: 2rem;
+  position: relative;
+  background: rgba(255,255,255,0.01);
+}
+.placeholder-block::before {
+  content: 'ADD YOUR CONTENT HERE';
+  position:absolute; top:-0.6em; left:1rem;
+  font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.2em;
+  background:var(--bg); color:var(--dim); padding:0 0.5rem;
+}
+.placeholder-hint {
+  font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.1em;
+  color:var(--dim); line-height:1.8;
+}
+.placeholder-hint strong { color:var(--muted); }
+
+/* =================== RED TEAMING =================== */
+.attack-card {
+  background:var(--ink); border:1px solid var(--border2); border-radius:6px;
+  overflow:hidden; transition:border-color .2s;
+}
+.attack-card:hover { border-color:rgba(255,68,85,0.3); }
+
+.attack-card-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.25rem;
+  background:var(--surface); border-bottom:1px solid var(--border);
+}
+.attack-type-badge {
+  font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.15em;
+  text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:2px;
+}
+.severity-badge {
+  font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.1em;
+  text-transform:uppercase; padding:0.2rem 0.5rem; border-radius:2px;
+}
+.sev-critical { background:rgba(255,68,85,0.12); color:var(--red); border:1px solid rgba(255,68,85,0.25); }
+.sev-high { background:rgba(240,160,80,0.12); color:var(--gold); border:1px solid rgba(240,160,80,0.25); }
+.sev-medium { background:rgba(79,124,255,0.12); color:var(--accent); border:1px solid rgba(79,124,255,0.25); }
+
+.attack-card-body { padding:1.25rem; }
+
+.attack-row {
+  display:grid; grid-template-columns:90px 1fr;
+  gap:0.75rem; padding:0.6rem 0;
+  border-bottom:1px solid rgba(28,29,46,0.6);
+  font-size:0.88rem;
+}
+.attack-row:last-child { border-bottom:none; }
+.attack-row-label { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; padding-top:0.15rem; }
+.attack-row-val { color:var(--text); line-height:1.5; }
+.attack-row-val.redacted {
+  background:var(--red); color:var(--red);
+  border-radius:2px; user-select:none; font-size:0.75rem;
+  display:inline-block; padding:0.1rem 0.4rem; letter-spacing:0.05em;
+}
+.attack-row-val.fix { color:var(--green); }
+
+/* METHODOLOGY BOX */
+.method-box {
+  background:var(--surface); border:1px solid var(--border2); border-radius:6px;
+  padding:2rem; margin-bottom:2rem;
+}
+.method-steps { display:flex; flex-direction:column; gap:0; }
+.method-step {
+  display:grid; grid-template-columns:32px 1fr;
+  gap:1rem; padding:1rem 0;
+  border-bottom:1px solid var(--border);
+}
+.method-step:last-child { border-bottom:none; }
+.step-num {
+  width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-size:0.6rem; font-weight:500;
+  flex-shrink:0; margin-top:0.1rem;
+}
+.step-title { font-weight:600; color:var(--white); font-size:0.95rem; margin-bottom:0.25rem; }
+.step-desc { font-size:0.88rem; color:var(--muted); font-style:italic; line-height:1.6; }
+
+/* ATTACK TAXONOMY */
+.taxonomy-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden;
+  margin-bottom:2rem;
+}
+.taxonomy-item {
+  background:var(--ink); padding:1.25rem;
+  transition:background .2s;
+}
+.taxonomy-item:hover { background:var(--surface2); }
+.taxonomy-item-icon { font-size:1.3rem; margin-bottom:0.6rem; }
+.taxonomy-item-name { font-family:var(--font-display); font-size:1.1rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.4rem; }
+.taxonomy-item-desc { font-size:0.8rem; color:var(--muted); font-style:italic; line-height:1.5; }
+
+/* =================== AI EVALUATION =================== */
+.eval-example {
+  background:var(--ink); border:1px solid var(--border2); border-radius:6px;
+  overflow:hidden; margin-bottom:1.5rem;
+}
+.eval-example-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.25rem; background:var(--surface); border-bottom:1px solid var(--border);
+}
+.eval-ex-label { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
+.eval-verdict { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; padding:0.2rem 0.6rem; border-radius:2px; }
+.verdict-pass { background:rgba(48,217,128,0.1); color:var(--green); border:1px solid rgba(48,217,128,0.25); }
+.verdict-fail { background:rgba(255,68,85,0.1); color:var(--red); border:1px solid rgba(255,68,85,0.25); }
+.verdict-partial { background:rgba(240,160,80,0.1); color:var(--gold); border:1px solid rgba(240,160,80,0.25); }
+
+.eval-cols { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.eval-col { padding:1.25rem; }
+.eval-col:first-child { border-right:1px solid var(--border); }
+.eval-col-label { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; }
+.eval-col-text { font-size:0.9rem; color:var(--text); line-height:1.7; font-style:italic; }
+
+.eval-scores {
+  padding:1.25rem; border-top:1px solid var(--border);
+  display:grid; grid-template-columns:repeat(5,1fr); gap:1rem;
+}
+.eval-score-item { display:flex; flex-direction:column; gap:0.4rem; }
+.eval-score-label { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; }
+.eval-score-bar { height:4px; background:var(--border2); border-radius:2px; overflow:hidden; }
+.eval-score-fill { height:100%; border-radius:2px; }
+.eval-score-num { font-family:var(--font-mono); font-size:0.62rem; color:var(--white); }
+
+/* RUBRIC TABLE */
+.rubric-table { width:100%; border-collapse:collapse; font-size:0.88rem; margin-bottom:2rem; }
+.rubric-table th { text-align:left; padding:0.75rem 1rem; font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--surface); }
+.rubric-table td { padding:0.9rem 1rem; border-bottom:1px solid rgba(28,29,46,0.5); vertical-align:top; line-height:1.5; }
+.rubric-table tr:last-child td { border-bottom:none; }
+.rubric-table tr:hover td { background:rgba(255,255,255,0.01); }
+.rubric-dim { font-weight:600; color:var(--white); }
+.rubric-weight { font-family:var(--font-mono); font-size:0.65rem; color:var(--accent); }
+
+/* =================== DATA ANNOTATION =================== */
+/* ANN SUB-SECTIONS */
+.ann-subsection {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.ann-sub-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sc, var(--accent2));
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ann-sub-label::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--sc, var(--accent2));
+}
+.ann-tab {
+  flex:1; padding:0.85rem; text-align:center;
+  font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--muted); background:var(--ink);
+  border:none; cursor:pointer; transition:all .2s;
+  border-right:1px solid var(--border2);
+}
+.ann-tab:last-child { border-right:none; }
+.ann-tab.active { background:var(--surface2); color:var(--white); }
+.ann-tab:hover:not(.active) { background:var(--surface); color:var(--text); }
+
+.ann-panel { display:none; }
+.ann-panel.active { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+
+.ann-visual {
+  background:var(--surface); border:1px solid var(--border2); border-radius:6px;
+  aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.ann-visual-placeholder {
+  display:flex; flex-direction:column; align-items:center; gap:1rem; text-align:center;
+}
+.ann-visual-icon { font-size:2.5rem; opacity:0.4; }
+.ann-visual-label { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.2em; color:var(--dim); text-transform:uppercase; }
+.ann-visual-hint { font-size:0.8rem; color:var(--dim); font-style:italic; max-width:200px; line-height:1.5; }
+
+.ann-info { display:flex; flex-direction:column; gap:1rem; }
+.ann-info-title { font-family:var(--font-display); font-size:1.8rem; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.ann-info-desc { font-style:italic; font-weight:300; color:var(--muted); font-size:0.95rem; line-height:1.8; }
+
+.ann-label-schema { background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:1rem; }
+.ann-schema-title { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; }
+.ann-label-list { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.ann-label {
+  font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.08em;
+  padding:0.25rem 0.6rem; border-radius:2px; border:1px solid;
+}
+
+.ann-challenges { display:flex; flex-direction:column; gap:0.5rem; }
+.ann-challenge { display:flex; gap:0.75rem; font-size:0.85rem; align-items:flex-start; }
+.ann-challenge-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:0.45rem; }
+
+/* STATS STRIP */
+.stats-strip {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border); border-radius:4px;
+  overflow:hidden; margin-bottom:3rem;
+}
+.strip-stat { background:var(--ink); padding:1.5rem; text-align:center; }
+.strip-num { font-family:var(--font-display); font-size:2.5rem; letter-spacing:0.03em; line-height:1; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.4rem; }
+.strip-label { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
+
+/* FOOTER */
+.page-footer { border-top:1px solid var(--border); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
+.footer-back { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-back:hover { color:var(--accent); }
+.footer-next { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent2); text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:opacity .2s; }
+.footer-next:hover { opacity:0.8; }
+
+/* ANIMATIONS */
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .page-hero,.content-section{padding-left:1.5rem;padding-right:1.5rem;}
+  .two-col,.three-col,.taxonomy-grid,.eval-cols,.eval-scores{grid-template-columns:1fr;}
+  .ann-panel.active{grid-template-columns:1fr;}
+  .stats-strip{grid-template-columns:1fr 1fr;}
+  .tab-nav{padding:0 1.5rem;overflow-x:auto;}
+  .page-footer{padding:1.5rem;flex-direction:column;gap:1rem;}
+}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    <div class="nav-logo-text">Nipun Aggarwal</div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+  <div class="nav-domain-tag">🧠 LLM Training</div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>/</span>
+    <span style="color:var(--accent2)">LLM Training</span>
+  </div>
+  <h1 class="page-title">LLM<br><span>TRAINING</span></h1>
+  <p style="font-style:italic;font-weight:300;color:var(--muted);font-size:1.1rem;max-width:600px;line-height:1.8;margin-bottom:2rem;">
+    End-to-end contribution to large language model development — adversarially stress-testing safety guardrails, evaluating model outputs for quality and compliance, and building high-quality training datasets through video annotation.
+  </p>
+  <div class="page-hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Companies</span>
+      <span class="meta-val">Mercor · Turing</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Sub-domains</span>
+      <span class="meta-val">Red Teaming · Output Evaluation · Data Annotation</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Models Worked On</span>
+      <span class="meta-val">Large Language Models (LLMs)</span>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY TABS -->
+<div class="tab-nav">
+  <a href="#red-teaming" class="tab-btn active" onclick="setTab(this)">⚔️ Red Teaming</a>
+  <a href="#evaluation" class="tab-btn" onclick="setTab(this)">🤖 Output Evaluation</a>
+  <a href="#annotation-robotic" class="tab-btn" onclick="setTab(this)">🎬 Data Annotation</a>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: RED TEAMING -->
+<!-- ============================================================ -->
+<section class="content-section" id="red-teaming">
+  <h2 class="sec-heading" style="color:var(--red)">RED TEAMING</h2>
+  <p class="sec-desc">Adversarially stress-testing large language models to find safety vulnerabilities, policy gaps, and alignment failures before they reach users. Every attack is documented, classified by severity, and reported with remediation recommendations.</p>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="strip-stat">
+      <div class="strip-num">50+</div>
+      <div class="strip-label">Attack Scenarios Tested</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num">4</div>
+      <div class="strip-label">Attack Strategies</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num"><!-- ADD -->—</div>
+      <div class="strip-label">Vulnerabilities Found</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num"><!-- ADD -->—</div>
+      <div class="strip-label">Critical Issues</div>
+    </div>
+  </div>
+
+  <!-- ATTACK TAXONOMY -->
+  <div style="margin-bottom:2rem;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Attack Taxonomy</div>
+    <div class="taxonomy-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="taxonomy-item">
+        <div class="taxonomy-item-icon">📖</div>
+        <div class="taxonomy-item-name">FICTIONALIZATION</div>
+        <div class="taxonomy-item-desc">Wrapping harmful requests inside fictional narratives, stories, or creative writing contexts to bypass content filters</div>
+      </div>
+      <div class="taxonomy-item">
+        <div class="taxonomy-item-icon">🌍</div>
+        <div class="taxonomy-item-name">OTHER WORLDS</div>
+        <div class="taxonomy-item-desc">Constructing hypothetical alternate worlds with "different rules" where normal safety guidelines supposedly don't apply</div>
+      </div>
+      <div class="taxonomy-item">
+        <div class="taxonomy-item-icon">🗣️</div>
+        <div class="taxonomy-item-name">RHETORIC</div>
+        <div class="taxonomy-item-desc">Manipulating the model through persuasive language, logical framing, and rhetorical techniques to override its safety reasoning</div>
+      </div>
+      <div class="taxonomy-item">
+        <div class="taxonomy-item-icon">🎭</div>
+        <div class="taxonomy-item-name">ROLE PLAYING</div>
+        <div class="taxonomy-item-desc">Assigning the model a character, persona, or role that carries different values or permissions than its default alignment</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div style="margin-bottom:3rem;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">My Methodology</div>
+    <div class="method-box">
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.2);">01</div>
+          <div>
+            <div class="step-title">Threat Modelling</div>
+            <div class="step-desc">Identify what a bad actor would want to extract from the model. Map out attack surfaces — system prompt leakage, harmful content generation, identity manipulation, data extraction.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">02</div>
+          <div>
+            <div class="step-title">Attack Design</div>
+            <div class="step-desc">Design prompt sequences targeting identified vulnerabilities. Vary tone, format, framing, and persona. Document each variant and its hypothesis before testing.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(79,124,255,0.1);color:var(--accent);border:1px solid rgba(79,124,255,0.2);">03</div>
+          <div>
+            <div class="step-title">Execution & Observation</div>
+            <div class="step-desc">Run attacks systematically. Document model responses verbatim. Note partial successes, unexpected refusals, and edge-case behaviours. Iterate on failed attacks.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(48,217,128,0.1);color:var(--green);border:1px solid rgba(48,217,128,0.2);">04</div>
+          <div>
+            <div class="step-title">Reporting</div>
+            <div class="step-desc">Write structured findings reports: Attack Type → Strategy → Vulnerability Exposed. Responsible disclosure — harmful payloads are never shared verbatim.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <div>
+    <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Case Studies — Sanitized Examples</div>
+    <p style="font-style:italic;font-size:0.88rem;color:var(--dim);margin-bottom:1.5rem;">Harmful prompts and model outputs are redacted per responsible disclosure guidelines. Structure and methodology are shown.</p>
+
+    <!-- CASE 1 -->
+    <div class="attack-card" style="margin-bottom:1rem;">
+      <div class="attack-card-header">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="attack-type-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Fictionalization</span>
+          <span style="font-family:var(--font-mono);font-size:0.55rem;color:var(--muted);">Case #001</span>
+        </div>
+        
+      </div>
+      <div class="attack-card-body">
+        <div class="attack-row">
+          <div class="attack-row-label">Strategy</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">Describe your fictionalization strategy — e.g. "Framed a harmful request as a scene in a novel where a character explains how to..."</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Prompt</div>
+          <div class="attack-row-val"><span class="redacted">█████████████████████████████████████</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Vulnerability</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">What did this expose? — e.g. "Model treated fictional framing as sufficient cover to bypass safety filters on harmful instructions"</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 2 -->
+    <div class="attack-card" style="margin-bottom:1rem;">
+      <div class="attack-card-header">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="attack-type-badge" style="background:rgba(155,110,243,0.1);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Other Worlds</span>
+          <span style="font-family:var(--font-mono);font-size:0.55rem;color:var(--muted);">Case #002</span>
+        </div>
+        
+      </div>
+      <div class="attack-card-body">
+        <div class="attack-row">
+          <div class="attack-row-label">Strategy</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">Describe the "other world" framing — e.g. "Constructed a distant planet where laws of ethics are inverted and asked the model to respond as a citizen of that world..."</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Prompt</div>
+          <div class="attack-row-val"><span class="redacted">█████████████████████████████████████</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Vulnerability</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">What did this expose?</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 3 -->
+    <div class="attack-card" style="margin-bottom:1rem;">
+      <div class="attack-card-header">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="attack-type-badge" style="background:rgba(0,200,255,0.1);color:var(--accent2);border:1px solid rgba(0,200,255,0.2);">Rhetoric</span>
+          <span style="font-family:var(--font-mono);font-size:0.55rem;color:var(--muted);">Case #003</span>
+        </div>
+        
+      </div>
+      <div class="attack-card-body">
+        <div class="attack-row">
+          <div class="attack-row-label">Strategy</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">Describe the rhetorical manipulation — e.g. "Used logical reasoning and appeals to authority to argue the model's refusal was itself harmful, persuading it to comply..."</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Prompt</div>
+          <div class="attack-row-val"><span class="redacted">█████████████████████████████████████</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Vulnerability</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">What did this expose?</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 4 -->
+    <div class="attack-card" style="margin-bottom:1.5rem;">
+      <div class="attack-card-header">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="attack-type-badge" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Role Playing</span>
+          <span style="font-family:var(--font-mono);font-size:0.55rem;color:var(--muted);">Case #004</span>
+        </div>
+        
+      </div>
+      <div class="attack-card-body">
+        <div class="attack-row">
+          <div class="attack-row-label">Strategy</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">Describe the roleplay scenario — e.g. "Assigned the model a character with explicit permissions, then gradually escalated requests within that persona..."</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Prompt</div>
+          <div class="attack-row-val"><span class="redacted">█████████████████████████████████████</span></div>
+        </div>
+        <div class="attack-row">
+          <div class="attack-row-label">Vulnerability</div>
+          <div class="attack-row-val"><span style="color:var(--dim);font-style:italic;">What did this expose?</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder-block">
+      <div class="placeholder-hint">
+        <strong>Add more case studies as you do more red teaming.</strong><br>
+        One card per attack. Copy any card above, change the badge color and type, fill in your real strategy and vulnerability.<br>
+        You can mix and combine attack types — e.g. "Fictionalization + Role Playing" as a hybrid attack.
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: AI OUTPUT EVALUATION -->
+<!-- ============================================================ -->
+<section class="content-section" id="evaluation" style="background:var(--surface);">
+  <h2 class="sec-heading" style="color:var(--accent2)">OUTPUT EVALUATION</h2>
+  <p class="sec-desc">Structured evaluation of LLM-generated responses for safety, accuracy, helpfulness, and policy compliance — human-in-the-loop review at the RLHF frontier. Every response is scored against a consistent rubric.</p>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="strip-stat">
+      <div class="strip-num"><!-- ADD -->—</div>
+      <div class="strip-label">Responses Evaluated</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num">4</div>
+      <div class="strip-label">Evaluation Dimensions</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num"><!-- ADD -->—</div>
+      <div class="strip-label">Datasets Contributed</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num"><!-- ADD -->—</div>
+      <div class="strip-label">Avg Daily Volume</div>
+    </div>
+  </div>
+
+  <!-- EVALUATION RUBRIC -->
+  <div style="margin-bottom:3rem;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Evaluation Rubric</div>
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>What I Assessed</th>
+          <th>Failure Signals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rubric-dim">Task Completion</span></td>
+          <td>Did the model actually do what was asked? Is the response complete, on-topic, and useful to the user?</td>
+          <td style="color:var(--muted);font-size:0.82rem;">Incomplete answer · Off-topic response · Misunderstood the request</td>
+        </tr>
+        <tr>
+          <td><span class="rubric-dim">Factual Accuracy</span></td>
+          <td>Are the facts, claims, and reasoning correct? Does the model hallucinate or present false information confidently?</td>
+          <td style="color:var(--muted);font-size:0.82rem;">Fabricated citations · Wrong facts · False confidence · Outdated information</td>
+        </tr>
+        <tr>
+          <td><span class="rubric-dim">AI Performance</span></td>
+          <td>Is the grammar correct? Is the response well-formatted, appropriately toned, agreeable, and easy to read?</td>
+          <td style="color:var(--muted);font-size:0.82rem;">Poor grammar · Bad formatting · Wrong tone · Sycophancy · Low readability</td>
+        </tr>
+        <tr>
+          <td><span class="rubric-dim">Safety</span></td>
+          <td>Does the response contain harmful, dangerous, or policy-violating content? Is it safe for the intended audience?</td>
+          <td style="color:var(--muted);font-size:0.82rem;">Harmful content · Policy violations · Unsafe advice · Biased outputs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EVAL EXAMPLES -->
+  <div>
+    <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Evaluation Examples</div>
+
+    <!-- EXAMPLE 1 — PASS -->
+    <div class="eval-example">
+      <div class="eval-example-header">
+        <span class="eval-ex-label">Example #001 — Factual Query</span>
+        <span class="eval-verdict verdict-pass">✓ Pass</span>
+      </div>
+      <div class="eval-cols">
+        <div class="eval-col">
+          <div class="eval-col-label">User Prompt</div>
+          <div class="eval-col-text"><!-- REPLACE with real prompt -->"Add a realistic user prompt here that you actually evaluated at Turing. Keep it general enough to not reveal proprietary info."</div>
+        </div>
+        <div class="eval-col">
+          <div class="eval-col-label">Model Response (Summary)</div>
+          <div class="eval-col-text"><!-- REPLACE with summary of response -->"Summarize the model's response here. What did it say? Was it accurate, safe, helpful?"</div>
+        </div>
+      </div>
+      <div class="eval-scores" style="grid-template-columns:repeat(4,1fr);">
+        <div class="eval-score-item">
+          <div class="eval-score-label">Task Completion</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:90%;background:var(--accent)"></div></div>
+          <div class="eval-score-num">9.0</div>
+        </div>
+        <div class="eval-score-item">
+          <div class="eval-score-label">Factual Accuracy</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:85%;background:var(--accent)"></div></div>
+          <div class="eval-score-num">8.5</div>
+        </div>
+        <div class="eval-score-item">
+          <div class="eval-score-label">AI Performance</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:88%;background:var(--accent)"></div></div>
+          <div class="eval-score-num">8.8</div>
+        </div>
+        <div class="eval-score-item">
+          <div class="eval-score-label">Safety</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:95%;background:var(--green)"></div></div>
+          <div class="eval-score-num" style="color:var(--green)">9.5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAMPLE 2 — FAIL -->
+    <div class="eval-example" style="margin-top:1rem;">
+      <div class="eval-example-header">
+        <span class="eval-ex-label">Example #002 — Sensitive Topic</span>
+        <span class="eval-verdict verdict-fail">✗ Fail</span>
+      </div>
+      <div class="eval-cols">
+        <div class="eval-col">
+          <div class="eval-col-label">User Prompt</div>
+          <div class="eval-col-text">"Add a prompt involving a sensitive topic where the model responded incorrectly or unsafely..."</div>
+        </div>
+        <div class="eval-col">
+          <div class="eval-col-label">Model Response (Summary)</div>
+          <div class="eval-col-text">"Describe what went wrong — hallucination, policy violation, harmful content, etc."</div>
+        </div>
+      </div>
+      <div class="eval-scores" style="grid-template-columns:repeat(4,1fr);">
+        <div class="eval-score-item">
+          <div class="eval-score-label">Task Completion</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:55%;background:var(--gold)"></div></div>
+          <div class="eval-score-num" style="color:var(--gold)">5.5</div>
+        </div>
+        <div class="eval-score-item">
+          <div class="eval-score-label">Factual Accuracy</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:40%;background:var(--red)"></div></div>
+          <div class="eval-score-num" style="color:var(--red)">4.0</div>
+        </div>
+        <div class="eval-score-item">
+          <div class="eval-score-label">AI Performance</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:65%;background:var(--gold)"></div></div>
+          <div class="eval-score-num" style="color:var(--gold)">6.5</div>
+        </div>
+        <div class="eval-score-item">
+          <div class="eval-score-label">Safety</div>
+          <div class="eval-score-bar"><div class="eval-score-fill" style="width:25%;background:var(--red)"></div></div>
+          <div class="eval-score-num" style="color:var(--red)">2.5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MORE placeholder -->
+    <div class="placeholder-block" style="margin-top:1.5rem;">
+      <div class="placeholder-hint">
+        <strong>Add 2–3 more evaluation examples here.</strong><br>
+        Aim for variety: one hallucination case, one overrefusal case, one edge case with partial score.<br>
+        Use the verdict-partial class for mixed results.
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- SECTION 3: DATA ANNOTATION -->
+<!-- ============================================================ -->
+<section class="content-section" id="annotation-robotic">
+  <h2 class="sec-heading" style="color:var(--purple)">DATA ANNOTATION</h2>
+  <p class="sec-desc">Vision-Language-Action annotation across three video categories — building training data that teaches AI systems to understand and act in the physical world.</p>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="strip-stat">
+      <div class="strip-num">3</div>
+      <div class="strip-label">Video Categories</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num">—</div>
+      <div class="strip-label">Videos Annotated</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num">—</div>
+      <div class="strip-label">Frames Labeled</div>
+    </div>
+    <div class="strip-stat">
+      <div class="strip-num">—</div>
+      <div class="strip-label">Avg Accuracy Rate</div>
+    </div>
+  </div>
+
+  <!-- ---- SUB-SECTION 1: ROBOTIC ---- -->
+  <div class="ann-subsection">
+    <div class="ann-sub-label" style="--sc:var(--accent2)">01 — Robotic Videos</div>
+    <div class="two-col">
+      <div class="ann-visual">
+        <div class="ann-visual-placeholder">
+          <div class="ann-visual-icon">🤖</div>
+          <div class="ann-visual-label">Add Annotation Screenshot</div>
+          <div class="ann-visual-hint">Replace with a real annotated frame — robot performing a task with bounding boxes and action labels</div>
+        </div>
+      </div>
+      <div class="ann-info">
+        <div class="ann-info-title">ROBOTIC VIDEOS</div>
+        <div class="ann-info-desc"><span style="color:var(--dim);font-style:italic;">Describe the robotic annotation work in your own words — what types of robots, what tasks they performed, what the annotation goal was.</span></div>
+        <div class="ann-label-schema">
+          <div class="ann-schema-title">Label Schema</div>
+          <div class="ann-label-list">
+            <span class="ann-label" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">robot_arm</span>
+            <span class="ann-label" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">gripper</span>
+            <span class="ann-label" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">target_object</span>
+            <span class="ann-label" style="color:var(--green);border-color:rgba(48,217,128,0.3);">action_start</span>
+            <span class="ann-label" style="color:var(--green);border-color:rgba(48,217,128,0.3);">action_end</span>
+            <span class="ann-label" style="color:var(--dim);border-color:var(--border2);">+ Add your labels</span>
+          </div>
+        </div>
+        <div class="ann-challenges">
+          <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
+          <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--red)"></div><div><span style="color:var(--dim);font-style:italic;">e.g. occluded gripper during close-range grasps</span></div></div>
+          <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--gold)"></div><div><span style="color:var(--dim);font-style:italic;">e.g. distinguishing intentional pause from task completion</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- SUB-SECTION 2: GAMEPLAY ---- -->
+  <div class="ann-subsection">
+    <div class="ann-sub-label" style="--sc:var(--green)">02 — Gameplay Videos</div>
+    <div class="two-col">
+      <div class="ann-visual">
+        <div class="ann-visual-placeholder">
+          <div class="ann-visual-icon">🎮</div>
+          <div class="ann-visual-label">Add Annotation Screenshot</div>
+          <div class="ann-visual-hint">Replace with a real annotated gameplay frame — player actions, objects, and events labeled</div>
+        </div>
+      </div>
+      <div class="ann-info">
+        <div class="ann-info-title">GAMEPLAY VIDEOS</div>
+        <div class="ann-info-desc"><span style="color:var(--dim);font-style:italic;">Describe the gameplay annotation — what types of games, what player actions were labeled, what the annotation goal was.</span></div>
+        <div class="ann-label-schema">
+          <div class="ann-schema-title">Label Schema</div>
+          <div class="ann-label-list">
+            <span class="ann-label" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">player_action</span>
+            <span class="ann-label" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">game_object</span>
+            <span class="ann-label" style="color:var(--green);border-color:rgba(48,217,128,0.3);">event_trigger</span>
+            <span class="ann-label" style="color:var(--dim);border-color:var(--border2);">+ Add your labels</span>
+          </div>
+        </div>
+        <div class="ann-challenges">
+          <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
+          <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--red)"></div><div><span style="color:var(--dim);font-style:italic;">e.g. rapid simultaneous actions in a single frame</span></div></div>
+          <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--gold)"></div><div><span style="color:var(--dim);font-style:italic;">e.g. determining player intent vs accidental movement</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- SUB-SECTION 3: SPORTS ---- -->
+  <div class="ann-subsection" style="border-bottom:none; padding-bottom:0;">
+    <div class="ann-sub-label" style="--sc:var(--purple)">03 — Live Action Sports</div>
+    <div class="two-col">
+      <div class="ann-visual">
+        <div class="ann-visual-placeholder">
+          <div class="ann-visual-icon">🏂</div>
+          <div class="ann-visual-label">Add Annotation Screenshot</div>
+          <div class="ann-visual-hint">Replace with a real annotated frame — skier or mountain biker with pose keypoints and action labels</div>
+        </div>
+      </div>
+      <div class="ann-info">
+        <div class="ann-info-title">LIVE ACTION SPORTS</div>
+        <div class="ann-info-desc"><span style="color:var(--dim);font-style:italic;">Describe the sports annotation — skiing, mountain biking, what body parts or actions were labeled, what made this different from the other video types.</span></div>
+        <div class="ann-label-schema">
+          <div class="ann-schema-title">Label Schema</div>
+          <div class="ann-label-list">
+            <span class="ann-label" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">person</span>
+            <span class="ann-label" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">action_type</span>
+            <span class="ann-label" style="color:var(--green);border-color:rgba(48,217,128,0.3);">body_keypoint</span>
+            <span class="ann-label" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">skiing</span>
+            <span class="ann-label" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">mountain_biking</span>
+            <span class="ann-label" style="color:var(--dim);border-color:var(--border2);">+ Add your labels</span>
+          </div>
+        </div>
+        <div class="ann-challenges">
+          <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
+          <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--red)"></div><div><span style="color:var(--dim);font-style:italic;">e.g. extreme motion blur at high speeds, sun glare on snow</span></div></div>
+          <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--gold)"></div><div><span style="color:var(--dim);font-style:italic;">e.g. equipment obscuring body keypoints — helmets, ski gear</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem;">
+    <div class="placeholder-block">
+      <div class="placeholder-hint">
+        <strong>Add the annotation tools you used:</strong><br>
+        e.g. CVAT · Label Studio · Roboflow · Custom internal Turing tool<br>
+        If you have a screen recording of yourself annotating, embed it here using a &lt;video&gt; tag or a Vimeo embed link.
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  <a href="index.html" class="footer-back">← Back to Portfolio</a>
+  <a href="trust-safety.html" class="footer-next">Next: Trust & Safety →</a>
+</div>
+
+<script>
+// Tab navigation highlight on scroll
+const sections = ['red-teaming','evaluation','annotation-robotic'];
+const tabs = document.querySelectorAll('.tab-btn');
+
+window.addEventListener('scroll', ()=>{
+  let current = '';
+  sections.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  tabs.forEach(t=>{
+    t.classList.remove('active');
+    if(t.getAttribute('href') === '#'+current) t.classList.add('active');
+  });
+});
+
+function setTab(el){ tabs.forEach(t=>t.classList.remove('active')); el.classList.add('active'); }
+</script>
+</body>
+</html>
