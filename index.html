@@ -105,7 +105,7 @@ nav {
 /* HERO */
 .hero {
   min-height: 100vh;
-  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  display: block;
   padding-top: 4.5rem;
   position: relative; overflow: hidden;
 }
@@ -865,73 +865,55 @@ nav {
   font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem;
 }
 
-.contact-items { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.contact-items { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
 
 .contact-item {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1.1rem 1.25rem;
-  border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border2);
   background: var(--ink);
-  text-decoration: none;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
-  transition: transform .2s, border-color .2s;
+  text-decoration: none; border-radius: 4px;
+  position: relative; overflow: hidden;
+  transition: all .25s ease;
 }
 
-/* Sliding color bar on hover */
 .contact-item::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  transform: scaleY(0);
-  transform-origin: bottom;
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; transform: scaleY(0); transform-origin: bottom;
   transition: transform .3s ease;
 }
 .contact-item:hover { transform: translateX(6px); }
 .contact-item:hover::before { transform: scaleY(1); }
 
 .contact-item-email::before { background: var(--accent2); }
-.contact-item-email:hover { border-color: rgba(0,200,255,0.3); }
-.contact-item-email:hover .ci-icon { color: var(--accent2); border-color: rgba(0,200,255,0.3); }
-.contact-item-email:hover .ci-val { color: var(--accent2); }
+.contact-item-email:hover { border-color: rgba(0,200,255,0.3); background: rgba(0,200,255,0.04); }
+.contact-item-email:hover .ci-platform-label { color: var(--accent2); }
+.contact-item-email:hover .ci-big-val { color: var(--accent2); }
+.contact-item-email:hover .ci-arrow { color: var(--accent2); transform: translate(3px,-3px); }
 
-.contact-item-linkedin::before { background: #0a66c2; }
-.contact-item-linkedin:hover { border-color: rgba(10,102,194,0.4); }
-.contact-item-linkedin:hover .ci-icon { color: #4da3ff; border-color: rgba(10,102,194,0.3); }
-.contact-item-linkedin:hover .ci-val { color: #4da3ff; }
+.contact-item-linkedin::before { background: #4da3ff; }
+.contact-item-linkedin:hover { border-color: rgba(77,163,255,0.3); background: rgba(77,163,255,0.04); }
+.contact-item-linkedin:hover .ci-platform-label { color: #4da3ff; }
+.contact-item-linkedin:hover .ci-big-val { color: #4da3ff; }
+.contact-item-linkedin:hover .ci-arrow { color: #4da3ff; transform: translate(3px,-3px); }
 
-.ci-icon {
-  width: 36px; height: 36px;
-  background: var(--surface2);
-  border: 1px solid var(--border2);
-  border-radius: 4px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.9rem; flex-shrink: 0;
-  color: var(--muted);
-  transition: color .3s, border-color .3s;
+.ci-platform-label {
+  font-family: var(--font-mono); font-size: 0.55rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--muted); width: 76px; flex-shrink: 0;
+  transition: color .25s;
 }
 
-.ci-info { display: flex; flex-direction: column; flex: 1; }
-.ci-label {
-  font-family: var(--font-mono); font-size: 0.52rem;
-  letter-spacing: 0.2em; color: var(--muted);
-  text-transform: uppercase; margin-bottom: 0.2rem;
-}
-.ci-val {
-  font-size: 0.9rem; color: var(--text);
-  transition: color .3s;
-  font-family: var(--font-mono);
-  font-size: 0.7rem; letter-spacing: 0.05em;
+.ci-big-val {
+  font-family: var(--font-body); font-size: 1.1rem;
+  font-weight: 600; color: var(--white); flex: 1;
+  transition: color .25s;
 }
 
 .ci-arrow {
-  font-size: 0.85rem; color: var(--dim);
-  transition: color .3s, transform .3s;
-  flex-shrink: 0;
+  font-size: 1.1rem; color: var(--dim);
+  transition: color .25s, transform .25s; flex-shrink: 0;
 }
-.contact-item:hover .ci-arrow { color: var(--muted); transform: translate(2px,-2px); }
 
 /* MINI FORM */
 .mini-form { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -972,10 +954,10 @@ footer {
 @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 @keyframes orbFloat { 0%,100% { transform:translateY(0) scale(1); } 50% { transform:translateY(-30px) scale(1.05); } }
 
-.reveal { opacity:0; transform:translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-.reveal-left { opacity:0; transform:translateX(-24px); transition: opacity .7s ease, transform .7s ease; }
-.reveal-left.visible { opacity:1; transform:translateX(0); }
+.reveal { opacity:1; transform:none; }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-left { opacity:1; transform:none; }
+.reveal-left.visible { opacity:1; transform:none; }
 
 /* Fallback: show everything if animations don't trigger */
 @media (prefers-reduced-motion: reduce) {
@@ -1024,41 +1006,35 @@ footer {
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#" class="nav-cta">Download CV</a>
+  <a href="#contact" class="nav-cta">Hire Me</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="grid-template-columns:1fr; min-height:90vh;">
+<section class="hero" style="display:block; min-height:90vh; position:relative; overflow:hidden;">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <div class="hero-left" style="padding:7rem 4rem 4rem; max-width:1000px;">
-    
+  <div class="hero-left" style="padding:6rem 3rem 4rem; width:100%;">
     <div class="hero-status">
       <div class="status-pulse"></div>
       Available · Remote or Relocation
     </div>
 
-    <h1 class="hero-name" style="font-size:clamp(6rem,14vw,14rem);">
+    <h1 class="hero-name" style="font-size:clamp(5rem,18vw,20rem); line-height:0.88; letter-spacing:-0.01em;">
       NIPUN<br>
       <span class="line2">AGGARWAL</span>
     </h1>
 
-    <!-- 🔥 UPDATED ROLE (LESS REPETITIVE, MORE SENIOR) -->
-    <div class="hero-role" style="font-size:0.9rem; margin-bottom:2rem;">
-      Building safer AI systems & resilient digital platforms
+    <div class="hero-role" style="font-size:0.85rem; margin-bottom:2rem;">
+      Trust & Safety <span>/</span> LLM Training <span>/</span> Content Moderation <span>/</span> Community Management
     </div>
 
     <p class="hero-desc" style="max-width:600px; font-size:1.2rem;">
       6+ years keeping platforms and AI systems safe — from moderating harmful content at scale to training large language models through red teaming, data annotation, and output evaluation. Based in New Delhi, open to relocation globally.
     </p>
 
-    <!-- 🔥 FIXED BUTTON LOGIC + BETTER LABELS -->
-    <div class="hero-actions">
-      <a href="#work" class="btn-primary">See Case Studies</a>
-      <a href="#skills" class="btn-secondary">Explore Domains</a>
-    </div>
+
 
     <div class="hero-stats" style="margin-top:2.5rem; max-width:320px;">
       <div class="hero-stat">
@@ -1066,7 +1042,7 @@ footer {
         <div class="hero-stat-label">Years Exp</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num">05</div>
+        <div class="hero-stat-num">04</div>
         <div class="hero-stat-label">Domains</div>
       </div>
       <div class="hero-stat">
@@ -1074,9 +1050,10 @@ footer {
         <div class="hero-stat-label">Cases Reviewed</div>
       </div>
     </div>
-
   </div>
+
 </section>
+
 <!-- MARQUEE -->
 <div class="marquee-strip">
   <div class="marquee-track">
@@ -1105,13 +1082,13 @@ footer {
 
 <!-- SKILLS -->
 <section class="skills-section" id="skills">
-  <div class="reveal">
+  <div class="">
     <div class="section-label">Expertise</div>
-    <h2 class="section-heading">FIVE DOMAINS</h2>
+    <h2 class="section-heading">FOUR DOMAINS</h2>
     <p class="section-sub">Real work across real platforms. Click any domain to explore case studies, methodology, and examples.</p>
   </div>
 
-  <div class="skills-grid reveal">
+  <div class="skills-grid">
 
     <!-- LLM TRAINING — HERO CARD spanning full width -->
     <a href="llm-training.html" class="skill-card skill-card-featured" style="--card-color:#00c8ff;--glow:rgba(0,200,255,0.1); grid-column: 1 / -1;">
@@ -1195,7 +1172,7 @@ footer {
 
 <!-- FEATURED WORK -->
 <section class="featured-section" id="work">
-  <div class="featured-top reveal">
+  <div class="featured-top">
     <div>
       <div class="section-label">Portfolio</div>
       <h2 class="section-heading">FEATURED WORK</h2>
@@ -1204,7 +1181,7 @@ footer {
     <a href="#" class="view-all">View all work →</a>
   </div>
 
-  <div class="featured-grid reveal">
+  <div class="featured-grid">
 
     <!-- RED TEAMING CARD -->
     <a href="red-teaming.html" class="work-card">
@@ -1475,23 +1452,19 @@ footer {
     <p class="contact-sub">Open to remote roles in AI Trust & Safety, Governance, and Red Teaming. If you're building safer AI, I'd like to help.</p>
 
     <div class="contact-items">
-      <a href="mailto:nipunagarwal1212@gmail.com" class="contact-item contact-item-email">
-        <div class="ci-icon">✉</div>
-        <div class="ci-info">
-          <span class="ci-label">Email</span>
-          <span class="ci-val">nipunagarwal1212@gmail.com</span>
-        </div>
+
+      <a href="/cdn-cgi/l/email-protection#234d4a53564d4244425154424f1211121163444e424a4f0d404c4e" class="contact-item contact-item-email">
+        <div class="ci-platform-label">EMAIL</div>
+        <div class="ci-big-val"><span class="__cf_email__" data-cfemail="a2cccbd2d7ccc3c5c3d0d5c3ce93909390e2c5cfc3cbce8cc1cdcf">[email&#160;protected]</span></div>
         <div class="ci-arrow">↗</div>
       </a>
+
       <a href="https://linkedin.com/in/nipun-agarwal-/" target="_blank" class="contact-item contact-item-linkedin">
-        <div class="ci-icon" style="font-family:var(--font-mono);font-size:0.75rem;font-weight:500">in</div>
-        <div class="ci-info">
-          <span class="ci-label">LinkedIn</span>
-          <span class="ci-val">nipun-agarwal-/</span>
-        </div>
+        <div class="ci-platform-label">LINKEDIN</div>
+        <div class="ci-big-val">nipun-agarwal</div>
         <div class="ci-arrow">↗</div>
       </a>
-    </div>
+
     </div>
 
     <div class="mini-form">
@@ -1512,49 +1485,23 @@ footer {
 </footer>
 
 <script>
-// CUSTOM CURSOR — desktop only
+// Custom cursor on desktop only
 const isMobile = window.matchMedia('(max-width:900px)').matches;
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
 
 if (!isMobile) {
-  cursor.style.display = 'block';
-  ring.style.display = 'block';
-  document.body.style.cursor = 'none';
-  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  cursor.style.display='block';
+  ring.style.display='block';
+  document.body.style.cursor='none';
+  document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
   (function animRing(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
   document.querySelectorAll('a,button,.skill-card,.work-card').forEach(el=>{
     el.addEventListener('mouseenter',()=>{ cursor.style.width='14px'; cursor.style.height='14px'; ring.style.width='46px'; ring.style.height='46px'; });
     el.addEventListener('mouseleave',()=>{ cursor.style.width='8px'; cursor.style.height='8px'; ring.style.width='30px'; ring.style.height='30px'; });
   });
 }
-
-// SCROLL REVEAL with fallback
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), i*60); }});
-}, {threshold:0.05, rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal,.reveal-left').forEach(el=>obs.observe(el));
-
-// Fallback: show all after 1.5s
-setTimeout(()=>{ document.querySelectorAll('.reveal,.reveal-left').forEach(el=>el.classList.add('visible')); }, 1500);
-
-// STAGGER CARDS
-const cardObs = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const cards = entry.target.querySelectorAll('.skill-card,.skill-card-add,.work-card');
-      cards.forEach((c,i)=>{
-        c.style.opacity='0'; c.style.transform='translateY(18px)';
-        c.style.transition=`opacity .5s ${i*0.07}s ease, transform .5s ${i*0.07}s ease`;
-        setTimeout(()=>{ c.style.opacity='1'; c.style.transform='translateY(0)'; }, i*70+100);
-      });
-      cardObs.unobserve(entry.target);
-    }
-  });
-},{threshold:0.05});
-document.querySelectorAll('.skills-grid,.featured-grid').forEach(el=>cardObs.observe(el));
-
-// Fallback: show all cards after 2s
-setTimeout(()=>{ document.querySelectorAll('.skill-card,.skill-card-add,.work-card').forEach(c=>{ c.style.opacity='1'; c.style.transform='translateY(0)'; }); }, 2000);
 </script>
+</body>
+</html>
