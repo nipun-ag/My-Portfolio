@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust & Safety — Nipun Aggarwal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#07080f; --ink:#0c0d16; --surface:#10111c; --surface2:#161724;
+  --border:#1c1d2e; --border2:#252638; --text:#c8cce0; --muted:#52546e;
+  --dim:#2e3048; --white:#eceef8; --accent:#4f7cff; --accent2:#00c8ff;
+  --red:#ff4455; --gold:#f0a050; --green:#30d980; --purple:#9b6ef3;
+  --font-display:'Bebas Neue',sans-serif; --font-body:'Crimson Pro',serif; --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;overflow-x:hidden;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(79,124,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,124,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;border-bottom:1px solid var(--border);background:rgba(7,8,15,0.95);backdrop-filter:blur(16px);}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite;}
+.nav-logo-text{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--white);text-transform:uppercase;}
+.nav-back{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--accent2);}
+.nav-domain-tag{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);background:rgba(79,124,255,0.08);border:1px solid rgba(79,124,255,0.2);padding:0.35rem 0.8rem;border-radius:2px;}
+
+.page-hero{padding:8rem 3rem 5rem;border-bottom:1px solid var(--border);position:relative;z-index:1;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(79,124,255,0.06) 0%,transparent 60%);pointer-events:none;}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:1.5rem;}
+.breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--accent);}
+.breadcrumb span{color:var(--dim);}
+.page-title{font-family:var(--font-display);font-size:clamp(4rem,10vw,10rem);line-height:0.88;letter-spacing:0.02em;color:var(--accent);margin-bottom:1.5rem;}
+.page-intro{font-style:italic;font-weight:300;font-size:1.1rem;color:var(--text);max-width:640px;line-height:1.8;margin-bottom:2rem;}
+.page-hero-meta{display:flex;gap:3rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border);}
+.meta-item{display:flex;flex-direction:column;gap:0.3rem;}
+.meta-label{font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.meta-val{font-size:0.95rem;color:var(--white);font-weight:600;}
+
+.tab-nav{position:sticky;top:57px;z-index:90;background:rgba(7,8,15,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;padding:0 3rem;overflow-x:auto;}
+.tab-btn{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:1rem 1.5rem;cursor:pointer;text-decoration:none;display:block;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s;white-space:nowrap;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+.content-section{padding:5rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;}
+.sec-heading{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,5rem);color:var(--accent);letter-spacing:0.03em;line-height:0.9;margin-bottom:1rem;}
+.sec-desc{font-style:italic;font-weight:300;font-size:1rem;color:var(--text);max-width:640px;line-height:1.8;margin-bottom:3rem;}
+
+/* TAXONOMY */
+.taxonomy-category{margin-bottom:3rem;}
+.cat-label{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.cat-label-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.violation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.violation-item{background:var(--ink);padding:1.5rem;transition:background .2s;}
+.violation-item:hover{background:var(--surface2);}
+.violation-icon{font-size:1.3rem;margin-bottom:0.6rem;}
+.violation-name{font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;}
+.violation-desc{font-size:0.92rem;color:var(--text);line-height:1.6;}
+.violation-sub{margin-top:0.6rem;display:flex;flex-direction:column;gap:0.3rem;}
+.violation-sub-item{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.08em;color:var(--muted);display:flex;align-items:center;gap:0.4rem;}
+.violation-sub-item::before{content:'→';color:var(--dim);}
+
+/* SELF HARM */
+.self-harm-box{background:var(--surface);border:1px solid var(--border2);border-radius:6px;overflow:hidden;margin-bottom:2rem;}
+.self-harm-header{padding:1rem 1.5rem;background:rgba(255,68,85,0.06);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:0.5rem;}
+.self-harm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.sh-col{padding:1.5rem;border-right:1px solid var(--border);}
+.sh-col:last-child{border-right:none;}
+.sh-label{font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
+.sh-title{font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;}
+.sh-desc{font-size:0.92rem;color:var(--text);line-height:1.6;}
+.sh-action{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;padding:0.25rem 0.6rem;border-radius:2px;margin-top:0.75rem;display:inline-block;}
+
+/* ENFORCEMENT */
+.actions-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem;}
+.action-item{background:var(--ink);padding:1.5rem 1rem;text-align:center;position:relative;overflow:hidden;transition:background .2s;}
+.action-item:hover{background:var(--surface2);}
+.action-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.action-warn::before{background:var(--gold);}
+.action-remove::before{background:var(--red);}
+.action-suspend::before{background:var(--purple);}
+.action-ban::before{background:var(--red);}
+.action-escalate::before{background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.action-icon{font-size:1.4rem;margin-bottom:0.6rem;}
+.action-name{font-family:var(--font-display);font-size:1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;}
+.action-desc{font-size:0.88rem;color:var(--text);line-height:1.5;}
+
+/* ESCALATION */
+.escalation-flow{display:flex;flex-direction:column;gap:0;margin-bottom:2rem;}
+.esc-step{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:1.5rem;padding:1.5rem;background:var(--ink);border:1px solid var(--border2);margin-bottom:1px;transition:background .2s;}
+.esc-step:first-child{border-radius:6px 6px 0 0;}
+.esc-step:last-child{border-radius:0 0 6px 6px;margin-bottom:0;}
+.esc-step:hover{background:var(--surface2);}
+.esc-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.65rem;font-weight:500;flex-shrink:0;}
+.esc-title{font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;}
+.esc-desc{font-size:0.92rem;color:var(--text);line-height:1.7;}
+.esc-triggers{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem;}
+.esc-trigger{font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.08em;padding:0.2rem 0.5rem;border-radius:2px;}
+.esc-action-badge{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2px;white-space:nowrap;align-self:flex-start;margin-top:0.25rem;}
+
+.page-footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.footer-back{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-back:hover{color:var(--accent);}
+.footer-next{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);text-decoration:none;transition:opacity .2s;}
+.footer-next:hover{opacity:0.8;}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .page-hero,.content-section{padding-left:1.5rem;padding-right:1.5rem;}
+  .violation-grid,.actions-grid{grid-template-columns:1fr 1fr;}
+  .self-harm-grid{grid-template-columns:1fr;}
+  .sh-col{border-right:none;border-bottom:1px solid var(--border);}
+  .sh-col:last-child{border-bottom:none;}
+  .esc-step{grid-template-columns:auto 1fr;}
+  .esc-action-badge{display:none;}
+  .page-footer{padding:1.5rem;flex-direction:column;gap:1rem;}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    <div class="nav-logo-text">Nipun Aggarwal</div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+  <div class="nav-domain-tag">🛡️ Trust & Safety</div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>/</span>
+    <span style="color:var(--accent)">Trust & Safety</span>
+  </div>
+  <h1 class="page-title">TRUST &<br>SAFETY</h1>
+  <p class="page-intro">The policy and systems layer of platform safety — the full taxonomy of what gets enforced, how severity is determined, and when a case goes beyond standard review into specialist escalation.</p>
+  <div class="page-hero-meta">
+    <div class="meta-item"><span class="meta-label">Experience</span><span class="meta-val">4+ Years</span></div>
+    <div class="meta-item"><span class="meta-label">Violation Categories</span><span class="meta-val">Safety · Integrity · Platform Abuse</span></div>
+    <div class="meta-item"><span class="meta-label">Enforcement Actions</span><span class="meta-val">Warn · Remove · Suspend · Ban · Escalate</span></div>
+  </div>
+</section>
+
+<div class="tab-nav">
+  <a href="#taxonomy" class="tab-btn active" onclick="setTab(this)">Violation Taxonomy</a>
+  <a href="#self-harm" class="tab-btn" onclick="setTab(this)">Self-Harm Protocol</a>
+  <a href="#enforcement" class="tab-btn" onclick="setTab(this)">Enforcement Actions</a>
+  <a href="#escalation" class="tab-btn" onclick="setTab(this)">Escalation Framework</a>
+</div>
+
+<!-- SECTION 1: TAXONOMY -->
+<section class="content-section" id="taxonomy">
+  <h2 class="sec-heading">VIOLATION TAXONOMY</h2>
+  <p class="sec-desc">The full landscape of policy violations I enforced — organised by category. Each type required a different assessment lens, threshold, and enforcement response.</p>
+
+  <div class="taxonomy-category">
+    <div class="cat-label">
+      <div class="cat-label-dot" style="background:var(--red)"></div>
+      <span style="color:var(--red)">Safety Violations</span>
+    </div>
+    <div class="violation-grid">
+      <div class="violation-item">
+        <div class="violation-icon">🔥</div>
+        <div class="violation-name">HATE SPEECH</div>
+        <div class="violation-desc">Content targeting individuals or groups based on race, religion, gender, ethnicity, or nationality. Includes coded language, slurs, and linguistic obfuscation designed to evade filters.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Direct slurs and dehumanizing language</div>
+          <div class="violation-sub-item">Coded references and abbreviations (e.g. KKK)</div>
+          <div class="violation-sub-item">Symbols assessed in cultural context</div>
+        </div>
+      </div>
+      <div class="violation-item">
+        <div class="violation-icon">⚠️</div>
+        <div class="violation-name">THREATS & VIOLENCE</div>
+        <div class="violation-desc">Explicit or implied threats of physical harm. Assessed using three signals — call to action, specific target or method, and timeframe. All three together = immediate escalation.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Direct threats with target + method + time</div>
+          <div class="violation-sub-item">Incitement to violence against groups</div>
+          <div class="violation-sub-item">Glorification of real-world violence</div>
+        </div>
+      </div>
+      <div class="violation-item">
+        <div class="violation-icon">🚨</div>
+        <div class="violation-name">CSAM</div>
+        <div class="violation-desc">Child Sexual Abuse Material — zero tolerance, no contextual assessment. Any content sexualising minors is immediately escalated to a dedicated child safety specialist team.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Always escalated — never handled directly</div>
+          <div class="violation-sub-item">No contextual exceptions apply</div>
+          <div class="violation-sub-item">Specialist team with law enforcement liaison</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="taxonomy-category">
+    <div class="cat-label">
+      <div class="cat-label-dot" style="background:var(--gold)"></div>
+      <span style="color:var(--gold)">Platform Integrity</span>
+    </div>
+    <div class="violation-grid">
+      <div class="violation-item">
+        <div class="violation-icon">🤖</div>
+        <div class="violation-name">SPAM & BOTS</div>
+        <div class="violation-desc">Automated or coordinated inauthentic behaviour — bot accounts, bulk posting, artificial engagement, and coordinated campaigns designed to manipulate platform metrics.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Automated posting patterns</div>
+          <div class="violation-sub-item">Coordinated inauthentic behaviour</div>
+          <div class="violation-sub-item">Artificial engagement farming</div>
+        </div>
+      </div>
+      <div class="violation-item">
+        <div class="violation-icon">👤</div>
+        <div class="violation-name">FAKE ACCOUNTS & IMPERSONATION</div>
+        <div class="violation-desc">Accounts misrepresenting identity — impersonating real people, brands, or public figures. Required ID verification process to confirm the reporting user's real identity before action.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">ID verification and cross-matching</div>
+          <div class="violation-sub-item">Impersonation of public figures</div>
+          <div class="violation-sub-item">Fake brand or organisation accounts</div>
+        </div>
+      </div>
+      <div class="violation-item">
+        <div class="violation-icon">📰</div>
+        <div class="violation-name">MISINFORMATION</div>
+        <div class="violation-desc">Demonstrably false information presented as fact — health misinformation, election interference content, and fabricated news designed to mislead users at scale.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Health and medical misinformation</div>
+          <div class="violation-sub-item">Election and civic misinformation</div>
+          <div class="violation-sub-item">Manipulated media and doctored content</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="taxonomy-category">
+    <div class="cat-label">
+      <div class="cat-label-dot" style="background:var(--purple)"></div>
+      <span style="color:var(--purple)">Platform Abuse</span>
+    </div>
+    <div class="violation-grid">
+      <div class="violation-item">
+        <div class="violation-icon">📢</div>
+        <div class="violation-name">ADVERTISING VIOLATIONS</div>
+        <div class="violation-desc">Unauthorised or deceptive advertising — promoting products or services in violation of platform policies. Includes prohibited product categories and misleading commercial claims.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Unauthorised commercial promotion</div>
+          <div class="violation-sub-item">Prohibited product advertising</div>
+          <div class="violation-sub-item">Misleading or deceptive claims</div>
+        </div>
+      </div>
+      <div class="violation-item">
+        <div class="violation-icon">🔗</div>
+        <div class="violation-name">THIRD PARTY TRAFFIC ABUSE</div>
+        <div class="violation-desc">Posting content solely to drive traffic to external sites in violation of platform policies — referral farming, artificial link amplification, and traffic manipulation schemes.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Referral and affiliate link farming</div>
+          <div class="violation-sub-item">Traffic manipulation to external sites</div>
+          <div class="violation-sub-item">Link spam at scale</div>
+        </div>
+      </div>
+      <div class="violation-item">
+        <div class="violation-icon">💸</div>
+        <div class="violation-name">ONLINE FRAUD & SCAMS</div>
+        <div class="violation-desc">Financial deception targeting users — investment scams, giveaway fraud, impersonation scams, and phishing attempts designed to extract money or personal information.</div>
+        <div class="violation-sub">
+          <div class="violation-sub-item">Investment and crypto scams</div>
+          <div class="violation-sub-item">Fake giveaways and prize fraud</div>
+          <div class="violation-sub-item">Credential phishing attempts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SELF HARM -->
+<section class="content-section" id="self-harm" style="background:var(--surface);">
+  <h2 class="sec-heading">SELF-HARM PROTOCOL</h2>
+  <p class="sec-desc">Self-harm content required a three-tier assessment — the same piece of content could warrant very different responses depending on intent, framing, and immediacy of risk.</p>
+
+  <div class="self-harm-box">
+    <div class="self-harm-header">⚠️ Three-Tier Assessment Framework</div>
+    <div class="self-harm-grid">
+      <div class="sh-col">
+        <div class="sh-label" style="color:var(--green)">Tier 1 — Allow</div>
+        <div class="sh-title">Awareness & Discussion</div>
+        <div class="sh-desc">Personal struggles, mental health conversations, support communities, and awareness content. Removing this harms the people who need support most — context and intent show this is safe to keep.</div>
+        <span class="sh-action" style="background:rgba(48,217,128,0.1);color:var(--green);border:1px solid rgba(48,217,128,0.25);">Keep — Monitor</span>
+      </div>
+      <div class="sh-col">
+        <div class="sh-label" style="color:var(--red)">Tier 2 — Remove</div>
+        <div class="sh-title">Promotion & Methods</div>
+        <div class="sh-desc">Content that promotes self-harm, shares specific methods, instructs others on how to harm themselves, or actively incites someone to hurt themselves. Clear policy violation regardless of framing.</div>
+        <span class="sh-action" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.25);">Remove Immediately</span>
+      </div>
+      <div class="sh-col">
+        <div class="sh-label" style="color:var(--accent2)">Tier 3 — Escalate</div>
+        <div class="sh-title">Immediate Risk</div>
+        <div class="sh-desc">Active, real-time expressions of suicidal intent or imminent self-harm — where there is a credible and immediate threat to the user's life. Goes directly to specialist welfare team for urgent intervention.</div>
+        <span class="sh-action" style="background:rgba(0,200,255,0.1);color:var(--accent2);border:1px solid rgba(0,200,255,0.25);">Escalate — Specialist Team</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;">
+    <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Key Judgment Factors</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+      <div>
+        <div style="font-weight:600;color:var(--white);font-size:0.95rem;margin-bottom:0.35rem;">Specificity</div>
+        <div style="font-size:0.92rem;color:var(--text);">Is this a general expression of pain or a specific plan with method and timeframe?</div>
+      </div>
+      <div>
+        <div style="font-weight:600;color:var(--white);font-size:0.95rem;margin-bottom:0.35rem;">Direction</div>
+        <div style="font-size:0.92rem;color:var(--text);">Is it inward (personal struggle) or outward (instructing or inciting others)?</div>
+      </div>
+      <div>
+        <div style="font-weight:600;color:var(--white);font-size:0.95rem;margin-bottom:0.35rem;">Immediacy</div>
+        <div style="font-size:0.92rem;color:var(--text);">Is this historical, hypothetical, or happening right now? Real-time = escalate.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: ENFORCEMENT -->
+<section class="content-section" id="enforcement">
+  <h2 class="sec-heading">ENFORCEMENT ACTIONS</h2>
+  <p class="sec-desc">Not every violation warrants the same response. Enforcement was graduated — matched to the severity of the violation, account history, and platform context.</p>
+
+  <div class="actions-grid">
+    <div class="action-item action-warn">
+      <div class="action-icon">⚡</div>
+      <div class="action-name">WARN</div>
+      <div class="action-desc">First-time or minor violations. User is notified, content may stay up. Creates a record for future enforcement.</div>
+    </div>
+    <div class="action-item action-remove">
+      <div class="action-icon">🗑️</div>
+      <div class="action-name">REMOVE</div>
+      <div class="action-desc">Content taken down. Used for clear policy violations where the content itself is the problem.</div>
+    </div>
+    <div class="action-item action-suspend">
+      <div class="action-icon">⏸️</div>
+      <div class="action-name">SUSPEND</div>
+      <div class="action-desc">Temporary account restriction. Used for repeat violations or serious single incidents requiring a cooling period.</div>
+    </div>
+    <div class="action-item action-ban">
+      <div class="action-icon">🚫</div>
+      <div class="action-name">PERMANENT BAN</div>
+      <div class="action-desc">Account terminated. Reserved for the most severe violations or repeat offenders with no path back.</div>
+    </div>
+    <div class="action-item action-escalate">
+      <div class="action-icon">🔺</div>
+      <div class="action-name">ESCALATE</div>
+      <div class="action-desc">Case passed to a specialist team. Used for CSAM, credible threats, and immediate self-harm risk.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: ESCALATION -->
+<section class="content-section" id="escalation" style="background:var(--surface);">
+  <h2 class="sec-heading">ESCALATION FRAMEWORK</h2>
+  <p class="sec-desc">Most cases were handled directly. A small subset required escalation — where severity, legal risk, or specialist knowledge exceeded standard review. Knowing when to escalate was as important as the decision itself.</p>
+
+  <div class="escalation-flow">
+    <div class="esc-step">
+      <div class="esc-num" style="background:rgba(48,217,128,0.1);border:1px solid rgba(48,217,128,0.2);color:var(--green);">01</div>
+      <div class="esc-content">
+        <div class="esc-title">STANDARD REVIEW</div>
+        <div class="esc-desc">The vast majority of cases — content reviewed against policy, action taken directly. No escalation needed. Decision documented in the moderation queue.</div>
+        <div class="esc-triggers">
+          <span class="esc-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Hate speech</span>
+          <span class="esc-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Spam</span>
+          <span class="esc-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Misinformation</span>
+          <span class="esc-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Advertising violations</span>
+          <span class="esc-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Fraud</span>
+          <span class="esc-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">NSFW</span>
+        </div>
+      </div>
+      <div class="esc-action-badge" style="background:rgba(48,217,128,0.1);color:var(--green);border:1px solid rgba(48,217,128,0.25);">Handle Directly</div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-num" style="background:rgba(240,160,80,0.1);border:1px solid rgba(240,160,80,0.2);color:var(--gold);">02</div>
+      <div class="esc-content">
+        <div class="esc-title">POLICY REVIEW ESCALATION</div>
+        <div class="esc-desc">Cases where policy interpretation required additional scrutiny — high-visibility accounts, ambiguous edge cases, or decisions with significant platform-wide implications. Routed for collaborative policy review.</div>
+        <div class="esc-triggers">
+          <span class="esc-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">High-profile accounts</span>
+          <span class="esc-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Ambiguous policy cases</span>
+          <span class="esc-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Crisis event content</span>
+          <span class="esc-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Borderline misinformation</span>
+        </div>
+      </div>
+      <div class="esc-action-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.25);">Policy Review</div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-num" style="background:rgba(255,68,85,0.1);border:1px solid rgba(255,68,85,0.2);color:var(--red);">03</div>
+      <div class="esc-content">
+        <div class="esc-title">SPECIALIST TEAM ESCALATION</div>
+        <div class="esc-desc">Cases requiring dedicated specialist response — child safety, credible threats to life, and active self-harm risk. Passed directly to a specialist team with the appropriate training and tools to respond.</div>
+        <div class="esc-triggers">
+          <span class="esc-trigger" style="background:rgba(255,68,85,0.08);color:var(--red);border:1px solid rgba(255,68,85,0.2);">CSAM — always</span>
+          <span class="esc-trigger" style="background:rgba(255,68,85,0.08);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Credible imminent threat</span>
+          <span class="esc-trigger" style="background:rgba(255,68,85,0.08);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Active self-harm risk</span>
+          <span class="esc-trigger" style="background:rgba(255,68,85,0.08);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Real-time suicide risk</span>
+        </div>
+      </div>
+      <div class="esc-action-badge" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.25);">Specialist Team</div>
+    </div>
+  </div>
+
+  <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;border-left:3px solid var(--accent2);">
+    <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;">Why Escalation Judgment Matters</div>
+    <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Knowing when <em>not</em> to handle a case yourself is as critical as the moderation decision itself. Under-escalating a credible threat or a CSAM case has real-world consequences. Over-escalating burdens specialist teams and slows response times for genuine emergencies. The judgment lives in between.</div>
+  </div>
+</section>
+
+<div class="page-footer">
+  <a href="index.html" class="footer-back">← Back to Portfolio</a>
+  <a href="community-management.html" class="footer-next">Next: Community Management →</a>
+</div>
+
+<script>
+const sections=['taxonomy','self-harm','enforcement','escalation'];
+const tabs=document.querySelectorAll('.tab-btn');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)current=id;});
+  tabs.forEach(t=>{t.classList.remove('active');if(t.getAttribute('href')==='#'+current)t.classList.add('active');});
+});
+function setTab(el){tabs.forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+</script>
+</body>
+</html>
