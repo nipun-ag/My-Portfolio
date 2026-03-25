@@ -865,24 +865,73 @@ nav {
   font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem;
 }
 
-.contact-items { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
+.contact-items { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
 
 .contact-item {
-  display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem;
-  border: 1px solid var(--border); background: var(--ink);
-  text-decoration: none; transition: all .2s; border-radius: 2px;
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--ink);
+  text-decoration: none;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
 }
-.contact-item:hover { border-color: rgba(79,124,255,0.4); background: var(--surface2); transform: translateX(4px); }
+
+/* Sliding color bar on hover */
+.contact-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .3s ease;
+}
+.contact-item:hover { transform: translateX(6px); }
+.contact-item:hover::before { transform: scaleY(1); }
+
+.contact-item-email::before { background: var(--accent2); }
+.contact-item-email:hover { border-color: rgba(0,200,255,0.3); }
+.contact-item-email:hover .ci-icon { color: var(--accent2); border-color: rgba(0,200,255,0.3); }
+.contact-item-email:hover .ci-val { color: var(--accent2); }
+
+.contact-item-linkedin::before { background: #0a66c2; }
+.contact-item-linkedin:hover { border-color: rgba(10,102,194,0.4); }
+.contact-item-linkedin:hover .ci-icon { color: #4da3ff; border-color: rgba(10,102,194,0.3); }
+.contact-item-linkedin:hover .ci-val { color: #4da3ff; }
 
 .ci-icon {
-  width: 30px; height: 30px; background: var(--surface2);
-  border: 1px solid var(--border2); border-radius: 3px;
+  width: 36px; height: 36px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.8rem; flex-shrink: 0;
+  font-size: 0.9rem; flex-shrink: 0;
+  color: var(--muted);
+  transition: color .3s, border-color .3s;
 }
-.ci-info { display: flex; flex-direction: column; }
-.ci-label { font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
-.ci-val { font-size: 0.88rem; color: var(--text); }
+
+.ci-info { display: flex; flex-direction: column; flex: 1; }
+.ci-label {
+  font-family: var(--font-mono); font-size: 0.52rem;
+  letter-spacing: 0.2em; color: var(--muted);
+  text-transform: uppercase; margin-bottom: 0.2rem;
+}
+.ci-val {
+  font-size: 0.9rem; color: var(--text);
+  transition: color .3s;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.05em;
+}
+
+.ci-arrow {
+  font-size: 0.85rem; color: var(--dim);
+  transition: color .3s, transform .3s;
+  flex-shrink: 0;
+}
+.contact-item:hover .ci-arrow { color: var(--muted); transform: translate(2px,-2px); }
 
 /* MINI FORM */
 .mini-form { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -979,28 +1028,27 @@ footer {
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" style="grid-template-columns:1fr; min-height:90vh;">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <!-- LEFT -->
-  <div class="hero-left">
+  <div class="hero-left" style="padding:7rem 4rem 4rem; max-width:1000px;">
     <div class="hero-status">
       <div class="status-pulse"></div>
       Available · Remote or Relocation
     </div>
 
-    <h1 class="hero-name">
+    <h1 class="hero-name" style="font-size:clamp(6rem,14vw,14rem);">
       NIPUN<br>
       <span class="line2">AGGARWAL</span>
     </h1>
 
-    <div class="hero-role">
+    <div class="hero-role" style="font-size:0.85rem; margin-bottom:2rem;">
       AI Trust & Safety <span>/</span> LLM Training <span>/</span> Content Moderation
     </div>
 
-    <p class="hero-desc">
+    <p class="hero-desc" style="max-width:600px; font-size:1.2rem;">
       6+ years keeping platforms and AI systems safe — from moderating harmful content at scale to training large language models through red teaming, data annotation, and output evaluation. Based in New Delhi, open to relocation globally.
     </p>
 
@@ -1009,7 +1057,6 @@ footer {
       <a href="#work" class="btn-secondary">Explore Skills</a>
     </div>
 
-    <!-- Stats under left text -->
     <div class="hero-stats" style="margin-top:2.5rem; max-width:320px;">
       <div class="hero-stat">
         <div class="hero-stat-num">6+</div>
@@ -1023,50 +1070,6 @@ footer {
         <div class="hero-stat-num">10k+</div>
         <div class="hero-stat-label">Cases Reviewed</div>
       </div>
-    </div>
-  </div>
-
-  <!-- RIGHT — Visual skill stack -->
-  <div class="hero-right">
-    <div class="skill-stack">
-
-      <div class="stack-card stack-card-1">
-        <div class="stack-card-icon">🧠</div>
-        <div class="stack-card-content">
-          <div class="stack-card-title">LLM Training</div>
-          <div class="stack-card-sub">Red Teaming · Annotation · Evaluation</div>
-        </div>
-        <div class="stack-card-glow"></div>
-      </div>
-
-      <div class="stack-card stack-card-2">
-        <div class="stack-card-icon">🛡️</div>
-        <div class="stack-card-content">
-          <div class="stack-card-title">Trust & Safety</div>
-          <div class="stack-card-sub">Policy · Risk · Escalation</div>
-        </div>
-        <div class="stack-card-glow"></div>
-      </div>
-
-      <div class="stack-card stack-card-3">
-        <div class="stack-card-icon">🚫</div>
-        <div class="stack-card-content">
-          <div class="stack-card-title">Content Moderation</div>
-          <div class="stack-card-sub">Hate Speech · CSAM · Spam</div>
-        </div>
-        <div class="stack-card-glow"></div>
-      </div>
-
-      <div class="stack-card stack-card-4">
-        <div class="stack-card-icon">🤝</div>
-        <div class="stack-card-content">
-          <div class="stack-card-title">Community Management</div>
-          <div class="stack-card-sub">Sentiment · Crisis · Trends</div>
-        </div>
-        <div class="stack-card-glow"></div>
-      </div>
-
-      <!-- end stack -->
     </div>
   </div>
 
@@ -1470,18 +1473,23 @@ footer {
     <p class="contact-sub">Open to remote roles in AI Trust & Safety, Governance, and Red Teaming. If you're building safer AI, I'd like to help.</p>
 
     <div class="contact-items">
-      <a href="/cdn-cgi/l/email-protection#46282f3633282721273431272a7774777406212b272f2a6825292b" class="contact-item">
+      <a href="mailto:nipunagarwal1212@gmail.com" class="contact-item contact-item-email">
         <div class="ci-icon">✉</div>
-        <div class="ci-info"><span class="ci-label">Email</span><span class="ci-val"><span class="__cf_email__" data-cfemail="8de3e4fdf8e3eceaecfffaece1bcbfbcbfcdeae0ece4e1a3eee2e0">[email&#160;protected]</span></span></div>
+        <div class="ci-info">
+          <span class="ci-label">Email</span>
+          <span class="ci-val">nipunagarwal1212@gmail.com</span>
+        </div>
+        <div class="ci-arrow">↗</div>
       </a>
-      <a href="https://linkedin.com/in/nipun-agarwal-/" target="_blank" class="contact-item">
-        <div class="ci-icon" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent2)">in</div>
-        <div class="ci-info"><span class="ci-label">LinkedIn</span><span class="ci-val">linkedin.com/in/nipun-agarwal-/</span></div>
+      <a href="https://linkedin.com/in/nipun-agarwal-/" target="_blank" class="contact-item contact-item-linkedin">
+        <div class="ci-icon" style="font-family:var(--font-mono);font-size:0.75rem;font-weight:500">in</div>
+        <div class="ci-info">
+          <span class="ci-label">LinkedIn</span>
+          <span class="ci-val">nipun-agarwal-/</span>
+        </div>
+        <div class="ci-arrow">↗</div>
       </a>
-      <a href="#" class="contact-item">
-        <div class="ci-icon">↓</div>
-        <div class="ci-info"><span class="ci-label">Resume</span><span class="ci-val">Download PDF · Updated 2026</span></div>
-      </a>
+    </div>
     </div>
 
     <div class="mini-form">
