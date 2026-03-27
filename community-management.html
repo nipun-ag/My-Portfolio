@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Community Management — Nipun Aggarwal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -23,14 +25,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
 .nav-logo-dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 2s infinite; }
 .nav-logo-text { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.15em; color:var(--white); text-transform:uppercase; }
-.nav-back { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.nav-back { font-family:var(--font-mono); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
 .nav-back:hover { color:var(--green); }
-.nav-domain-tag { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); background:rgba(48,217,128,0.08); border:1px solid rgba(48,217,128,0.2); padding:0.35rem 0.8rem; border-radius:2px; }
+.nav-domain-tag { font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); background:rgba(48,217,128,0.08); border:1px solid rgba(48,217,128,0.2); padding:0.35rem 0.8rem; border-radius:2px; }
 
 /* PAGE HERO */
 .page-hero { padding:8rem 3rem 5rem; border-bottom:1px solid var(--border); position:relative; z-index:1; overflow:hidden; }
 .page-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 60% 50%, rgba(48,217,128,0.05) 0%, transparent 60%); pointer-events:none; }
-.breadcrumb { display:flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:1.5rem; }
+.breadcrumb { display:flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:1.5rem; }
 .breadcrumb a { color:var(--muted); text-decoration:none; transition:color .2s; }
 .breadcrumb a:hover { color:var(--green); }
 .breadcrumb span { color:var(--dim); }
@@ -39,18 +41,18 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .page-intro { font-style:italic; font-weight:300; font-size:1.1rem; color:var(--text); max-width:640px; line-height:1.8; margin-bottom:2rem; }
 .page-hero-meta { display:flex; gap:3rem; flex-wrap:wrap; padding-top:2rem; border-top:1px solid var(--border); }
 .meta-item { display:flex; flex-direction:column; gap:0.3rem; }
-.meta-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
+.meta-label { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
 .meta-val { font-size:0.95rem; color:var(--white); font-weight:600; }
 
 /* TAB NAV */
 .tab-nav { position:sticky; top:57px; z-index:90; background:rgba(7,8,15,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); display:flex; padding:0 3rem; overflow-x:auto; }
-.tab-btn { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); background:none; border:none; padding:1rem 1.5rem; cursor:pointer; text-decoration:none; display:block; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .2s; white-space:nowrap; }
+.tab-btn { font-family:var(--font-mono); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); background:none; border:none; padding:1rem 1.5rem; cursor:pointer; text-decoration:none; display:block; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .2s; white-space:nowrap; }
 .tab-btn:hover { color:var(--text); }
 .tab-btn.active { color:var(--green); border-bottom-color:var(--green); }
 
 /* SECTIONS */
 .content-section { padding:5rem 3rem; border-bottom:1px solid var(--border); position:relative; z-index:1; }
-.sec-eyebrow { display:flex; align-items:center; gap:0.75rem; font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:1rem; color:var(--muted); }
+.sec-eyebrow { display:flex; align-items:center; gap:0.75rem; font-family:var(--font-mono); font-size:0.76rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:1rem; color:var(--muted); }
 .sec-eyebrow-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
 .sec-heading { font-family:var(--font-display); font-size:clamp(2.5rem,5vw,5.5rem); letter-spacing:0.03em; line-height:0.9; margin-bottom:1rem; }
 .sec-desc { font-style:italic; font-weight:300; font-size:1rem; color:var(--text); max-width:640px; line-height:1.8; margin-bottom:3rem; }
@@ -59,7 +61,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .stats-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden; margin-bottom:3rem; }
 .strip-stat { background:var(--ink); padding:1.5rem; text-align:center; }
 .strip-num { font-family:var(--font-display); font-size:2.5rem; letter-spacing:0.03em; line-height:1; background:linear-gradient(135deg,var(--green),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.4rem; }
-.strip-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
+.strip-label { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
 
 /* PLATFORM CARDS */
 .platform-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem; }
@@ -68,23 +70,23 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .platform-card-header { padding:1.5rem 1.5rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
 .platform-icon { font-size:1.6rem; }
 .platform-name { font-family:var(--font-display); font-size:1.6rem; letter-spacing:0.04em; color:var(--white); line-height:1; }
-.platform-type { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.2rem; }
+.platform-type { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.2rem; }
 .platform-body { padding:1.25rem 1.5rem; }
 .platform-desc { font-size:0.97rem; color:var(--text); line-height:1.8; margin-bottom:1rem; }
-.platform-scope-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem; }
+.platform-scope-label { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem; }
 .platform-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
-.platform-tag { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.07em; padding:0.2rem 0.55rem; border-radius:2px; border:1px solid; }
+.platform-tag { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.07em; padding:0.2rem 0.55rem; border-radius:2px; border:1px solid; }
 
 /* SENTIMENT SECTION */
 .sentiment-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
 .sentiment-chart-block { background:var(--ink); border:1px solid var(--border2); border-radius:6px; padding:1.75rem; }
-.chart-label { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; }
+.chart-label { font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; }
 .bar-chart { display:flex; align-items:flex-end; gap:0.5rem; height:120px; margin-bottom:0.75rem; }
 .bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:0.4rem; height:100%; justify-content:flex-end; }
 .bar { width:100%; border-radius:2px 2px 0 0; transition:height .3s; min-height:4px; }
-.bar-day { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.05em; color:var(--muted); }
+.bar-day { font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.05em; color:var(--muted); }
 .chart-legend { display:flex; gap:1rem; flex-wrap:wrap; }
-.legend-item { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.08em; color:var(--muted); }
+.legend-item { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--muted); }
 .legend-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
 
 .sentiment-categories { display:flex; flex-direction:column; gap:1rem; }
@@ -102,12 +104,12 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .crisis-step:first-child { border-radius:6px 6px 0 0; }
 .crisis-step:last-child { border-radius:0 0 6px 6px; margin-bottom:0; }
 .crisis-step:hover { background:var(--surface2); }
-.crisis-num { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.65rem; font-weight:500; flex-shrink:0; }
+.crisis-num { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.76rem; font-weight:500; flex-shrink:0; }
 .crisis-title { font-family:var(--font-display); font-size:1.3rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.4rem; }
 .crisis-desc { font-size:0.97rem; color:var(--text); line-height:1.7; }
 .crisis-triggers { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem; }
-.crisis-trigger { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.07em; padding:0.2rem 0.5rem; border-radius:2px; }
-.crisis-badge { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.75rem; border-radius:2px; white-space:nowrap; align-self:flex-start; margin-top:0.25rem; }
+.crisis-trigger { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.07em; padding:0.2rem 0.5rem; border-radius:2px; }
+.crisis-badge { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.75rem; border-radius:2px; white-space:nowrap; align-self:flex-start; margin-top:0.25rem; }
 
 /* ABUSE PATTERNS */
 .abuse-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden; margin-bottom:2rem; }
@@ -117,14 +119,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .abuse-item-name { font-family:var(--font-display); font-size:1.1rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.4rem; }
 .abuse-item-desc { font-size:0.95rem; color:var(--text); line-height:1.6; }
 .abuse-item-signals { margin-top:0.75rem; display:flex; flex-direction:column; gap:0.3rem; }
-.abuse-signal { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.05em; color:var(--text); display:flex; align-items:center; gap:0.4rem; }
+.abuse-signal { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.05em; color:var(--text); display:flex; align-items:center; gap:0.4rem; }
 .abuse-signal::before { content:'→'; color:var(--green); }
 
 /* HEALTH METRICS */
 .metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
 .metric-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; padding:1.5rem; position:relative; overflow:hidden; }
 .metric-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
-.metric-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem; }
+.metric-label { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem; }
 .metric-title { font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.75rem; }
 .metric-desc { font-size:0.97rem; color:var(--text); line-height:1.75; }
 .metric-signals { display:flex; flex-direction:column; gap:0.4rem; margin-top:1rem; }
@@ -142,8 +144,8 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 /* REPORT ANATOMY */
 .report-block { background:var(--surface); border:1px solid var(--border2); border-radius:6px; overflow:hidden; }
 .report-header { padding:1rem 1.5rem; background:rgba(48,217,128,0.05); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
-.report-title { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--green); }
-.report-badge { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; padding:0.2rem 0.55rem; border-radius:2px; background:rgba(48,217,128,0.1); color:var(--green); border:1px solid rgba(48,217,128,0.25); }
+.report-title { font-family:var(--font-mono); font-size:0.76rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--green); }
+.report-badge { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; padding:0.2rem 0.55rem; border-radius:2px; background:rgba(48,217,128,0.1); color:var(--green); border:1px solid rgba(48,217,128,0.25); }
 .report-sections { display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
 .report-section { padding:1.25rem 1.5rem; border-right:1px solid var(--border); }
 .report-section:last-child { border-right:none; }
@@ -155,9 +157,9 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
 /* PAGE FOOTER */
 .page-footer { border-top:1px solid var(--border); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
-.footer-back { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-back { font-family:var(--font-mono); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
 .footer-back:hover { color:var(--accent); }
-.footer-next { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent2); text-decoration:none; transition:opacity .2s; }
+.footer-next { font-family:var(--font-mono); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent2); text-decoration:none; transition:opacity .2s; }
 .footer-next:hover { opacity:0.8; }
 
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
@@ -250,7 +252,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
         </div>
         <div style="margin-left:auto;text-align:right;">
           <div style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">20K+</div>
-          <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Personal Karma</div>
+          <div style="font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Personal Karma</div>
         </div>
       </div>
       <div class="platform-body">
@@ -330,21 +332,21 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
         <div style="font-size:1.6rem;">💜</div>
         <div>
           <div style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:0.04em;color:var(--white);line-height:1;">GAMING DISCORD SERVER</div>
-          <div style="font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--purple);margin-top:0.2rem;">Personal Project · Built from Zero</div>
+          <div style="font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--purple);margin-top:0.2rem;">Personal Project · Built from Zero</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
         <div style="background:var(--ink);padding:1.25rem;text-align:center;">
           <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.3rem;">50+</div>
-          <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Members</div>
+          <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Members</div>
         </div>
         <div style="background:var(--ink);padding:1.25rem;text-align:center;">
           <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.3rem;">0</div>
-          <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Starting Point</div>
+          <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Starting Point</div>
         </div>
         <div style="background:var(--ink);padding:1.25rem;text-align:center;">
           <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.3rem;">Active</div>
-          <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Current Status</div>
+          <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Current Status</div>
         </div>
       </div>
       <div style="padding:1.25rem 1.5rem;">
@@ -354,7 +356,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
     <!-- ENGAGEMENT PROGRAMMES -->
     <div style="display:flex;flex-direction:column;gap:1rem;">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;">What Drives Retention</div>
+      <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;">What Drives Retention</div>
 
       <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.25rem;border-left:3px solid var(--gold);">
         <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;">🗣️ COMMUNITY ENGAGEMENT</div>
@@ -380,7 +382,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
   <!-- WHAT I LEARNED -->
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.75rem;border-left:3px solid var(--purple);">
-    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:1rem;">What Running Your Own Server Teaches You</div>
+    <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:1rem;">What Running Your Own Server Teaches You</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
       <div>
         <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">TRUST IS THE PRODUCT</div>
@@ -480,7 +482,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
   <!-- SENTIMENT SIGNALS BOX -->
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.75rem;border-left:3px solid var(--accent2);">
-    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;">What I Tracked Beyond Volume</div>
+    <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;">What I Tracked Beyond Volume</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
       <div>
         <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">VELOCITY</div>
@@ -594,12 +596,12 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
 
     <div>
-      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">De-escalation Approach</div>
+      <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">De-escalation Approach</div>
       <div style="display:flex;flex-direction:column;gap:1px;">
 
         <div style="background:var(--ink);border:1px solid var(--border2);padding:1.25rem;border-radius:6px 6px 0 0;">
           <div style="display:grid;grid-template-columns:28px 1fr;gap:1rem;align-items:flex-start;">
-            <div style="width:28px;height:28px;border-radius:50%;background:rgba(48,217,128,0.1);border:1px solid rgba(48,217,128,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.62rem;color:var(--green);flex-shrink:0;">01</div>
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(48,217,128,0.1);border:1px solid rgba(48,217,128,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.74rem;color:var(--green);flex-shrink:0;">01</div>
             <div>
               <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.35rem;">READ THE TEMPERATURE EARLY</div>
               <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">A debate that's heading somewhere bad gives signals before it gets there — increasing reply frequency, shorter messages, more caps. Catching it at step two is much easier than stepping in at step eight.</div>
@@ -609,7 +611,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
         <div style="background:var(--ink);border:1px solid var(--border2);padding:1.25rem;margin-top:1px;">
           <div style="display:grid;grid-template-columns:28px 1fr;gap:1rem;align-items:flex-start;">
-            <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.62rem;color:var(--accent2);flex-shrink:0;">02</div>
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.74rem;color:var(--accent2);flex-shrink:0;">02</div>
             <div>
               <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.35rem;">REDIRECT, DON'T SHUT DOWN</div>
               <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">A redirect acknowledges the energy and moves it somewhere constructive. Shutting a conversation down without addressing the underlying tension just means it resurfaces elsewhere — or members leave feeling dismissed.</div>
@@ -619,7 +621,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
         <div style="background:var(--ink);border:1px solid var(--border2);padding:1.25rem;margin-top:1px;">
           <div style="display:grid;grid-template-columns:28px 1fr;gap:1rem;align-items:flex-start;">
-            <div style="width:28px;height:28px;border-radius:50%;background:rgba(240,160,80,0.1);border:1px solid rgba(240,160,80,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.62rem;color:var(--gold);flex-shrink:0;">03</div>
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(240,160,80,0.1);border:1px solid rgba(240,160,80,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.74rem;color:var(--gold);flex-shrink:0;">03</div>
             <div>
               <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.35rem;">SET THE TONE PUBLICLY</div>
               <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">How a moderator responds to friction is watched by the entire community, not just the people in the thread. A measured, fair, visible response to a heated exchange tells every lurker what this community expects of itself.</div>
@@ -629,7 +631,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
         <div style="background:var(--ink);border:1px solid var(--border2);padding:1.25rem;margin-top:1px;border-radius:0 0 6px 6px;">
           <div style="display:grid;grid-template-columns:28px 1fr;gap:1rem;align-items:flex-start;">
-            <div style="width:28px;height:28px;border-radius:50%;background:rgba(155,110,243,0.1);border:1px solid rgba(155,110,243,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.62rem;color:var(--purple);flex-shrink:0;">04</div>
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(155,110,243,0.1);border:1px solid rgba(155,110,243,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.74rem;color:var(--purple);flex-shrink:0;">04</div>
             <div>
               <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.35rem;">ENFORCE AS A LAST RESORT</div>
               <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Bans and removals are the right call when they're needed — but a community where the moderator successfully steers debates without reaching for enforcement has healthier long-term engagement than one where every conflict ends in a removal.</div>
@@ -641,7 +643,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
     </div>
 
     <div style="display:flex;flex-direction:column;gap:1.5rem;">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:-0.5rem;">Engagement Techniques</div>
+      <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:-0.5rem;">Engagement Techniques</div>
 
       <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;">
         <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.6rem;">💬 ASKING BETTER QUESTIONS</div>
@@ -804,7 +806,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
   <p class="sec-desc">Every week the data told a story before the moderation queue did. These are the KPIs I tracked to understand platform health, member behaviour, and engagement quality.</p>
 
   <!-- CORE KPIs -->
-  <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Core Platform KPIs</div>
+  <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Core Platform KPIs</div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2.5rem;">
 
     <div style="background:var(--ink);padding:1.5rem;position:relative;overflow:hidden;transition:background .2s;">
@@ -812,7 +814,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div style="font-size:1.4rem;margin-bottom:0.75rem;">👁️</div>
       <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">TOTAL VISITS</div>
       <div style="font-size:0.92rem;color:var(--text);line-height:1.6;">Overall traffic to the community. Week-on-week trend reveals whether content strategy is driving return visits or just one-time arrivals.</div>
-      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--accent);">→ Tracked: weekly + monthly trend</div>
+      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--accent);">→ Tracked: weekly + monthly trend</div>
     </div>
 
     <div style="background:var(--ink);padding:1.5rem;position:relative;overflow:hidden;transition:background .2s;">
@@ -820,7 +822,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div style="font-size:1.4rem;margin-bottom:0.75rem;">🙋</div>
       <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">NEW MEMBERSHIPS</div>
       <div style="font-size:0.92rem;color:var(--text);line-height:1.6;">Rate of new members joining the community. Spikes often correlate with external campaigns or brand announcements — drops signal a growth problem worth flagging.</div>
-      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--green);">→ Tracked: weekly new joins</div>
+      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--green);">→ Tracked: weekly new joins</div>
     </div>
 
     <div style="background:var(--ink);padding:1.5rem;position:relative;overflow:hidden;transition:background .2s;">
@@ -828,7 +830,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div style="font-size:1.4rem;margin-bottom:0.75rem;">✍️</div>
       <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">TOTAL POSTS</div>
       <div style="font-size:0.92rem;color:var(--text);line-height:1.6;">Volume of new posts and replies created. Measures active participation — a community with high visits but low post volume has a lurker problem, not a traffic problem.</div>
-      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--gold);">→ Tracked: posts + replies separately</div>
+      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--gold);">→ Tracked: posts + replies separately</div>
     </div>
 
     <div style="background:var(--ink);padding:1.5rem;position:relative;overflow:hidden;transition:background .2s;">
@@ -836,17 +838,17 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div style="font-size:1.4rem;margin-bottom:0.75rem;">👍</div>
       <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">KUDOS GIVEN & RECEIVED</div>
       <div style="font-size:0.92rem;color:var(--text);line-height:1.6;">Peer recognition metric — how much members are appreciating each other's contributions. Low kudos relative to post volume signals low-quality or low-effort content dominating the feed.</div>
-      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--purple);">→ Tracked: given vs. received ratio</div>
+      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--purple);">→ Tracked: given vs. received ratio</div>
     </div>
 
   </div>
 
   <!-- SUPERUSER TRACKING -->
-  <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Superuser Tracking</div>
+  <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Superuser Tracking</div>
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;overflow:hidden;margin-bottom:2rem;">
     <div style="padding:1rem 1.5rem;background:rgba(79,124,255,0.05);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);">Weekly Top Members · Leaderboard</div>
-      <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.1em;padding:0.2rem 0.55rem;border-radius:2px;background:rgba(79,124,255,0.1);color:var(--accent);border:1px solid rgba(79,124,255,0.25);">Reported Weekly</div>
+      <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);">Weekly Top Members · Leaderboard</div>
+      <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.1em;padding:0.2rem 0.55rem;border-radius:2px;background:rgba(79,124,255,0.1);color:var(--accent);border:1px solid rgba(79,124,255,0.25);">Reported Weekly</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
 
@@ -854,21 +856,21 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
         <div style="font-size:1.3rem;margin-bottom:0.6rem;">💬</div>
         <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">MOST REPLIES</div>
         <div style="font-size:0.92rem;color:var(--text);line-height:1.6;margin-bottom:0.75rem;">Member with the highest reply count for the week. High repliers are the connective tissue of a community — they keep conversations alive and make new members feel heard.</div>
-        <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--muted);">Why it matters → consistent repliers are candidates for community moderator or superuser roles.</div>
+        <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--muted);">Why it matters → consistent repliers are candidates for community moderator or superuser roles.</div>
       </div>
 
       <div style="padding:1.5rem;border-right:1px solid var(--border);">
         <div style="font-size:1.3rem;margin-bottom:0.6rem;">📝</div>
         <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">MOST NEW POSTS</div>
         <div style="font-size:0.92rem;color:var(--text);line-height:1.6;margin-bottom:0.75rem;">Member who started the most new threads. Topic starters drive the direction of community discussion — tracking who they are reveals the community's most engaged voices and emerging leaders.</div>
-        <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--muted);">Why it matters → repeat topic starters shape community culture more than casual posters.</div>
+        <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--muted);">Why it matters → repeat topic starters shape community culture more than casual posters.</div>
       </div>
 
       <div style="padding:1.5rem;">
         <div style="font-size:1.3rem;margin-bottom:0.6rem;">🏆</div>
         <div style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;">HELPFUL ANSWER AWARD</div>
         <div style="font-size:0.92rem;color:var(--text);line-height:1.6;margin-bottom:0.75rem;">Member whose reply was marked as the accepted solution most often. Quality metric rather than volume — identifies members whose contributions are genuinely useful, not just frequent.</div>
-        <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.08em;color:var(--muted);">Why it matters → helpful answer leaders are the most valuable members for community trust and peer support.</div>
+        <div style="font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.08em;color:var(--muted);">Why it matters → helpful answer leaders are the most valuable members for community trust and peer support.</div>
       </div>
 
     </div>
@@ -876,7 +878,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
   <!-- WHY SUPERUSER TRACKING MATTERS -->
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.75rem;border-left:3px solid var(--accent);">
-    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">Why Superuser Tracking Matters Beyond Recognition</div>
+    <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">Why Superuser Tracking Matters Beyond Recognition</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
       <div style="font-size:0.97rem;color:var(--text);line-height:1.8;">Superusers are the early warning system for community health. When a consistently high-engagement member goes quiet, it's worth a direct check-in — they often see problems forming before they show up in the aggregate data.</div>
       <div style="font-size:0.97rem;color:var(--text);line-height:1.8;">They're also the first line of informal moderation — the members who answer questions before the mod team sees them, who flag issues in DMs, and who set the standard for what constructive engagement looks like in that community.</div>
@@ -932,7 +934,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
   </div>
 
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;border-left:3px solid var(--accent2);">
-    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;">Why the Recommendations Section Matters</div>
+    <div style="font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;">Why the Recommendations Section Matters</div>
     <div style="font-size:0.97rem;color:var(--text);line-height:1.8;">Reporting what happened is table stakes. The value is in translating what happened into what should change — surfacing patterns that product teams haven't seen, flagging policy ambiguities before they cause inconsistent enforcement, and giving brand teams enough lead time to respond before a community issue becomes a public one.</div>
   </div>
 </section>
