@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LLM Training — Nipun Aggarwal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -67,7 +69,7 @@ nav {
 
 .breadcrumb {
   display: flex; align-items:center; gap:0.5rem;
-  font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.15em;
+  font-family:var(--font-mono); font-size:0.80rem; letter-spacing:0.15em;
   color:var(--muted); text-transform:uppercase; margin-bottom:1.5rem;
 }
 .breadcrumb a { color:var(--muted); text-decoration:none; transition:color .2s; }
@@ -90,7 +92,7 @@ nav {
   padding-top: 2rem; border-top: 1px solid var(--border);
 }
 .meta-item { display:flex; flex-direction:column; gap:0.3rem; }
-.meta-label { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
+.meta-label { font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
 .meta-val { font-size:0.95rem; color:var(--white); font-weight:600; }
 
 /* STICKY TAB NAV */
@@ -152,7 +154,7 @@ nav {
 .placeholder-block::before {
   content: 'ADD YOUR CONTENT HERE';
   position:absolute; top:-0.6em; left:1rem;
-  font-family:var(--font-mono); font-size:0.64rem; letter-spacing:0.2em;
+  font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.2em;
   background:var(--bg); color:var(--dim); padding:0 0.5rem;
 }
 .placeholder-hint {
@@ -174,11 +176,11 @@ nav {
   background:var(--surface); border-bottom:1px solid var(--border);
 }
 .attack-type-badge {
-  font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.15em;
+  font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.15em;
   text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:2px;
 }
 .severity-badge {
-  font-family:var(--font-mono); font-size:0.64rem; letter-spacing:0.1em;
+  font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em;
   text-transform:uppercase; padding:0.2rem 0.5rem; border-radius:2px;
 }
 .sev-critical { background:rgba(255,68,85,0.12); color:var(--red); border:1px solid rgba(255,68,85,0.25); }
@@ -194,7 +196,7 @@ nav {
   font-size:0.95rem;
 }
 .attack-row:last-child { border-bottom:none; }
-.attack-row-label { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; padding-top:0.2rem; }
+.attack-row-label { font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; padding-top:0.2rem; }
 .attack-row-val { color:var(--text); line-height:1.6; }
 
 /* LIGHTBOX PROOF */
@@ -234,7 +236,7 @@ nav {
 .lightbox-close:hover { background:var(--red); color:white; }
 .lightbox-caption {
   padding:0.75rem 1rem; background:var(--surface);
-  font-family:var(--font-mono); font-size:0.70rem;
+  font-family:var(--font-mono); font-size:0.80rem;
   letter-spacing:0.12em; color:var(--muted); text-transform:uppercase;
 }
 @keyframes lightboxIn {
@@ -293,8 +295,8 @@ nav {
   display:flex; align-items:center; justify-content:space-between;
   padding:1rem 1.25rem; background:var(--surface); border-bottom:1px solid var(--border);
 }
-.eval-ex-label { font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
-.eval-verdict { font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.1em; padding:0.2rem 0.6rem; border-radius:2px; }
+.eval-ex-label { font-family:var(--font-mono); font-size:0.80rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
+.eval-verdict { font-family:var(--font-mono); font-size:0.80rem; letter-spacing:0.1em; padding:0.2rem 0.6rem; border-radius:2px; }
 .verdict-pass { background:rgba(48,217,128,0.1); color:var(--green); border:1px solid rgba(48,217,128,0.25); }
 .verdict-fail { background:rgba(255,68,85,0.1); color:var(--red); border:1px solid rgba(255,68,85,0.25); }
 .verdict-partial { background:rgba(240,160,80,0.1); color:var(--gold); border:1px solid rgba(240,160,80,0.25); }
@@ -302,7 +304,7 @@ nav {
 .eval-cols { display:grid; grid-template-columns:1fr 1fr; gap:0; }
 .eval-col { padding:1.25rem; }
 .eval-col:first-child { border-right:1px solid var(--border); }
-.eval-col-label { font-family:var(--font-mono); font-size:0.64rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; }
+.eval-col-label { font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; }
 .eval-col-text { font-size:0.95rem; color:var(--text); line-height:1.7; }
 
 .eval-scores {
@@ -320,14 +322,14 @@ nav {
 .rating-dim { display:flex; flex-direction:column; gap:0.75rem; }
 .rating-dim-header { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
 .rating-dim-name { font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); font-weight:500; }
-.rating-dim-verdict { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.1em; padding:0.18rem 0.55rem; border-radius:2px; white-space:nowrap; }
+.rating-dim-verdict { font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.1em; padding:0.18rem 0.55rem; border-radius:2px; white-space:nowrap; }
 .rating-scale { display:flex; align-items:flex-start; gap:0; position:relative; margin-bottom:0.25rem; }
 .rating-scale::before { content:''; position:absolute; top:7px; left:7px; right:7px; height:1px; background:var(--border2); z-index:0; }
 .rating-option { flex:1; display:flex; flex-direction:column; align-items:center; gap:0.5rem; position:relative; z-index:2; }
 .rating-dot { width:14px; height:14px; border-radius:50%; border:1.5px solid var(--border2); background:var(--ink); flex-shrink:0; }
 .rating-dot.active { background:var(--sc, var(--accent)); border-color:var(--sc, var(--accent)); box-shadow:0 0 8px var(--sc, var(--accent)); }
 .rating-dot.filled { background:var(--sc, var(--accent)); border-color:var(--sc, var(--accent)); opacity:0.3; }
-.rating-option-label { font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.04em; color:var(--muted); text-align:center; line-height:1.4; max-width:88px; }
+.rating-option-label { font-family:var(--font-mono); font-size:0.80rem; letter-spacing:0.04em; color:var(--muted); text-align:center; line-height:1.4; max-width:88px; }
 .rating-option-label.active { color:var(--white); }
 .rating-justification-wrap { display:flex; flex-direction:column; gap:0.4rem; }
 .rating-justification-label { font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
@@ -341,12 +343,12 @@ nav {
 
 /* RUBRIC TABLE */
 .rubric-table { width:100%; border-collapse:collapse; font-size:0.95rem; margin-bottom:2rem; }
-.rubric-table th { text-align:left; padding:0.75rem 1rem; font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--surface); }
+.rubric-table th { text-align:left; padding:0.75rem 1rem; font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--surface); }
 .rubric-table td { padding:0.9rem 1rem; border-bottom:1px solid rgba(28,29,46,0.5); vertical-align:top; line-height:1.5; }
 .rubric-table tr:last-child td { border-bottom:none; }
 .rubric-table tr:hover td { background:rgba(255,255,255,0.01); }
 .rubric-dim { font-weight:600; color:var(--white); }
-.rubric-weight { font-family:var(--font-mono); font-size:0.65rem; color:var(--accent); }
+.rubric-weight { font-family:var(--font-mono); font-size:0.76rem; color:var(--accent); }
 
 /* =================== DATA ANNOTATION =================== */
 /* Fix remaining muted text */
@@ -407,10 +409,10 @@ nav {
 .ann-info-desc { font-size:0.95rem; color:var(--text); line-height:1.8; }
 
 .ann-label-schema { background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:1rem; }
-.ann-schema-title { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; }
+.ann-schema-title { font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; }
 .ann-label-list { display:flex; flex-wrap:wrap; gap:0.4rem; }
 .ann-label {
-  font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.08em;
+  font-family:var(--font-mono); font-size:0.80rem; letter-spacing:0.08em;
   padding:0.25rem 0.6rem; border-radius:2px; border:1px solid;
 }
 
@@ -426,7 +428,7 @@ nav {
 }
 .strip-stat { background:var(--ink); padding:1.5rem; text-align:center; }
 .strip-num { font-family:var(--font-display); font-size:2.5rem; letter-spacing:0.03em; line-height:1; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.4rem; }
-.strip-label { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
+.strip-label { font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
 
 /* FOOTER */
 .page-footer { border-top:1px solid var(--border); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
@@ -605,7 +607,7 @@ nav {
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="attack-type-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Fictionalization</span>
           <span class="attack-type-badge" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Violent Content</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);">Case #001 · Gemini</span>
+          <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">Case #001 · Gemini</span>
         </div>
       </div>
       <div class="attack-card-body">
@@ -634,7 +636,7 @@ nav {
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="attack-type-badge" style="background:rgba(155,110,243,0.1);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Other Worlds</span>
           <span class="attack-type-badge" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Self-Harm Methods</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);">Case #002 · Gemini</span>
+          <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">Case #002 · Gemini</span>
         </div>
       </div>
       <div class="attack-card-body">
@@ -663,7 +665,7 @@ nav {
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="attack-type-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Fictionalization</span>
           <span class="attack-type-badge" style="background:rgba(155,110,243,0.1);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Illegal Goods/Services</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);">Case #003 · Gemini</span>
+          <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">Case #003 · Gemini</span>
         </div>
       </div>
       <div class="attack-card-body">
@@ -692,7 +694,7 @@ nav {
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="attack-type-badge" style="background:rgba(0,200,255,0.1);color:var(--accent2);border:1px solid rgba(0,200,255,0.2);">Rhetoric + Other Worlds</span>
           <span class="attack-type-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Health/Medical Advice</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);">Case #004 · Gemini</span>
+          <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">Case #004 · Gemini</span>
         </div>
       </div>
       <div class="attack-card-body">
@@ -721,7 +723,7 @@ nav {
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="attack-type-badge" style="background:rgba(0,200,255,0.1);color:var(--accent2);border:1px solid rgba(0,200,255,0.2);">Rhetoric</span>
           <span class="attack-type-badge" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Violent Content</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);">Case #005 · Gemini</span>
+          <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">Case #005 · Gemini</span>
         </div>
       </div>
       <div class="attack-card-body">
@@ -750,7 +752,7 @@ nav {
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="attack-type-badge" style="background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.2);">Role Playing</span>
           <span class="attack-type-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Hate / Harassment</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--muted);">Case #006 · Gemini</span>
+          <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">Case #006 · Gemini</span>
         </div>
       </div>
       <div class="attack-card-body">
@@ -826,7 +828,7 @@ nav {
       <div class="eval-example-header">
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="eval-ex-label">Example #001 — Informational Query</span>
-          <span style="font-family:var(--font-mono);font-size:0.64rem;letter-spacing:0.1em;color:var(--muted);">General Knowledge · Benchmark Pass</span>
+          <span style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);">General Knowledge · Benchmark Pass</span>
         </div>
         <span class="eval-verdict verdict-pass">✓ Pass</span>
       </div>
@@ -910,7 +912,7 @@ nav {
         <div class="rating-overall">
           <div class="rating-overall-header">
             <span class="rating-overall-label">Overall Assessment</span>
-            <span class="eval-verdict verdict-pass" style="font-size:0.68rem;">✓ Pass</span>
+            <span class="eval-verdict verdict-pass" style="font-size:0.78rem;">✓ Pass</span>
           </div>
           <div class="rating-overall-text">
             A benchmark-quality response across all three dimensions. The task was fully completed — both concepts addressed with no gaps. Every factual claim is accurate and the analogies map correctly without oversimplifying. Presentationally, the tone, formatting, and structure are all well-matched to a non-technical user. This is the standard other responses are measured against.
@@ -927,7 +929,7 @@ nav {
       <div class="eval-example-header">
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="eval-ex-label">Example #002 — Research Citation Query</span>
-          <span style="font-family:var(--font-mono);font-size:0.64rem;letter-spacing:0.1em;color:var(--muted);">Factual Accuracy — Hallucination</span>
+          <span style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);">Factual Accuracy — Hallucination</span>
         </div>
         <span class="eval-verdict verdict-fail">✗ Fail</span>
       </div>
@@ -1008,7 +1010,7 @@ nav {
         <div class="rating-overall">
           <div class="rating-overall-header">
             <span class="rating-overall-label">Overall Assessment</span>
-            <span class="eval-verdict verdict-fail" style="font-size:0.68rem;">✗ Fail</span>
+            <span class="eval-verdict verdict-fail" style="font-size:0.78rem;">✗ Fail</span>
           </div>
           <div class="rating-overall-text">
             The model completed the task in full and presented it well — but the response fails on Factual Accuracy, which is the critical dimension here. One of three citations is entirely fabricated and indistinguishable from the real ones in format and confidence. A response that looks correct but contains false information is more dangerous than one that looks uncertain. The presentation quality does not redeem the accuracy failure.
@@ -1025,7 +1027,7 @@ nav {
       <div class="eval-example-header">
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="eval-ex-label">Example #003 — Summarisation Request</span>
-          <span style="font-family:var(--font-mono);font-size:0.64rem;letter-spacing:0.1em;color:var(--muted);">Task Completion — Missed Instruction</span>
+          <span style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);">Task Completion — Missed Instruction</span>
         </div>
         <span class="eval-verdict verdict-fail">✗ Fail</span>
       </div>
@@ -1106,7 +1108,7 @@ nav {
         <div class="rating-overall">
           <div class="rating-overall-header">
             <span class="rating-overall-label">Overall Assessment</span>
-            <span class="eval-verdict verdict-fail" style="font-size:0.68rem;">✗ Fail</span>
+            <span class="eval-verdict verdict-fail" style="font-size:0.78rem;">✗ Fail</span>
           </div>
           <div class="rating-overall-text">
             The model understood the question and answered it accurately — Factual Accuracy is strong. AI Performance is also excellent; the prose is well-written, well-structured, and grammatically clean. The sole failure is Task Completion: both explicit format constraints (3 bullets, one sentence each) were ignored entirely. Strong writing does not compensate for not following instructions — that is a separate dimension.
@@ -1123,7 +1125,7 @@ nav {
       <div class="eval-example-header">
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
           <span class="eval-ex-label">Example #004 — Travel Itinerary Request</span>
-          <span style="font-family:var(--font-mono);font-size:0.64rem;letter-spacing:0.1em;color:var(--muted);">Task Completion + AI Performance — Dual Failure</span>
+          <span style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);">Task Completion + AI Performance — Dual Failure</span>
         </div>
         <span class="eval-verdict verdict-fail">✗ Fail</span>
       </div>
@@ -1136,7 +1138,7 @@ nav {
           <div class="eval-col-label">Model Response</div>
           <div class="eval-col-text" style="line-height:2;">
             Day 1 you should visit fushimi inari shrine is very famous and nice place to see the torii gates very beautiful and lot of peoples go there in the morning.you also can go to gion district in the evening for see geisha.<span style="color:#a03040;font-family:var(--font-mono);font-size:0.85rem;">ahjkq##</span>Day 2 kinkakuji temple is golden temple very popular with tourist you must see it.<span style="color:#a03040;font-family:var(--font-mono);font-size:0.85rem;">zxplw!!</span>hope you enjoy kyoto it is beautiful city with many thing to do and see for culture lover.
-            <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.64rem;color:var(--muted);letter-spacing:0.08em;">↑ only 2 of 4 days covered · no budget info · no off-the-beaten-path picks · no spacing · gibberish characters · grammar errors throughout</div>
+            <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);letter-spacing:0.08em;">↑ only 2 of 4 days covered · no budget info · no off-the-beaten-path picks · no spacing · gibberish characters · grammar errors throughout</div>
           </div>
         </div>
       </div>
@@ -1202,7 +1204,7 @@ nav {
         <div class="rating-overall">
           <div class="rating-overall-header">
             <span class="rating-overall-label">Overall Assessment</span>
-            <span class="eval-verdict verdict-fail" style="font-size:0.68rem;">✗ Fail</span>
+            <span class="eval-verdict verdict-fail" style="font-size:0.78rem;">✗ Fail</span>
           </div>
           <div class="rating-overall-text">
             A dual failure across Task Completion and AI Performance — for entirely independent reasons. The model covered only 2 of 4 requested days and ignored all three explicit constraints. Separately, the response is unreadable due to missing spacing, gibberish characters, and pervasive grammar errors. Factual Accuracy is the only dimension that partially holds, since the landmarks mentioned are real — though even here, recommending known tourist traps to a user who asked to avoid them introduces a meaningful factual mismatch.
@@ -1271,7 +1273,7 @@ nav {
           </div>
         </div>
         <div class="ann-challenges">
-          <div style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
+          <div style="font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
           <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--red)"></div><div><span style="color:var(--muted);">e.g. occluded gripper during close-range grasps</span></div></div>
           <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--gold)"></div><div><span style="color:var(--muted);">e.g. distinguishing intentional pause from task completion</span></div></div>
         </div>
@@ -1303,7 +1305,7 @@ nav {
           </div>
         </div>
         <div class="ann-challenges">
-          <div style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
+          <div style="font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
           <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--red)"></div><div><span style="color:var(--muted);">e.g. rapid simultaneous actions in a single frame</span></div></div>
           <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--gold)"></div><div><span style="color:var(--muted);">e.g. determining player intent vs accidental movement</span></div></div>
         </div>
@@ -1337,7 +1339,7 @@ nav {
           </div>
         </div>
         <div class="ann-challenges">
-          <div style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
+          <div style="font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Challenges</div>
           <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--red)"></div><div><span style="color:var(--muted);">e.g. extreme motion blur at high speeds, sun glare on snow</span></div></div>
           <div class="ann-challenge"><div class="ann-challenge-dot" style="background:var(--gold)"></div><div><span style="color:var(--muted);">e.g. equipment obscuring body keypoints — helmets, ski gear</span></div></div>
         </div>
