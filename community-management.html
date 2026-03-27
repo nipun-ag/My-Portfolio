@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Management — Nipun Aggarwal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#07080f; --ink:#0c0d16; --surface:#10111c; --surface2:#161724;
+  --border:#1c1d2e; --border2:#252638; --text:#c8cce0; --muted:#52546e;
+  --dim:#2e3048; --white:#eceef8; --accent:#4f7cff; --accent2:#00c8ff;
+  --red:#ff4455; --gold:#f0a050; --green:#30d980; --purple:#9b6ef3;
+  --font-display:'Bebas Neue',sans-serif; --font-body:'Crimson Pro',serif; --font-mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-size:17px; line-height:1.6; overflow-x:hidden; }
+.grid-bg { position:fixed; inset:0; background-image:linear-gradient(rgba(79,124,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,124,255,0.03) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1rem 3rem; border-bottom:1px solid var(--border); background:rgba(7,8,15,0.95); backdrop-filter:blur(16px); }
+.nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
+.nav-logo-dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 2s infinite; }
+.nav-logo-text { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.15em; color:var(--white); text-transform:uppercase; }
+.nav-back { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.nav-back:hover { color:var(--green); }
+.nav-domain-tag { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); background:rgba(48,217,128,0.08); border:1px solid rgba(48,217,128,0.2); padding:0.35rem 0.8rem; border-radius:2px; }
+
+/* PAGE HERO */
+.page-hero { padding:8rem 3rem 5rem; border-bottom:1px solid var(--border); position:relative; z-index:1; overflow:hidden; }
+.page-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 60% 50%, rgba(48,217,128,0.05) 0%, transparent 60%); pointer-events:none; }
+.breadcrumb { display:flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:1.5rem; }
+.breadcrumb a { color:var(--muted); text-decoration:none; transition:color .2s; }
+.breadcrumb a:hover { color:var(--green); }
+.breadcrumb span { color:var(--dim); }
+.page-title { font-family:var(--font-display); font-size:clamp(3.5rem,9vw,9rem); line-height:0.88; letter-spacing:0.02em; color:var(--white); margin-bottom:1.5rem; }
+.page-title span { background:linear-gradient(90deg,var(--green),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-intro { font-style:italic; font-weight:300; font-size:1.1rem; color:var(--text); max-width:640px; line-height:1.8; margin-bottom:2rem; }
+.page-hero-meta { display:flex; gap:3rem; flex-wrap:wrap; padding-top:2rem; border-top:1px solid var(--border); }
+.meta-item { display:flex; flex-direction:column; gap:0.3rem; }
+.meta-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
+.meta-val { font-size:0.95rem; color:var(--white); font-weight:600; }
+
+/* TAB NAV */
+.tab-nav { position:sticky; top:57px; z-index:90; background:rgba(7,8,15,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); display:flex; padding:0 3rem; overflow-x:auto; }
+.tab-btn { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); background:none; border:none; padding:1rem 1.5rem; cursor:pointer; text-decoration:none; display:block; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .2s; white-space:nowrap; }
+.tab-btn:hover { color:var(--text); }
+.tab-btn.active { color:var(--green); border-bottom-color:var(--green); }
+
+/* SECTIONS */
+.content-section { padding:5rem 3rem; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+.sec-eyebrow { display:flex; align-items:center; gap:0.75rem; font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:1rem; color:var(--muted); }
+.sec-eyebrow-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.sec-heading { font-family:var(--font-display); font-size:clamp(2.5rem,5vw,5.5rem); letter-spacing:0.03em; line-height:0.9; margin-bottom:1rem; }
+.sec-desc { font-style:italic; font-weight:300; font-size:1rem; color:var(--text); max-width:640px; line-height:1.8; margin-bottom:3rem; }
+
+/* STATS STRIP */
+.stats-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden; margin-bottom:3rem; }
+.strip-stat { background:var(--ink); padding:1.5rem; text-align:center; }
+.strip-num { font-family:var(--font-display); font-size:2.5rem; letter-spacing:0.03em; line-height:1; background:linear-gradient(135deg,var(--green),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.4rem; }
+.strip-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
+
+/* PLATFORM CARDS */
+.platform-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem; }
+.platform-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; overflow:hidden; transition:border-color .2s; }
+.platform-card:hover { border-color:rgba(48,217,128,0.3); }
+.platform-card-header { padding:1.5rem 1.5rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
+.platform-icon { font-size:1.6rem; }
+.platform-name { font-family:var(--font-display); font-size:1.6rem; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.platform-type { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.2rem; }
+.platform-body { padding:1.25rem 1.5rem; }
+.platform-desc { font-size:0.97rem; color:var(--text); line-height:1.8; margin-bottom:1rem; }
+.platform-scope-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem; }
+.platform-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.platform-tag { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.07em; padding:0.2rem 0.55rem; border-radius:2px; border:1px solid; }
+
+/* SENTIMENT SECTION */
+.sentiment-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
+.sentiment-chart-block { background:var(--ink); border:1px solid var(--border2); border-radius:6px; padding:1.75rem; }
+.chart-label { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; }
+.bar-chart { display:flex; align-items:flex-end; gap:0.5rem; height:120px; margin-bottom:0.75rem; }
+.bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:0.4rem; height:100%; justify-content:flex-end; }
+.bar { width:100%; border-radius:2px 2px 0 0; transition:height .3s; min-height:4px; }
+.bar-day { font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.05em; color:var(--muted); }
+.chart-legend { display:flex; gap:1rem; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.08em; color:var(--muted); }
+.legend-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+
+.sentiment-categories { display:flex; flex-direction:column; gap:1rem; }
+.sentiment-cat { background:var(--ink); border:1px solid var(--border2); border-radius:6px; padding:1.25rem; }
+.sentiment-cat-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem; }
+.sentiment-cat-name { font-family:var(--font-display); font-size:1.1rem; letter-spacing:0.04em; color:var(--white); }
+.sentiment-cat-pct { font-family:var(--font-mono); font-size:0.72rem; font-weight:500; }
+.sentiment-bar-track { height:4px; background:var(--border2); border-radius:2px; overflow:hidden; }
+.sentiment-bar-fill { height:100%; border-radius:2px; }
+.sentiment-cat-desc { font-size:0.92rem; color:var(--text); line-height:1.6; margin-top:0.5rem; }
+
+/* CRISIS SECTION */
+.crisis-flow { display:flex; flex-direction:column; gap:1px; margin-bottom:2rem; }
+.crisis-step { display:grid; grid-template-columns:auto 1fr auto; align-items:start; gap:1.5rem; padding:1.5rem; background:var(--ink); border:1px solid var(--border2); margin-bottom:1px; transition:background .2s; }
+.crisis-step:first-child { border-radius:6px 6px 0 0; }
+.crisis-step:last-child { border-radius:0 0 6px 6px; margin-bottom:0; }
+.crisis-step:hover { background:var(--surface2); }
+.crisis-num { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.65rem; font-weight:500; flex-shrink:0; }
+.crisis-title { font-family:var(--font-display); font-size:1.3rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.4rem; }
+.crisis-desc { font-size:0.97rem; color:var(--text); line-height:1.7; }
+.crisis-triggers { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem; }
+.crisis-trigger { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.07em; padding:0.2rem 0.5rem; border-radius:2px; }
+.crisis-badge { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.75rem; border-radius:2px; white-space:nowrap; align-self:flex-start; margin-top:0.25rem; }
+
+/* ABUSE PATTERNS */
+.abuse-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden; margin-bottom:2rem; }
+.abuse-item { background:var(--ink); padding:1.5rem; transition:background .2s; }
+.abuse-item:hover { background:var(--surface2); }
+.abuse-item-icon { font-size:1.3rem; margin-bottom:0.6rem; }
+.abuse-item-name { font-family:var(--font-display); font-size:1.1rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.4rem; }
+.abuse-item-desc { font-size:0.95rem; color:var(--text); line-height:1.6; }
+.abuse-item-signals { margin-top:0.75rem; display:flex; flex-direction:column; gap:0.3rem; }
+.abuse-signal { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.05em; color:var(--text); display:flex; align-items:center; gap:0.4rem; }
+.abuse-signal::before { content:'→'; color:var(--green); }
+
+/* HEALTH METRICS */
+.metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.metric-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; padding:1.5rem; position:relative; overflow:hidden; }
+.metric-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.metric-label { font-family:var(--font-mono); font-size:0.60rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem; }
+.metric-title { font-family:var(--font-display); font-size:1.4rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.75rem; }
+.metric-desc { font-size:0.97rem; color:var(--text); line-height:1.75; }
+.metric-signals { display:flex; flex-direction:column; gap:0.4rem; margin-top:1rem; }
+.metric-signal { display:flex; align-items:center; gap:0.75rem; font-size:0.95rem; color:var(--text); }
+.metric-signal-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+
+/* TOOLS SECTION */
+.tools-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+.tool-item { background:var(--ink); padding:1.25rem; transition:background .2s; }
+.tool-item:hover { background:var(--surface2); }
+.tool-icon { font-size:1.2rem; margin-bottom:0.5rem; }
+.tool-name { font-family:var(--font-display); font-size:1.1rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.35rem; }
+.tool-desc { font-size:0.92rem; color:var(--text); line-height:1.5; }
+
+/* REPORT ANATOMY */
+.report-block { background:var(--surface); border:1px solid var(--border2); border-radius:6px; overflow:hidden; }
+.report-header { padding:1rem 1.5rem; background:rgba(48,217,128,0.05); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.report-title { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--green); }
+.report-badge { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; padding:0.2rem 0.55rem; border-radius:2px; background:rgba(48,217,128,0.1); color:var(--green); border:1px solid rgba(48,217,128,0.25); }
+.report-sections { display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
+.report-section { padding:1.25rem 1.5rem; border-right:1px solid var(--border); }
+.report-section:last-child { border-right:none; }
+.report-section-num { font-family:var(--font-display); font-size:0.9rem; letter-spacing:0.05em; color:var(--muted); margin-bottom:0.25rem; }
+.report-section-title { font-family:var(--font-display); font-size:1.2rem; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:0.5rem; }
+.report-section-items { display:flex; flex-direction:column; gap:0.3rem; }
+.report-section-item { font-size:0.92rem; color:var(--text); display:flex; align-items:flex-start; gap:0.5rem; }
+.report-section-item::before { content:'·'; color:var(--green); flex-shrink:0; }
+
+/* PAGE FOOTER */
+.page-footer { border-top:1px solid var(--border); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
+.footer-back { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-back:hover { color:var(--accent); }
+.footer-next { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent2); text-decoration:none; transition:opacity .2s; }
+.footer-next:hover { opacity:0.8; }
+
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .page-hero,.content-section{padding-left:1.5rem;padding-right:1.5rem;}
+  .platform-grid,.sentiment-grid,.metrics-grid{grid-template-columns:1fr;}
+  .abuse-grid,.tools-grid{grid-template-columns:1fr 1fr;}
+  .report-sections{grid-template-columns:1fr;}
+  .report-section{border-right:none;border-bottom:1px solid var(--border);}
+  .report-section:last-child{border-bottom:none;}
+  .stats-strip{grid-template-columns:1fr 1fr;}
+  .crisis-step{grid-template-columns:auto 1fr;}
+  .crisis-badge{display:none;}
+  .tab-nav{padding:0 1.5rem;}
+  .page-footer{padding:1.5rem;flex-direction:column;gap:1rem;}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    <div class="nav-logo-text">Nipun Aggarwal</div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+  <div class="nav-domain-tag">🤝 Community Management</div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>/</span>
+    <span style="color:var(--green)">Community Management</span>
+  </div>
+  <h1 class="page-title">COMMUNITY<br><span>MANAGEMENT</span></h1>
+  <p class="page-intro">Keeping online communities healthy at scale — sentiment tracking, abuse pattern detection, crisis response, and weekly reporting across Reddit, Discord, and Khoros-powered brand communities.</p>
+  <div class="page-hero-meta">
+    <div class="meta-item"><span class="meta-label">Experience</span><span class="meta-val">2+ Years</span></div>
+    <div class="meta-item"><span class="meta-label">Platforms</span><span class="meta-val">Reddit · Discord · Khoros</span></div>
+    <div class="meta-item"><span class="meta-label">Focus Areas</span><span class="meta-val">Sentiment · Crisis · Abuse Detection · Reporting</span></div>
+    <div class="meta-item"><span class="meta-label">Company</span><span class="meta-val">Khoros · Bengaluru</span></div>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <a href="#platforms" class="tab-btn active">Platforms</a>
+  <a href="#personal-project" class="tab-btn">Personal Project</a>
+  <a href="#sentiment" class="tab-btn">Sentiment Analysis</a>
+  <a href="#crisis" class="tab-btn">Crisis Management</a>
+  <a href="#abuse" class="tab-btn">Abuse Patterns</a>
+  <a href="#health" class="tab-btn">Community Health</a>
+  <a href="#reporting" class="tab-btn">Reporting</a>
+  <a href="#tools" class="tab-btn">Tools</a>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: PLATFORMS -->
+<!-- ============================================================ -->
+<section class="content-section" id="platforms">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--green);"></div>Where I Worked</div>
+  <h2 class="sec-heading" style="color:var(--green);">PLATFORM<br>OVERVIEW</h2>
+  <p class="sec-desc">Each platform has its own culture, vocabulary, and abuse patterns. Effective moderation means understanding the community before you can protect it.</p>
+
+  <div class="stats-strip">
+    <div class="strip-stat"><div class="strip-num">3</div><div class="strip-label">Platforms</div></div>
+    <div class="strip-stat"><div class="strip-num">2+</div><div class="strip-label">Years Active</div></div>
+    <div class="strip-stat"><div class="strip-num">7</div><div class="strip-label">Days / Week</div></div>
+    <div class="strip-stat"><div class="strip-num">Weekly</div><div class="strip-label">Health Reports</div></div>
+  </div>
+
+  <div class="platform-grid">
+
+    <!-- REDDIT -->
+    <div class="platform-card">
+      <div class="platform-card-header">
+        <div class="platform-icon">🔴</div>
+        <div>
+          <div class="platform-name">REDDIT</div>
+          <div class="platform-type" style="color:var(--gold);">Long-form · Threaded Discussion</div>
+        </div>
+      </div>
+      <div class="platform-body">
+        <div class="platform-desc">Reddit's upvote-driven, thread-based structure creates unique moderation challenges — viral bad-faith content, brigading from external communities, and rule-lawyering users who know the platform deeply. Subreddit culture varies enormously; what counts as harassment in one community is accepted banter in another.</div>
+        <div class="platform-scope-label">Key Moderation Scope</div>
+        <div class="platform-tags">
+          <span class="platform-tag" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">Post & Comment Review</span>
+          <span class="platform-tag" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">Brigading Detection</span>
+          <span class="platform-tag" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">Rule Enforcement</span>
+          <span class="platform-tag" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">Spam & Bot Accounts</span>
+          <span class="platform-tag" style="color:var(--gold);border-color:rgba(240,160,80,0.3);">Flair & Community Norms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCORD -->
+    <div class="platform-card">
+      <div class="platform-card-header">
+        <div class="platform-icon">💜</div>
+        <div>
+          <div class="platform-name">DISCORD</div>
+          <div class="platform-type" style="color:var(--purple);">Real-time · Channel-based</div>
+        </div>
+      </div>
+      <div class="platform-body">
+        <div class="platform-desc">Discord's real-time nature demands faster response than any other platform — abuse escalates in minutes, not hours. Server culture is tight-knit and often protective of its own; outsider moderation requires earned trust. Particular focus on voice channel behaviour, DM harassment, and bot-assisted spam campaigns.</div>
+        <div class="platform-scope-label">Key Moderation Scope</div>
+        <div class="platform-tags">
+          <span class="platform-tag" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">Real-time Chat Review</span>
+          <span class="platform-tag" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">Voice Channel Monitoring</span>
+          <span class="platform-tag" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">DM Harassment Reports</span>
+          <span class="platform-tag" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">Bot & Raid Detection</span>
+          <span class="platform-tag" style="color:var(--purple);border-color:rgba(155,110,243,0.3);">Role & Permission Management</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KHOROS -->
+    <div class="platform-card">
+      <div class="platform-card-header">
+        <div class="platform-icon">🏢</div>
+        <div>
+          <div class="platform-name">KHOROS</div>
+          <div class="platform-type" style="color:var(--accent2);">Brand Communities · Enterprise</div>
+        </div>
+      </div>
+      <div class="platform-body">
+        <div class="platform-desc">Khoros hosts brand-owned communities — customer support forums, product feedback spaces, and loyalty communities for enterprise clients. The moderation standard is higher; public-facing brand reputation is at stake on every decision. Focus on maintaining constructive discussion while protecting the brand from crisis escalation.</div>
+        <div class="platform-scope-label">Key Moderation Scope</div>
+        <div class="platform-tags">
+          <span class="platform-tag" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">Brand Community Moderation</span>
+          <span class="platform-tag" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">Customer Sentiment Tracking</span>
+          <span class="platform-tag" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">Escalation to Brand Teams</span>
+          <span class="platform-tag" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">Abuse & Spam Control</span>
+          <span class="platform-tag" style="color:var(--accent2);border-color:rgba(0,200,255,0.3);">Weekly Health Reporting</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: PERSONAL PROJECT -->
+<!-- ============================================================ -->
+<section class="content-section" id="personal-project" style="background:var(--surface);">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--purple);"></div>Built From Scratch</div>
+  <h2 class="sec-heading" style="color:var(--purple);">PERSONAL<br>PROJECT</h2>
+  <p class="sec-desc">Beyond professional work — I built and run my own gaming Discord server from zero. A hands-on experiment in what actually drives community engagement and retention.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+
+    <!-- SERVER OVERVIEW -->
+    <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;overflow:hidden;">
+      <div style="padding:1.25rem 1.5rem;background:rgba(155,110,243,0.05);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:1.6rem;">💜</div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:0.04em;color:var(--white);line-height:1;">GAMING DISCORD SERVER</div>
+          <div style="font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--purple);margin-top:0.2rem;">Personal Project · Built from Zero</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
+        <div style="background:var(--ink);padding:1.25rem;text-align:center;">
+          <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.3rem;">50+</div>
+          <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Members</div>
+        </div>
+        <div style="background:var(--ink);padding:1.25rem;text-align:center;">
+          <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.3rem;">0</div>
+          <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Starting Point</div>
+        </div>
+        <div style="background:var(--ink);padding:1.25rem;text-align:center;">
+          <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.3rem;">Active</div>
+          <div style="font-family:var(--font-mono);font-size:0.60rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Current Status</div>
+        </div>
+      </div>
+      <div style="padding:1.25rem 1.5rem;">
+        <div style="font-size:0.97rem;color:var(--text);line-height:1.8;">Started the server from scratch with zero members. Built up to 50+ through a mix of organic outreach, consistent content, and structured engagement programmes. The challenge of growing a community without a brand behind it taught me what actually drives people to stay — which turns out to be consistency and giving members something worth showing up for.</div>
+      </div>
+    </div>
+
+    <!-- ENGAGEMENT PROGRAMMES -->
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;">What Drives Retention</div>
+
+      <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.25rem;border-left:3px solid var(--purple);">
+        <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;">🎁 REGULAR GIVEAWAYS</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Scheduled giveaways create recurring reasons for members to stay engaged and check back in. The key insight: frequency matters more than prize value. Weekly small giveaways outperform monthly big ones for retention.</div>
+      </div>
+
+      <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.25rem;border-left:3px solid var(--accent2);">
+        <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;">😄 MEME & MEDIA SHARING</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Low-effort, high-participation channels. Meme threads lower the barrier to posting for members who wouldn't start a conversation themselves — and are consistently the highest-traffic channels in gaming communities.</div>
+      </div>
+
+      <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.25rem;border-left:3px solid var(--green);">
+        <div style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;">🏗️ BUILT FROM ZERO</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">No existing audience, no brand, no shortcuts. Every member was brought in through genuine community building — outreach, cross-server networking, and creating enough value that members invited others themselves.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT I LEARNED -->
+  <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.75rem;border-left:3px solid var(--purple);">
+    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:1rem;">What Running Your Own Server Teaches You</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">TRUST IS THE PRODUCT</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Members stay when they trust the server will be moderated fairly and consistently. One bad call handled badly loses more people than a slow week of content ever would.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">SILENT MEMBERS ARE DATA</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Most members never post. Watching what they react to, what channels they visit, and when they go quiet tells you more about community health than the vocal 20% does.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">CULTURE IS FRAGILE</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">It takes months to build a community tone — and one toxic user left unchecked for a week can shift it. Early enforcement signals to the whole community what's acceptable far more clearly than any rules channel does.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================================================ -->
+<section class="content-section" id="sentiment" style="background:var(--surface);">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--accent2);"></div>Reading the Room</div>
+  <h2 class="sec-heading" style="color:var(--accent2);">SENTIMENT<br>ANALYSIS</h2>
+  <p class="sec-desc">Community sentiment isn't just positive or negative — it's a signal for what's coming. Tracking shifts in tone before they become crises is the core skill in community health work.</p>
+
+  <div class="sentiment-grid">
+
+    <!-- WEEKLY CHART -->
+    <div class="sentiment-chart-block">
+      <div class="chart-label">Sentiment Trend · Typical Weekly Pattern</div>
+      <div class="bar-chart">
+        <div class="bar-wrap">
+          <div class="bar" style="height:55%;background:rgba(48,217,128,0.5);"></div>
+          <div class="bar-day">Mon</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:65%;background:rgba(48,217,128,0.55);"></div>
+          <div class="bar-day">Tue</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:40%;background:rgba(240,160,80,0.5);"></div>
+          <div class="bar-day">Wed</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:85%;background:rgba(255,68,85,0.6);"></div>
+          <div class="bar-day">Thu</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:60%;background:rgba(240,160,80,0.5);"></div>
+          <div class="bar-day">Fri</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:50%;background:rgba(48,217,128,0.45);"></div>
+          <div class="bar-day">Sat</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:70%;background:rgba(48,217,128,0.55);"></div>
+          <div class="bar-day">Sun</div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div>Positive</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>Neutral / Mixed</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div>Negative / Crisis spike</div>
+      </div>
+      <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);font-size:0.95rem;color:var(--text);line-height:1.75;">
+        Thursday spikes are a recurring pattern — mid-week product announcements, policy changes, or unresolved support issues tend to surface as community frustration by Thursday. Catching the Wednesday uptick is the early warning signal.
+      </div>
+    </div>
+
+    <!-- SENTIMENT CATEGORIES -->
+    <div class="sentiment-categories">
+      <div class="sentiment-cat">
+        <div class="sentiment-cat-header">
+          <div class="sentiment-cat-name" style="color:var(--green);">POSITIVE</div>
+          <div class="sentiment-cat-pct" style="color:var(--green);">~55%</div>
+        </div>
+        <div class="sentiment-bar-track"><div class="sentiment-bar-fill" style="width:55%;background:var(--green);"></div></div>
+        <div class="sentiment-cat-desc">Product appreciation, community bonding, helpful peer support. The baseline state to maintain and protect from being eroded by unaddressed negative threads.</div>
+      </div>
+      <div class="sentiment-cat">
+        <div class="sentiment-cat-header">
+          <div class="sentiment-cat-name" style="color:var(--gold);">NEUTRAL / MIXED</div>
+          <div class="sentiment-cat-pct" style="color:var(--gold);">~30%</div>
+        </div>
+        <div class="sentiment-bar-track"><div class="sentiment-bar-fill" style="width:30%;background:var(--gold);"></div></div>
+        <div class="sentiment-cat-desc">Questions, requests, ambiguous feedback. Not a risk in isolation — but a rise in neutral without a corresponding rise in positive is often a leading indicator of disengagement.</div>
+      </div>
+      <div class="sentiment-cat">
+        <div class="sentiment-cat-header">
+          <div class="sentiment-cat-name" style="color:var(--red);">NEGATIVE</div>
+          <div class="sentiment-cat-pct" style="color:var(--red);">~15%</div>
+        </div>
+        <div class="sentiment-bar-track"><div class="sentiment-bar-fill" style="width:15%;background:var(--red);"></div></div>
+        <div class="sentiment-cat-desc">Complaints, frustration, and abuse. Anything above 20% baseline negative requires a written flag in the weekly report. A spike above 40% in a single day triggers a crisis protocol.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SENTIMENT SIGNALS BOX -->
+  <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.75rem;border-left:3px solid var(--accent2);">
+    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;">What I Tracked Beyond Volume</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">VELOCITY</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">How fast is negative sentiment growing? A slow burn is different from a sudden spike — the response is different too.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">REPEAT THEMES</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">The same complaint surfacing across different users in the same week signals a systemic issue, not individual frustration.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.4rem;">AMPLIFICATION</div>
+        <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Is a negative post gaining upvotes or reactions? A complaint that's being amplified by the community needs faster intervention.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: CRISIS MANAGEMENT -->
+<!-- ============================================================ -->
+<section class="content-section" id="crisis">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--red);"></div>When Things Escalate</div>
+  <h2 class="sec-heading" style="color:var(--red);">CRISIS<br>MANAGEMENT</h2>
+  <p class="sec-desc">A community crisis isn't always dramatic — sometimes it's a product issue that the brand hasn't acknowledged yet, or a coordinated negative campaign from a competitor's fanbase. The response framework is the same.</p>
+
+  <div class="crisis-flow">
+    <div class="crisis-step">
+      <div class="crisis-num" style="background:rgba(48,217,128,0.1);border:1px solid rgba(48,217,128,0.2);color:var(--green);">01</div>
+      <div>
+        <div class="crisis-title">DETECT</div>
+        <div class="crisis-desc">Identify the signal before it becomes noise — a sentiment spike, a flood of similar complaints, unusual volume on a specific topic, or a coordinated wave of new accounts posting the same content.</div>
+        <div class="crisis-triggers">
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Sentiment spike > 40% negative</span>
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Repeat theme across 5+ users</span>
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Coordinated posting pattern</span>
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">High-engagement negative post</span>
+        </div>
+      </div>
+      <div class="crisis-badge" style="background:rgba(48,217,128,0.1);color:var(--green);border:1px solid rgba(48,217,128,0.25);">Monitor</div>
+    </div>
+
+    <div class="crisis-step">
+      <div class="crisis-num" style="background:rgba(240,160,80,0.1);border:1px solid rgba(240,160,80,0.2);color:var(--gold);">02</div>
+      <div>
+        <div class="crisis-title">ASSESS</div>
+        <div class="crisis-desc">Determine the nature and scope — is this a genuine product complaint, an organised external campaign, or a moderation failure that let something through? The source shapes the response. Internal issues need brand team involvement; external attacks need containment.</div>
+        <div class="crisis-triggers">
+          <span class="crisis-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Organic vs coordinated?</span>
+          <span class="crisis-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Internal issue vs external attack?</span>
+          <span class="crisis-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Escalating or plateauing?</span>
+          <span class="crisis-trigger" style="background:rgba(240,160,80,0.08);color:var(--gold);border:1px solid rgba(240,160,80,0.2);">Requires brand response?</span>
+        </div>
+      </div>
+      <div class="crisis-badge" style="background:rgba(240,160,80,0.1);color:var(--gold);border:1px solid rgba(240,160,80,0.25);">Classify</div>
+    </div>
+
+    <div class="crisis-step">
+      <div class="crisis-num" style="background:rgba(79,124,255,0.1);border:1px solid rgba(79,124,255,0.2);color:var(--accent);">03</div>
+      <div>
+        <div class="crisis-title">CONTAIN</div>
+        <div class="crisis-desc">Take immediate moderation action to stop the spread — removing policy-violating content, locking high-risk threads, temp-banning coordinated bad actors, and pinning official responses where the brand team has provided one. Speed matters here.</div>
+        <div class="crisis-triggers">
+          <span class="crisis-trigger" style="background:rgba(79,124,255,0.08);color:var(--accent);border:1px solid rgba(79,124,255,0.2);">Remove violating content</span>
+          <span class="crisis-trigger" style="background:rgba(79,124,255,0.08);color:var(--accent);border:1px solid rgba(79,124,255,0.2);">Lock escalating threads</span>
+          <span class="crisis-trigger" style="background:rgba(79,124,255,0.08);color:var(--accent);border:1px solid rgba(79,124,255,0.2);">Temp-ban coordinated accounts</span>
+          <span class="crisis-trigger" style="background:rgba(79,124,255,0.08);color:var(--accent);border:1px solid rgba(79,124,255,0.2);">Pin official brand response</span>
+        </div>
+      </div>
+      <div class="crisis-badge" style="background:rgba(79,124,255,0.1);color:var(--accent);border:1px solid rgba(79,124,255,0.25);">Act</div>
+    </div>
+
+    <div class="crisis-step">
+      <div class="crisis-num" style="background:rgba(155,110,243,0.1);border:1px solid rgba(155,110,243,0.2);color:var(--purple);">04</div>
+      <div>
+        <div class="crisis-title">ESCALATE & DOCUMENT</div>
+        <div class="crisis-desc">Flag to the brand or internal team with a structured summary — what happened, when, what action was taken, and what's still unresolved. Every crisis gets documented whether or not it fully escalated. The pattern across incidents is how policy gets improved.</div>
+        <div class="crisis-triggers">
+          <span class="crisis-trigger" style="background:rgba(155,110,243,0.08);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Structured incident summary</span>
+          <span class="crisis-trigger" style="background:rgba(155,110,243,0.08);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Timeline of events</span>
+          <span class="crisis-trigger" style="background:rgba(155,110,243,0.08);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Actions taken + outcomes</span>
+          <span class="crisis-trigger" style="background:rgba(155,110,243,0.08);color:var(--purple);border:1px solid rgba(155,110,243,0.2);">Recommendations for policy</span>
+        </div>
+      </div>
+      <div class="crisis-badge" style="background:rgba(155,110,243,0.1);color:var(--purple);border:1px solid rgba(155,110,243,0.25);">Report</div>
+    </div>
+
+    <div class="crisis-step">
+      <div class="crisis-num" style="background:rgba(48,217,128,0.1);border:1px solid rgba(48,217,128,0.2);color:var(--green);">05</div>
+      <div>
+        <div class="crisis-title">RECOVER</div>
+        <div class="crisis-desc">Monitor sentiment in the days following the crisis event. Healthy recovery looks like a return to baseline positive within 48–72 hours. Persistent elevated negative after a week signals the root cause hasn't been addressed — and that needs to go back into the report.</div>
+        <div class="crisis-triggers">
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Return to baseline within 72hrs</span>
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Post-incident sentiment check</span>
+          <span class="crisis-trigger" style="background:rgba(48,217,128,0.08);color:var(--green);border:1px solid rgba(48,217,128,0.2);">Persistent negative = re-flag</span>
+        </div>
+      </div>
+      <div class="crisis-badge" style="background:rgba(48,217,128,0.1);color:var(--green);border:1px solid rgba(48,217,128,0.25);">Monitor</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: ABUSE PATTERNS -->
+<!-- ============================================================ -->
+<section class="content-section" id="abuse" style="background:var(--surface);">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--gold);"></div>What to Look For</div>
+  <h2 class="sec-heading" style="color:var(--gold);">ABUSE PATTERN<br>DETECTION</h2>
+  <p class="sec-desc">Abuse in communities rarely presents cleanly. It hides in platform norms, coded language, and coordinated behaviour that looks organic until you spot the pattern.</p>
+
+  <div class="abuse-grid">
+    <div class="abuse-item">
+      <div class="abuse-item-icon">🤖</div>
+      <div class="abuse-item-name">COORDINATED CAMPAIGNS</div>
+      <div class="abuse-item-desc">Multiple accounts posting similar content in a short window. Could be bot-driven or organised via external channels like private Discord servers.</div>
+      <div class="abuse-item-signals">
+        <div class="abuse-signal">Similar phrasing across accounts</div>
+        <div class="abuse-signal">New accounts with no post history</div>
+        <div class="abuse-signal">Posting at the same time of day</div>
+        <div class="abuse-signal">Targeting the same thread or topic</div>
+      </div>
+    </div>
+    <div class="abuse-item">
+      <div class="abuse-item-icon">😶</div>
+      <div class="abuse-item-name">CODED LANGUAGE</div>
+      <div class="abuse-item-desc">Slurs, hate speech, and harassment disguised in community slang, emojis, or deliberate misspellings designed to pass automated filters.</div>
+      <div class="abuse-item-signals">
+        <div class="abuse-signal">Unusual spelling variations of known slurs</div>
+        <div class="abuse-signal">Emoji combinations with known meaning</div>
+        <div class="abuse-signal">Community-specific coded phrases</div>
+        <div class="abuse-signal">Dog-whistle references to external movements</div>
+      </div>
+    </div>
+    <div class="abuse-item">
+      <div class="abuse-item-icon">🎯</div>
+      <div class="abuse-item-name">TARGETED HARASSMENT</div>
+      <div class="abuse-item-desc">Sustained abuse directed at a specific user — following them across threads, replying to all their posts, or organising pile-ons.</div>
+      <div class="abuse-item-signals">
+        <div class="abuse-signal">Multiple users engaging the same target</div>
+        <div class="abuse-signal">Cross-thread following pattern</div>
+        <div class="abuse-signal">Coordinated downvoting</div>
+        <div class="abuse-signal">DM abuse reported alongside public posts</div>
+      </div>
+    </div>
+    <div class="abuse-item">
+      <div class="abuse-item-icon">🌊</div>
+      <div class="abuse-item-name">BRIGADING</div>
+      <div class="abuse-item-desc">External communities organising to flood a subreddit or Discord server with off-topic, hostile, or rule-violating content. Common on Reddit during inter-community conflicts.</div>
+      <div class="abuse-item-signals">
+        <div class="abuse-signal">Traffic spike from unusual sources</div>
+        <div class="abuse-signal">High ratio of new accounts in short window</div>
+        <div class="abuse-signal">Content disconnected from community topics</div>
+        <div class="abuse-signal">Cross-references to external rally posts</div>
+      </div>
+    </div>
+    <div class="abuse-item">
+      <div class="abuse-item-icon">💬</div>
+      <div class="abuse-item-name">SPAM & SELF-PROMOTION</div>
+      <div class="abuse-item-desc">Low-effort content posted for engagement farming, affiliate links disguised as recommendations, and repeat offenders using multiple accounts to bypass bans.</div>
+      <div class="abuse-item-signals">
+        <div class="abuse-signal">Identical or near-identical posts</div>
+        <div class="abuse-signal">Link-heavy posts with no engagement context</div>
+        <div class="abuse-signal">Account age vs. post volume mismatch</div>
+        <div class="abuse-signal">Same IP across multiple flagged accounts</div>
+      </div>
+    </div>
+    <div class="abuse-item">
+      <div class="abuse-item-icon">🔥</div>
+      <div class="abuse-item-name">TROLLING & BAITING</div>
+      <div class="abuse-item-desc">Deliberately provocative content designed to derail constructive discussion. Harder to action than direct violations — the intent is the violation, not always the content itself.</div>
+      <div class="abuse-item-signals">
+        <div class="abuse-signal">Inflammatory framing on neutral topics</div>
+        <div class="abuse-signal">Pattern of starting arguments then going quiet</div>
+        <div class="abuse-signal">Editing posts after replies arrive</div>
+        <div class="abuse-signal">Prior history of similar behaviour</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: COMMUNITY HEALTH -->
+<!-- ============================================================ -->
+<section class="content-section" id="health">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--green);"></div>Beyond Moderation</div>
+  <h2 class="sec-heading" style="color:var(--green);">COMMUNITY<br>HEALTH METRICS</h2>
+  <p class="sec-desc">A healthy community isn't just one with low violation counts. These are the signals I tracked to measure whether a community was genuinely thriving or quietly deteriorating.</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card" style="--mc:var(--green);">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);"></div>
+      <div class="metric-label">Engagement Quality</div>
+      <div class="metric-title">PARTICIPATION DEPTH</div>
+      <div class="metric-desc">Raw post volume doesn't tell you if a community is healthy. What matters is whether users are responding to each other, having multi-turn conversations, and returning to threads they've participated in.</div>
+      <div class="metric-signals">
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--green);"></div>Reply-to-post ratio per week</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--green);"></div>Returning user rate vs. new accounts</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--green);"></div>Thread depth (avg replies per post)</div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);"></div>
+      <div class="metric-label">Safety Signals</div>
+      <div class="metric-title">VIOLATION RATE TREND</div>
+      <div class="metric-desc">A rising violation rate relative to post volume is a community health warning even when absolute numbers are low. It means the ratio of harmful to constructive content is shifting — and the community is becoming less safe for regular users.</div>
+      <div class="metric-signals">
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--red);"></div>Violations as % of total posts</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--red);"></div>Week-on-week trend direction</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--red);"></div>Repeat offender rate</div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);"></div>
+      <div class="metric-label">Community Voice</div>
+      <div class="metric-title">USER PAIN POINTS</div>
+      <div class="metric-desc">Recurring themes in negative sentiment — the same feature complaint, the same unresolved support issue, the same community norm being violated repeatedly. These are signals for product and policy teams, not just for moderation.</div>
+      <div class="metric-signals">
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--gold);"></div>Top recurring complaint themes</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--gold);"></div>Unresolved issues from prior weeks</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--gold);"></div>User requests vs. brand response rate</div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);"></div>
+      <div class="metric-label">Cohesion</div>
+      <div class="metric-title">COMMUNITY TONE SHIFT</div>
+      <div class="metric-desc">Gradual shifts in how community members talk to each other — increasingly hostile replies, less constructive disagreement, fewer positive interactions. Hard to catch in a single week; only visible in the trend over time.</div>
+      <div class="metric-signals">
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--accent);"></div>Tone of peer-to-peer replies</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--accent);"></div>Frequency of rule-lawyering behaviour</div>
+        <div class="metric-signal"><div class="metric-signal-dot" style="background:var(--accent);"></div>Upvote patterns on constructive vs. hostile posts</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: REPORTING -->
+<!-- ============================================================ -->
+<section class="content-section" id="reporting" style="background:var(--surface);">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--accent2);"></div>Making It Actionable</div>
+  <h2 class="sec-heading" style="color:var(--accent2);">WEEKLY<br>REPORTING</h2>
+  <p class="sec-desc">A moderation decision without documentation is an opportunity lost. Weekly reports turned individual case decisions into pattern intelligence for product, policy, and brand teams.</p>
+
+  <div class="report-block" style="margin-bottom:2rem;">
+    <div class="report-header">
+      <div class="report-title">Weekly Community Health Report · Structure</div>
+      <div class="report-badge">Delivered Every Monday</div>
+    </div>
+    <div class="report-sections">
+      <div class="report-section">
+        <div class="report-section-num">01</div>
+        <div class="report-section-title">SENTIMENT SUMMARY</div>
+        <div class="report-section-items">
+          <div class="report-section-item">Overall sentiment breakdown for the week</div>
+          <div class="report-section-item">Day-by-day trend with notable spikes flagged</div>
+          <div class="report-section-item">Comparison to prior week baseline</div>
+          <div class="report-section-item">Top positive and negative themes</div>
+        </div>
+      </div>
+      <div class="report-section">
+        <div class="report-section-num">02</div>
+        <div class="report-section-title">ABUSE & VIOLATIONS</div>
+        <div class="report-section-items">
+          <div class="report-section-item">Total violations by category</div>
+          <div class="report-section-item">Emerging patterns or new tactics observed</div>
+          <div class="report-section-item">Repeat offender flags</div>
+          <div class="report-section-item">Escalations sent to brand or specialist teams</div>
+        </div>
+      </div>
+      <div class="report-section">
+        <div class="report-section-num">03</div>
+        <div class="report-section-title">RECOMMENDATIONS</div>
+        <div class="report-section-items">
+          <div class="report-section-item">User pain points requiring brand response</div>
+          <div class="report-section-item">Policy gaps identified during the week</div>
+          <div class="report-section-item">Proactive actions suggested for next week</div>
+          <div class="report-section-item">Risk flags — anything to watch closely</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;border-left:3px solid var(--accent2);">
+    <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;">Why the Recommendations Section Matters</div>
+    <div style="font-size:0.97rem;color:var(--text);line-height:1.8;">Reporting what happened is table stakes. The value is in translating what happened into what should change — surfacing patterns that product teams haven't seen, flagging policy ambiguities before they cause inconsistent enforcement, and giving brand teams enough lead time to respond before a community issue becomes a public one.</div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: TOOLS -->
+<!-- ============================================================ -->
+<section class="content-section" id="tools">
+  <div class="sec-eyebrow"><div class="sec-eyebrow-dot" style="background:var(--purple);"></div>The Toolkit</div>
+  <h2 class="sec-heading" style="color:var(--purple);">TOOLS<br>USED</h2>
+  <p class="sec-desc">The platforms and tools used across community management, moderation, reporting, and collaboration.</p>
+
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-icon">🔴</div>
+      <div class="tool-name">REDDIT MOD TOOLS</div>
+      <div class="tool-desc">Native subreddit moderation queue, mod log, user history review, AutoModerator rule configuration, and ban management.</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-icon">💜</div>
+      <div class="tool-name">DISCORD MOD TOOLS</div>
+      <div class="tool-desc">Server audit logs, role permission management, MEE6/bot integration for auto-moderation, and thread-level moderation controls.</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-icon">🏢</div>
+      <div class="tool-name">KHOROS PLATFORM</div>
+      <div class="tool-desc">Community management dashboard, content moderation queue, sentiment analytics, member management, and reporting tools.</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-icon">☁️</div>
+      <div class="tool-name">SALESFORCE</div>
+      <div class="tool-desc">Case management, user record tracking, escalation logging, and audit trail documentation across community incidents.</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-icon">💼</div>
+      <div class="tool-name">SLACK</div>
+      <div class="tool-desc">Real-time escalation coordination with brand and safety teams, incident channels, and async reporting threads.</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-icon">📊</div>
+      <div class="tool-name">GOOGLE SHEETS</div>
+      <div class="tool-desc">Weekly report templates, sentiment trend tracking, violation volume dashboards, and pivot table analysis for pattern identification.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  <a href="index.html" class="footer-back">← Back to Portfolio</a>
+  <a href="trust-safety.html" class="footer-next">Next: Trust & Safety →</a>
+</div>
+
+<script>
+const sections = ['platforms','personal-project','sentiment','crisis','abuse','health','reporting','tools'];
+const tabs = document.querySelectorAll('.tab-btn');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  tabs.forEach(t => {
+    t.classList.remove('active');
+    if (t.getAttribute('href') === '#' + current) t.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
