@@ -1015,20 +1015,21 @@ footer {
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="display:block; min-height:90vh; position:relative; overflow:hidden;">
+<section class="hero" style="display:grid;grid-template-columns:1fr 1fr;min-height:90vh;position:relative;overflow:hidden;">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <div class="hero-left" style="padding:6rem 3rem 4rem; width:100%;">
+  <div class="hero-left" style="padding:6rem 3rem 4rem;">
     <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
       <div style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.15);padding:0.35rem 0.8rem;border-radius:2px;">
         ⚡ Self-Built Using AI
       </div>
     </div>
 
-    <h1 class="hero-name" style="font-size:clamp(4rem,11.5vw,14rem);white-space:nowrap;line-height:0.88;">
-      NIPUN <span class="line2">AGGARWAL</span>
+    <h1 class="hero-name">
+      NIPUN<br>
+      <span class="line2">AGGARWAL</span>
     </h1>
 
     <div class="hero-role" style="font-size:0.85rem; margin-bottom:2rem;">
@@ -1055,7 +1056,127 @@ footer {
     </div>
   </div>
 
+  <!-- HERO RIGHT — Animated network illustration -->
+  <div style="padding:5rem 2rem 4rem 1rem;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;">
+    <canvas id="heroCanvas" style="width:100%;height:100%;max-height:600px;opacity:0.9;"></canvas>
+  </div>
+
 </section>
+<script>
+(function(){
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize(){
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initNodes(); });
+
+  const DOMAIN_COLORS = ['#4f7cff','#00c8ff','#30d980','#f0a050','#9b6ef3','#ff4455'];
+
+  let nodes = [], signals = [];
+
+  function initNodes(){
+    const W = canvas.width / devicePixelRatio;
+    const H = canvas.height / devicePixelRatio;
+    nodes = [];
+    for(let i = 0; i < 22; i++){
+      nodes.push({
+        x: 40 + Math.random() * (W - 80),
+        y: 40 + Math.random() * (H - 80),
+        r: 2.5 + Math.random() * 3.5,
+        color: DOMAIN_COLORS[Math.floor(Math.random() * DOMAIN_COLORS.length)],
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.02 + Math.random() * 0.02,
+      });
+    }
+  }
+  initNodes();
+
+  function spawnSignal(){
+    if(nodes.length < 2) return;
+    const a = Math.floor(Math.random() * nodes.length);
+    let b;
+    do { b = Math.floor(Math.random() * nodes.length); } while(b === a);
+    signals.push({ from: a, to: b, t: 0, speed: 0.008 + Math.random() * 0.008, color: nodes[a].color });
+  }
+  setInterval(spawnSignal, 600);
+
+  function draw(){
+    const W = canvas.width / devicePixelRatio;
+    const H = canvas.height / devicePixelRatio;
+    ctx.clearRect(0, 0, W, H);
+
+    for(let i = 0; i < nodes.length; i++){
+      for(let j = i + 1; j < nodes.length; j++){
+        const dx = nodes[j].x - nodes[i].x;
+        const dy = nodes[j].y - nodes[i].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 160){
+          const alpha = (1 - dist/160) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(79,124,255,${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    signals = signals.filter(s => s.t <= 1);
+    signals.forEach(s => {
+      const from = nodes[s.from], to = nodes[s.to];
+      const x = from.x + (to.x - from.x) * s.t;
+      const y = from.y + (to.y - from.y) * s.t;
+      const tx = from.x + (to.x - from.x) * Math.max(0, s.t - 0.12);
+      const ty = from.y + (to.y - from.y) * Math.max(0, s.t - 0.12);
+      const grad = ctx.createLinearGradient(tx, ty, x, y);
+      grad.addColorStop(0, s.color + '00');
+      grad.addColorStop(1, s.color + 'cc');
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.fill();
+      s.t += s.speed;
+    });
+
+    nodes.forEach(n => {
+      n.pulse += n.pulseSpeed;
+      const glow = 0.4 + Math.sin(n.pulse) * 0.3;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.fillStyle = n.color + Math.floor(glow * 30).toString(16).padStart(2,'0');
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.fill();
+      n.x += n.vx;
+      n.y += n.vy;
+      if(n.x < 20 || n.x > W - 20) n.vx *= -1;
+      if(n.y < 20 || n.y > H - 20) n.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 <!-- MARQUEE -->
 <div class="marquee-strip">
