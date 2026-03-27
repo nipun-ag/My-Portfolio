@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trust & Safety — Nipun Aggarwal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -22,13 +24,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite;}
 .nav-logo-text{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--white);text-transform:uppercase;}
-.nav-back{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-back{font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
 .nav-back:hover{color:var(--accent2);}
-.nav-domain-tag{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);background:rgba(79,124,255,0.08);border:1px solid rgba(79,124,255,0.2);padding:0.35rem 0.8rem;border-radius:2px;}
+.nav-domain-tag{font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);background:rgba(79,124,255,0.08);border:1px solid rgba(79,124,255,0.2);padding:0.35rem 0.8rem;border-radius:2px;}
 
 .page-hero{padding:8rem 3rem 5rem;border-bottom:1px solid var(--border);position:relative;z-index:1;overflow:hidden;}
 .page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(79,124,255,0.06) 0%,transparent 60%);pointer-events:none;}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:1.5rem;}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:1.5rem;}
 .breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s;}
 .breadcrumb a:hover{color:var(--accent);}
 .breadcrumb span{color:var(--dim);}
@@ -36,11 +38,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .page-intro{font-style:italic;font-weight:300;font-size:1.1rem;color:var(--text);max-width:640px;line-height:1.8;margin-bottom:2rem;}
 .page-hero-meta{display:flex;gap:3rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border);}
 .meta-item{display:flex;flex-direction:column;gap:0.3rem;}
-.meta-label{font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.meta-label{font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
 .meta-val{font-size:0.95rem;color:var(--white);font-weight:600;}
 
 .tab-nav{position:sticky;top:57px;z-index:90;background:rgba(7,8,15,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;padding:0 3rem;overflow-x:auto;}
-.tab-btn{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:1rem 1.5rem;cursor:pointer;text-decoration:none;display:block;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s;white-space:nowrap;}
+.tab-btn{font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:1rem 1.5rem;cursor:pointer;text-decoration:none;display:block;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s;white-space:nowrap;}
 .tab-btn:hover{color:var(--text);}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
 
@@ -50,7 +52,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* TAXONOMY */
 .taxonomy-category{margin-bottom:3rem;}
-.cat-label{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.cat-label{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
 .cat-label-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .violation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .violation-item{background:var(--ink);padding:1.5rem;transition:background .2s;}
@@ -59,19 +61,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .violation-name{font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;}
 .violation-desc{font-size: 0.95rem;color:var(--text);line-height:1.6;}
 .violation-sub{margin-top:0.6rem;display:flex;flex-direction:column;gap:0.3rem;}
-.violation-sub-item{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.05em;color:var(--text);display:flex;align-items:center;gap:0.4rem;}
+.violation-sub-item{font-family:var(--font-mono);font-size:0.76rem;letter-spacing:0.05em;color:var(--text);display:flex;align-items:center;gap:0.4rem;}
 .violation-sub-item::before{content:'→';color:var(--accent);}
 
 /* SELF HARM */
 .self-harm-box{background:var(--surface);border:1px solid var(--border2);border-radius:6px;overflow:hidden;margin-bottom:2rem;}
-.self-harm-header{padding:1rem 1.5rem;background:rgba(255,68,85,0.06);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:0.5rem;}
+.self-harm-header{padding:1rem 1.5rem;background:rgba(255,68,85,0.06);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:0.5rem;}
 .self-harm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
 .sh-col{padding:1.5rem;border-right:1px solid var(--border);}
 .sh-col:last-child{border-right:none;}
-.sh-label{font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
+.sh-label{font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
 .sh-title{font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.5rem;}
 .sh-desc{font-size: 0.95rem;color:var(--text);line-height:1.6;}
-.sh-action{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;padding:0.25rem 0.6rem;border-radius:2px;margin-top:0.75rem;display:inline-block;}
+.sh-action{font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.1em;padding:0.25rem 0.6rem;border-radius:2px;margin-top:0.75rem;display:inline-block;}
 
 /* ENFORCEMENT */
 .actions-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem;}
@@ -93,17 +95,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .esc-step:first-child{border-radius:6px 6px 0 0;}
 .esc-step:last-child{border-radius:0 0 6px 6px;margin-bottom:0;}
 .esc-step:hover{background:var(--surface2);}
-.esc-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.65rem;font-weight:500;flex-shrink:0;}
+.esc-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.76rem;font-weight:500;flex-shrink:0;}
 .esc-title{font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.4rem;}
 .esc-desc{font-size: 0.95rem;color:var(--text);line-height:1.7;}
 .esc-triggers{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem;}
-.esc-trigger{font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.08em;padding:0.2rem 0.5rem;border-radius:2px;}
-.esc-action-badge{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2px;white-space:nowrap;align-self:flex-start;margin-top:0.25rem;}
+.esc-trigger{font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.08em;padding:0.2rem 0.5rem;border-radius:2px;}
+.esc-action-badge{font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2px;white-space:nowrap;align-self:flex-start;margin-top:0.25rem;}
 
 .page-footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
-.footer-back{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-back{font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
 .footer-back:hover{color:var(--accent);}
-.footer-next{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);text-decoration:none;transition:opacity .2s;}
+.footer-next{font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);text-decoration:none;transition:opacity .2s;}
 .footer-next:hover{opacity:0.8;}
 
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
@@ -308,7 +310,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;">
-    <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Key Judgment Factors</div>
+    <div style="font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Key Judgment Factors</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
       <div>
         <div style="font-weight:600;color:var(--white);font-size:0.95rem;margin-bottom:0.35rem;">Specificity</div>
@@ -413,7 +415,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 
   <div style="background:var(--ink);border:1px solid var(--border2);border-radius:6px;padding:1.5rem;border-left:3px solid var(--accent2);">
-    <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;">Why Escalation Judgment Matters</div>
+    <div style="font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;">Why Escalation Judgment Matters</div>
     <div style="font-size:0.95rem;color:var(--text);line-height:1.7;">Knowing when <em>not</em> to handle a case yourself is as critical as the moderation decision itself. Under-escalating a credible threat or a CSAM case has real-world consequences. Over-escalating burdens specialist teams and slows response times for genuine emergencies. The judgment lives in between.</div>
   </div>
 </section>
