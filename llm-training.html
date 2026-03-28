@@ -487,6 +487,15 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 .cot-card-header .cot-card-status { margin-left: auto; }
+
+/* Approximate timestamp */
+.cot-ts {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--white);
+  letter-spacing: 0.08em;
+  margin-left: auto;
+}
 .cot-card-num {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -1712,13 +1721,14 @@ nav {
         <!-- CoT annotation cards — flowing paragraph format -->
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.85rem;background:var(--surface2);border-bottom:1px solid var(--border);">
           <span style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">5 annotations · 4.6s clip</span>
-          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--dim);">avg 0.9s per annotation</span>
+          <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--dim);">timestamps approximate — actions span &lt;1s</span>
         </div>
         <div class="cot-annotations-panel">
 
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 01</span>
+              <span class="cot-ts">~0s – ~1s</span>
             </div>
             <div class="cot-card-body">
               <p class="cot-para"><span class="cot-o">I observe a table containing several objects, including a monitor, snacks, and a blue chips packet, along with a Pepsi can serving as the target destination.</span> <span class="cot-r">Since I need to move the blue chips packet closer to the Pepsi can, I must first position my gripper around it in preparation for a secure grasp.</span> <span class="cot-a">I lower my gripper downward toward the blue chips packet, aligning the jaws on either side of it.</span> <span class="cot-e">I expect the gripper to be correctly positioned around the packet, ready to close and secure it.</span></p>
@@ -1728,6 +1738,7 @@ nav {
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 02</span>
+              <span class="cot-ts">~1s – ~1.5s</span>
             </div>
             <div class="cot-card-body">
               <p class="cot-para"><span class="cot-o">The gripper is now positioned around the blue chips packet as expected, with the jaws aligned on either side.</span> <span class="cot-r">Since I want to lift the packet, I need to close the gripper firmly enough to hold it without slipping.</span> <span class="cot-a">I close the gripper around the blue chips packet.</span> <span class="cot-e">I expect the gripper to achieve a firm, stable hold on the packet.</span></p>
@@ -1737,6 +1748,7 @@ nav {
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 03</span>
+              <span class="cot-ts">~1.5s – ~3s</span>
             </div>
             <div class="cot-card-body">
               <p class="cot-para"><span class="cot-o">The gripper has secured a firm hold on the blue chips packet as expected.</span> <span class="cot-r">Since I want to move it closer to the Pepsi can, I must lift the arm upward and move it forward toward the target destination.</span> <span class="cot-a">I move the arm upward and forward in the direction of the Pepsi can, keeping the gripper orientation stable.</span> <span class="cot-e">I expect the arm to be in close proximity to the Pepsi can, ready to lower and release.</span></p>
@@ -1747,6 +1759,7 @@ nav {
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 04</span>
+              <span class="cot-ts">~3s – ~4s</span>
             </div>
             <div class="cot-card-body">
               <p class="cot-para"><span class="cot-o">The arm is now near the Pepsi can as expected.</span> <span class="cot-r">Since I want to place the packet down on the table, I need to lower the arm toward the surface.</span> <span class="cot-a">I lower the arm downward toward the table near the Pepsi can.</span> <span class="cot-e">I expect the packet to make contact with the table surface.</span></p>
@@ -1756,32 +1769,7 @@ nav {
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 05</span>
-            </div>
-            <div class="cot-card-body">
-              <p class="cot-para"><span class="cot-o">The packet has made contact with the table surface near the Pepsi can as expected.</span> <span class="cot-r">Since the task requires me to release the packet at this location, I must now open the gripper to complete the placement.</span> <span class="cot-a">I open the gripper, releasing the blue chips packet onto the table surface near the Pepsi can.</span> <span class="cot-e">I expect the packet to remain stably placed on the table, with the gripper fully disengaged and clear of the object.</span></p>
-            </div>
-          </div>
-
-        </div>
-            </div>
-            <div class="cot-card-body">
-              <p class="cot-para"><span class="cot-o">The gripper has secured a firm hold on the blue chips packet as expected.</span> <span class="cot-r">Since I want to move it closer to the Pepsi can, I must lift the arm upward and move it forward toward the target destination.</span> <span class="cot-a">I move the arm upward and forward in the direction of the Pepsi can, keeping the gripper orientation stable.</span> <span class="cot-e">I expect the arm to be in close proximity to the Pepsi can, ready to lower and release.</span></p>
-              <div class="cot-shortcoming"><span class="cot-shortcoming-label">⚠ Motion Note</span> Arm movement was jittery and non-linear during transit — the path lacked smooth continuous motion, suggesting suboptimal trajectory planning at this stage.</div>
-            </div>
-          </div>
-
-          <div class="cot-card">
-            <div class="cot-card-header">
-              <span class="cot-card-num">ANN 04</span>
-            </div>
-            <div class="cot-card-body">
-              <p class="cot-para"><span class="cot-o">The arm is now near the Pepsi can as expected.</span> <span class="cot-r">Since I want to place the packet down on the table, I need to lower the arm toward the surface.</span> <span class="cot-a">I lower the arm downward toward the table near the Pepsi can.</span> <span class="cot-e">I expect the packet to make contact with the table surface.</span></p>
-            </div>
-          </div>
-
-          <div class="cot-card">
-            <div class="cot-card-header">
-              <span class="cot-card-num">ANN 05</span>
+              <span class="cot-ts">~4s – ~4.5s</span>
             </div>
             <div class="cot-card-body">
               <p class="cot-para"><span class="cot-o">The packet has made contact with the table surface near the Pepsi can as expected.</span> <span class="cot-r">Since the task requires me to release the packet at this location, I must now open the gripper to complete the placement.</span> <span class="cot-a">I open the gripper, releasing the blue chips packet onto the table surface near the Pepsi can.</span> <span class="cot-e">I expect the packet to remain stably placed on the table, with the gripper fully disengaged and clear of the object.</span></p>
