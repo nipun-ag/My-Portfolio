@@ -576,6 +576,26 @@ nav {
   animation: blink 1.1s infinite;
 }
 
+/* CoT shortcoming / motion note */
+.cot-shortcoming {
+  margin-top: 0.65rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(240,160,80,0.06);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 3px 3px 0;
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.cot-shortcoming-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-right: 0.5rem;
+}
+
 /* CoT flowing paragraph + colour spans */
 .cot-para {
   font-size: 0.84rem;
@@ -1657,6 +1677,7 @@ nav {
             </div>
             <div class="cot-card-body">
               <p class="cot-para"><span class="cot-o">The gripper has secured a firm hold on the blue chips packet as expected.</span> <span class="cot-r">Since I want to move it closer to the Pepsi can, I must lift the arm upward and move it forward toward the target destination.</span> <span class="cot-a">I move the arm upward and forward in the direction of the Pepsi can, keeping the gripper orientation stable.</span> <span class="cot-e">I expect the arm to be in close proximity to the Pepsi can, ready to lower and release.</span></p>
+              <div class="cot-shortcoming"><span class="cot-shortcoming-label">⚠ Motion Note</span> Arm movement was jittery and non-linear during transit — the path lacked smooth continuous motion, suggesting suboptimal trajectory planning at this stage.</div>
             </div>
           </div>
 
