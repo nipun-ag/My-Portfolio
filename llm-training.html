@@ -861,6 +861,19 @@ nav {
   .stats-strip{grid-template-columns:1fr 1fr;}
   .tab-nav{padding:0 1.5rem;overflow-x:auto;}
   .page-footer{padding:1.5rem;flex-direction:column;gap:1rem;}
+  .ann-tab-bar{grid-template-columns:1fr;}
+  .ann-tab-btn{border-right:none;border-bottom:1px solid var(--border2);}
+  .ann-tab-btn:last-child{border-bottom:none;}
+  .ann-tab-panel{padding:1rem;}
+  .eval-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
+  .cot-mockup-bar{flex-wrap:wrap;gap:0.5rem;}
+  .ann-tool-footer{flex-direction:column;align-items:flex-start;}
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 ::-webkit-scrollbar{width:3px;}
