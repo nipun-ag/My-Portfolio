@@ -120,6 +120,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   .esc-step{grid-template-columns:auto 1fr;}
   .esc-action-badge{display:none;}
   .page-footer{padding:1.5rem;flex-direction:column;gap:1rem;}
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"],
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 </style>
 </head>
