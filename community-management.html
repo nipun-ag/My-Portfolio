@@ -178,6 +178,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
   .crisis-badge{display:none;}
   .tab-nav{padding:0 1.5rem;}
   .page-footer{padding:1.5rem;flex-direction:column;gap:1rem;}
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"],
+  [style*="grid-template-columns:1fr 1fr 1fr"],
+  [style*="grid-template-columns:repeat(2,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 </style>
 </head>
