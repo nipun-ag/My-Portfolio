@@ -143,6 +143,18 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .footer-next { font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent2); text-decoration:none; transition:opacity .2s; }
 .footer-next:hover { opacity:0.8; }
 
+/* COLLAPSIBLE */
+.collapsible-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; background:none; border:none; border-bottom:1px solid var(--border); padding:0.75rem 0; cursor:pointer; margin-bottom:1rem; }
+.collapsible-toggle-left { display:flex; align-items:center; gap:0.75rem; }
+.collapsible-toggle-label { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); transition:color .2s; }
+.collapsible-toggle:hover .collapsible-toggle-label { color:var(--text); }
+.collapsible-toggle-count { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.1em; color:var(--dim); background:var(--surface2); border:1px solid var(--border); padding:0.1rem 0.5rem; border-radius:2px; }
+.collapsible-toggle-arrow { font-family:var(--font-mono); font-size:0.72rem; color:var(--dim); transition:transform 0.25s, color 0.2s; }
+.collapsible-toggle:hover .collapsible-toggle-arrow { color:var(--text); }
+.collapsible-toggle.open .collapsible-toggle-arrow { transform:rotate(180deg); }
+.collapsible-body { display:none; }
+.collapsible-body.open { display:block; }
+
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
 
 @media(max-width:900px){
@@ -264,6 +276,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
   <h2 class="sec-heading">CASE STUDIES</h2>
   <p class="sec-desc">Real scenarios from Twitter/X that required contextual judgment beyond standard policy application. All examples are anonymized.</p>
 
+  <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
+    <div class="collapsible-toggle-left">
+      <span class="collapsible-toggle-label">Case Studies — Verified Examples</span>
+      <span class="collapsible-toggle-count">6 cases</span>
+    </div>
+    <span class="collapsible-toggle-arrow">▼</span>
+  </button>
+  <div class="collapsible-body">
   <div class="case-grid">
 
     <!-- CASE 1: LINGUISTIC OBFUSCATION -->
@@ -410,11 +430,9 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       </div>
     </div>
 
-  </div>
+  </div><!-- end case-grid -->
+  </div><!-- end collapsible-body -->
 </section>
-
-<!-- ============================================================ -->
-<!-- SECTION 3: SCOPE -->
 <!-- ============================================================ -->
 <section class="content-section" id="violations">
   <h2 class="sec-heading" style="color:var(--gold)">SCOPE OF WORK</h2>
@@ -489,6 +507,14 @@ window.addEventListener('scroll', ()=>{
     if(t.getAttribute('href') === '#'+current) t.classList.add('active');
   });
 });
+
+function toggleCollapsible(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling.classList.contains('collapsible-body')
+    ? btn.nextElementSibling
+    : btn.parentElement.querySelector('.collapsible-body');
+  body.classList.toggle('open');
+}
 
 function setTab(el){ tabs.forEach(t=>t.classList.remove('active')); el.classList.add('active'); }
 </script>
