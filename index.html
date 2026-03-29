@@ -990,6 +990,33 @@ footer {
   footer { padding:1.5rem; flex-direction:column; gap:.5rem; text-align:center; }
   body { cursor:auto; }
   .cursor,.cursor-ring { display:none; }
+
+  /* Featured card inner grid — stack on mobile */
+  .skill-card-featured > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  .featured-inner-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Work cards grid */
+  .work-grid { grid-template-columns: 1fr !important; }
+
+  /* Stats strips */
+  .hero-stats { grid-template-columns: 1fr 1fr !important; gap: 1px; }
+
+  /* Mini form */
+  .mini-form { padding: 1.5rem !important; }
+
+  /* Prevent any horizontal overflow */
+  * { max-width: 100%; }
+  img, video, svg { max-width: 100%; height: auto; }
+
+  /* Reduce hero title size */
+  .hero-title { font-size: clamp(3rem, 12vw, 6rem) !important; }
+
+  /* Contact items */
+  .contact-items { gap: 0.75rem; }
 }
 </style>
 </head>
@@ -1217,7 +1244,7 @@ footer {
     <!-- LLM TRAINING - HERO CARD spanning full width -->
     <a href="llm-training.html" class="skill-card skill-card-featured" style="--card-color:#00c8ff;--glow:rgba(0,200,255,0.1); grid-column: 1 / -1;">
       <div class="sk-top"><div class="sk-num">01 - FEATURED</div><div class="sk-arrow">↗</div></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;">
+      <div class="featured-inner-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;">
         <div>
           <div class="sk-icon">🧠</div>
           <div class="sk-name" style="font-size:2.5rem;">LLM TRAINING</div>
