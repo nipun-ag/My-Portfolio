@@ -1850,7 +1850,7 @@ nav {
         </div>
         <!-- Intent + annotation cards -->
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.85rem;background:var(--surface2);border-bottom:1px solid var(--border);">
-          <span style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">2 annotations · ~5.9s / rest split</span>
+          <span style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">3 annotations · full clip</span>
           <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--dim);">timestamps approximate</span>
         </div>
         <div style="padding:0.65rem 0.85rem;border-bottom:1px solid var(--border);background:var(--ink);">
@@ -1861,10 +1861,10 @@ nav {
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 01</span>
-              <span class="cot-ts">~0s – ~5.9s</span>
+              <span class="cot-ts">0s – 6.758s</span>
             </div>
             <div class="cot-card-body">
-              <p class="cot-para"><span class="cot-o">I am in an open area with the LOL Comedy Club building visible to my left.</span> <span class="cot-r">Since I want to stand facing the building,</span> <span class="cot-a">I walk forward while moving rightwards simultaneously, looking toward the left to align myself with the entrance.</span> <span class="cot-e">I expect to be standing in front of the LOL Comedy Club, aligned with its entrance gate.</span></p>
+              <p class="cot-para"><span class="cot-o">I am in an open area with the LOL Comedy Club building visible to my left.</span> <span class="cot-r">Since I want to stand facing the building,</span> <span class="cot-a">I walk forward while moving rightwards simultaneously, looking toward the left.</span> <span class="cot-e">I expect to be standing facing the LOL Comedy Club building.</span></p>
             </div>
             <div class="cot-rating-row" style="--sc:var(--green)">
               <span class="cot-rating-label">rating</span>
@@ -1873,17 +1873,36 @@ nav {
               <div class="cot-rating-dot on"></div>
               <div class="cot-rating-dot on"></div>
               <div class="cot-rating-dot on"></div>
-              <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--green);margin-left:0.4rem;">5/5 — direct and efficient approach toward intent</span>
+              <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--green);margin-left:0.4rem;">5/5 — direct approach toward intent</span>
             </div>
           </div>
 
           <div class="cot-card">
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 02</span>
-              <span class="cot-ts">~5.9s – end</span>
+              <span class="cot-ts">6.758s – 7.441s</span>
             </div>
             <div class="cot-card-body">
-              <p class="cot-para"><span class="cot-o">I am now facing the LOL Comedy Club entrance gate as expected.</span> <span class="cot-r">Since I want to get inside the building,</span> <span class="cot-a">I move forward through the gate, entering the LOL Comedy Club.</span> <span class="cot-e">I expect to be inside the LOL Comedy Club, completing the intent.</span></p>
+              <p class="cot-para"><span class="cot-o">I am now facing the LOL Comedy Club building as expected.</span> <span class="cot-r">Since I want to position myself directly in front of the gate,</span> <span class="cot-a">I walk forward while moving rightwards to get in front of the entrance gate.</span> <span class="cot-e">I expect to be standing directly in front of the gate, ready to enter.</span></p>
+            </div>
+            <div class="cot-rating-row" style="--sc:var(--green)">
+              <span class="cot-rating-label">rating</span>
+              <div class="cot-rating-dot on"></div>
+              <div class="cot-rating-dot on"></div>
+              <div class="cot-rating-dot on"></div>
+              <div class="cot-rating-dot on"></div>
+              <div class="cot-rating-dot on"></div>
+              <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--green);margin-left:0.4rem;">5/5 — efficient positioning toward gate</span>
+            </div>
+          </div>
+
+          <div class="cot-card">
+            <div class="cot-card-header">
+              <span class="cot-card-num">ANN 03</span>
+              <span class="cot-ts">7.441s – end</span>
+            </div>
+            <div class="cot-card-body">
+              <p class="cot-para"><span class="cot-o">I am now directly in front of the gate as expected.</span> <span class="cot-r">Since I want to enter the LOL Comedy Club,</span> <span class="cot-a">I move forward while slightly turning to the left, passing through the gate and entering the building.</span> <span class="cot-e">I expect to be inside the LOL Comedy Club, completing the intent.</span></p>
             </div>
             <div class="cot-rating-row" style="--sc:var(--green)">
               <span class="cot-rating-label">rating</span>
