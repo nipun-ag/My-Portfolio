@@ -207,7 +207,7 @@ nav {
   border:none; border-top:1px solid var(--border);
   font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.15em;
   text-transform:uppercase; color:var(--accent2); cursor:pointer;
-  transition:background .2s;
+  transition:background .2s; touch-action: manipulation;
 }
 .proof-toggle:hover { background:rgba(0,200,255,0.06); }
 .proof-toggle-icon { font-size:0.8rem; }
@@ -2173,6 +2173,19 @@ function closeLightbox(e) {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+// Mobile touch support for lightbox
+document.addEventListener('DOMContentLoaded', function() {
+  const lb = document.getElementById('lightbox');
+  if (lb) {
+    lb.addEventListener('touchend', function(e) {
+      if (e.target === lb || e.target.classList.contains('lightbox-close')) {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+});
 
 function toggleCollapsible(btn) {
   btn.classList.toggle('open');
