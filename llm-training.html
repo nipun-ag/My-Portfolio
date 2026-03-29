@@ -464,12 +464,12 @@ nav {
   height: 160px;
 }
 .cot-annotations-panel {
-  flex: 1;
   overflow-y: auto;
   padding: 0.85rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  max-height: 340px;
 }
 .cot-annotations-panel::-webkit-scrollbar { width: 2px; }
 .cot-annotations-panel::-webkit-scrollbar-thumb { background: var(--border2); }
@@ -1862,7 +1862,9 @@ nav {
             <div class="cot-card-header">
               <span class="cot-card-num">ANN 01</span>
               <span class="cot-ts">0s – 6.758s</span>
-            </div> <span class="cot-r">Since I want to stand facing the building,</span> <span class="cot-a">I walk forward while moving rightwards simultaneously, looking toward the left.</span> <span class="cot-e">I expect to be standing facing the LOL Comedy Club building.</span></p>
+            </div>
+            <div class="cot-card-body">
+              <p class="cot-para"><span class="cot-o">I am in an open area with the LOL Comedy Club building visible to my left.</span> <span class="cot-r">Since I want to stand facing the building,</span> <span class="cot-a">I walk forward while moving rightwards simultaneously, looking toward the left.</span> <span class="cot-e">I expect to be standing facing the LOL Comedy Club building.</span></p>
             </div>
             <div class="cot-rating-row" style="--sc:var(--green)">
               <span class="cot-rating-label">rating</span>
