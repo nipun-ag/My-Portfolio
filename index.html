@@ -1617,12 +1617,12 @@ footer {
 
     </div>
 
-    <div class="mini-form">
-      <input type="text" class="mf-input" placeholder="Your name">
-      <input type="email" class="mf-input" placeholder="Email address">
-      <textarea class="mf-input" rows="3" placeholder="Tell me about the role or project..."></textarea>
-      <button class="mf-submit">Send Message →</button>
-    </div>
+    <form class="mini-form" action="https://formspree.io/f/xojpeyjq" method="POST">
+      <input type="text" name="name" class="mf-input" placeholder="Your name" required>
+      <input type="email" name="email" class="mf-input" placeholder="Email address" required>
+      <textarea name="message" class="mf-input" rows="3" placeholder="Tell me about the role or project..."></textarea>
+      <button type="submit" class="mf-submit">Send Message →</button>
+    </form>
   </section>
 
 </div>
