@@ -18,8 +18,8 @@
   --border: #1c1d2e;
   --border2: #252638;
   --text: #c8cce0;
-  --muted: #52546e;
-  --dim: #2e3048;
+  --muted: #7e8199;
+  --dim: #52546e;
   --white: #eceef8;
   --accent: #4f7cff;
   --accent2: #00c8ff;
@@ -499,7 +499,7 @@ nav {
 .cot-card-num {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--dim);
+  color: var(--muted);
   letter-spacing: 0.1em;
 }
 .cot-card-status {
@@ -822,9 +822,9 @@ nav {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
-  color: var(--dim);
+  color: var(--white);
   background: var(--surface2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border2);
   padding: 0.1rem 0.5rem;
   border-radius: 2px;
 }
@@ -868,6 +868,10 @@ nav {
   .eval-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
   .cot-mockup-bar{flex-wrap:wrap;gap:0.5rem;}
   .ann-tool-footer{flex-direction:column;align-items:flex-start;}
+  .attack-row{grid-template-columns:1fr;}
+  .attack-row-label{padding-bottom:0.25rem;}
+  .rubric-table{font-size:0.82rem;}
+  .rubric-table th,.rubric-table td{padding:0.6rem 0.75rem;}
   [style*="grid-template-columns:1fr 1fr"],
   [style*="grid-template-columns: 1fr 1fr"],
   [style*="grid-template-columns:repeat(3,1fr)"],
