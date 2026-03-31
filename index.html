@@ -498,24 +498,11 @@ nav {
 .skill-card {
   background: var(--ink); padding: 2rem;
   position: relative; overflow: hidden;
-   transition: background .3s;
+  transition: background .3s;
   text-decoration: none; display: block; color: inherit;
-  group: true;
 }
 
-/* Glow on hover */
-.skill-card::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 0%, var(--glow, rgba(79,124,255,0.08)) 0%, transparent 70%);
-  opacity: 0; transition: opacity .4s;
-}
-.skill-card:hover { background: var(--surface); }
-.skill-card:hover::after { opacity: 1; }
-.skill-card:hover .sk-arrow { opacity: 1; transform: translate(3px,-3px); }
-.skill-card:hover .sk-num { color: var(--card-color, var(--accent)); }
-
-/* Top border accent */
+/* Top border accent sweep */
 .skill-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, var(--card-color, var(--accent)), transparent);
@@ -523,9 +510,16 @@ nav {
 }
 .skill-card:hover::before { transform: scaleX(1); }
 
+/* On hover: num color only, no bg change */
+.skill-card:hover .sk-num { color: var(--card-color, var(--accent)); }
+
+/* Title lights up + inline arrow slides in */
+.skill-card:hover .sk-name { color: var(--card-color, var(--accent)); }
+.skill-card:hover .sk-name-arrow { opacity: 1; transform: translate(0, 0); }
+
 .sk-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
 .sk-num { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; color: var(--dim); transition: color .3s; }
-.sk-arrow { font-size: 1rem; color: var(--card-color, var(--accent)); opacity: 0; transition: all .3s; }
+.sk-arrow { display: none; }
 
 .sk-icon {
   width: 42px; height: 42px; border-radius: 6px;
@@ -539,6 +533,16 @@ nav {
   font-family: var(--font-display); font-size: 1.65rem;
   letter-spacing: 0.04em; color: var(--white); line-height: 1;
   margin-bottom: 0.6rem; position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 0.4rem;
+  transition: color .3s;
+}
+
+/* Inline arrow next to title */
+.sk-name-arrow {
+  font-size: 1.1rem; opacity: 0;
+  transform: translate(-6px, 4px);
+  transition: opacity .3s, transform .3s;
+  display: inline-block; line-height: 1;
 }
 
 .sk-desc {
@@ -595,7 +599,13 @@ nav {
   margin-bottom: 3rem;
 }
 
-
+.view-all {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent2); text-decoration: none;
+  border-bottom: 1px solid rgba(0,200,255,0.3); padding-bottom: 2px;
+  transition: border-color .2s;
+}
+.view-all:hover { border-color: var(--accent2); }
 
 /* FEATURED CARDS GRID - 3 column */
 .featured-grid {
@@ -1286,7 +1296,7 @@ footer {
       <div class="featured-inner-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;">
         <div>
           <div class="sk-icon">🧠</div>
-          <div class="sk-name" style="font-size:2.5rem;">LLM TRAINING</div>
+          <div class="sk-name" style="font-size:2.5rem;">LLM TRAINING<span class="sk-name-arrow">↗</span></div>
           <p class="sk-desc">End-to-end contribution to large language model development - from building high-quality training datasets through video annotation, to evaluating model outputs, to adversarially stress-testing safety guardrails.</p>
           <div class="sk-tags">
             <span class="sk-tag">RLHF</span>
@@ -1328,7 +1338,7 @@ footer {
     <a href="trust-safety.html" class="skill-card" style="--card-color:#4f7cff;--glow:rgba(79,124,255,0.1)">
       <div class="sk-top"><div class="sk-num">02</div><div class="sk-arrow">↗</div></div>
       <div class="sk-icon">🛡️</div>
-      <div class="sk-name">TRUST & SAFETY</div>
+      <div class="sk-name">TRUST & SAFETY<span class="sk-name-arrow">↗</span></div>
       <p class="sk-desc">Policy enforcement, escalation management, and platform integrity across Meta, Twitter, and gaming ecosystems.</p>
       <div class="sk-tags"><span class="sk-tag">Policy Enforcement</span><span class="sk-tag">Risk Assessment</span><span class="sk-tag">Escalation</span><span class="sk-tag">Abuse Prevention</span></div>
     </a>
@@ -1337,7 +1347,7 @@ footer {
     <a href="content-moderation.html" class="skill-card" style="--card-color:#f0a050;--glow:rgba(240,160,80,0.08)">
       <div class="sk-top"><div class="sk-num">03</div><div class="sk-arrow">↗</div></div>
       <div class="sk-icon">🚫</div>
-      <div class="sk-name">CONTENT MODERATION</div>
+      <div class="sk-name">CONTENT MODERATION<span class="sk-name-arrow">↗</span></div>
       <p class="sk-desc">High-volume, high-stakes content review across hate speech, violence, CSAM, and policy violations at scale.</p>
       <div class="sk-tags"><span class="sk-tag">Hate Speech</span><span class="sk-tag">NSFW Review</span><span class="sk-tag">Spam Detection</span><span class="sk-tag">Cultural Context</span></div>
     </a>
@@ -1346,7 +1356,7 @@ footer {
     <a href="community-management.html" class="skill-card" style="--card-color:#30d980;--glow:rgba(48,217,128,0.07)">
       <div class="sk-top"><div class="sk-num">04</div><div class="sk-arrow">↗</div></div>
       <div class="sk-icon">🤝</div>
-      <div class="sk-name">COMMUNITY MANAGEMENT</div>
+      <div class="sk-name">COMMUNITY MANAGEMENT<span class="sk-name-arrow">↗</span></div>
       <p class="sk-desc">Sentiment analysis, crisis detection, and abuse pattern reporting for brand communities and platform health.</p>
       <div class="sk-tags"><span class="sk-tag">Sentiment Analysis</span><span class="sk-tag">Crisis Management</span><span class="sk-tag">Trend Reporting</span></div>
     </a>
@@ -1363,7 +1373,7 @@ footer {
       <h2 class="section-heading">FEATURED WORK</h2>
       <p class="section-sub">Case studies, examples, and methodology from across my domains.</p>
     </div>
-
+    <a href="#" class="view-all">View all work →</a>
   </div>
 
   <div class="featured-grid">
