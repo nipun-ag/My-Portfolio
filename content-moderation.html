@@ -99,15 +99,23 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 /* CASE STUDY CARDS */
 .case-grid { display:flex; flex-direction:column; gap:1.25rem; }
 
-.case-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; overflow:hidden; transition:border-color .2s; }
+.case-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; overflow:hidden; transition:border-color .2s; position:relative; }
 .case-card:hover { border-color:rgba(79,124,255,0.3); }
 
-.case-card-header { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; background:var(--surface); border-bottom:1px solid var(--border); flex-wrap:wrap; gap:0.75rem; }
+/* Shimmer sweep */
+.case-card::after { content:''; position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(79,124,255,0.06) 50%, transparent 60%); transform:translateX(-100%); transition:transform 0s; pointer-events:none; z-index:0; }
+.case-card:hover::after { transform:translateX(100%); transition:transform 0.6s ease; }
+
+/* Top border sweep */
+.case-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--accent), transparent); transform:scaleX(0); transform-origin:center; transition:transform .5s; z-index:1; }
+.case-card:hover::before { transform:scaleX(1); }
+
+.case-card-header { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; background:var(--surface); border-bottom:1px solid var(--border); flex-wrap:wrap; gap:0.75rem; position:relative; z-index:1; }
 .case-num { font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.15em; color:var(--muted); }
 .case-type-badge { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:2px; }
 .case-platform { font-family:var(--font-mono); font-size:0.70rem; letter-spacing:0.1em; color:var(--dim); }
 
-.case-card-body { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.case-card-body { display:grid; grid-template-columns:1fr 1fr; gap:0; position:relative; z-index:1; }
 .case-col { padding:1.5rem; }
 .case-col:first-child { border-right:1px solid var(--border); }
 .case-col-label { font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
