@@ -68,11 +68,25 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 
 /* PLATFORM CARDS */
 .platform-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem; }
-.platform-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; overflow:hidden; transition:border-color .2s; }
+.platform-card { background:var(--ink); border:1px solid var(--border2); border-radius:6px; overflow:hidden; transition:border-color .2s; position:relative; }
 .platform-card:hover { border-color:rgba(48,217,128,0.3); }
-.platform-card-header { padding:1.5rem 1.5rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
+
+/* Shimmer sweep */
+.platform-card::after { content:''; position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(48,217,128,0.06) 50%, transparent 60%); transform:translateX(-100%); transition:transform 0s; pointer-events:none; z-index:0; }
+.platform-card:hover::after { transform:translateX(100%); transition:transform 0.6s ease; }
+
+/* Top border sweep */
+.platform-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--green), transparent); transform:scaleX(0); transform-origin:center; transition:transform .5s; z-index:1; }
+.platform-card:hover::before { transform:scaleX(1); }
+
+/* Title lights up + arrow slides in */
+.platform-card:hover .platform-name { color:var(--green); }
+.platform-card:hover .platform-name-arrow { opacity:1; transform:translate(0,0); }
+
+.platform-name-arrow { font-size:1rem; opacity:0; transform:translate(-6px,4px); transition:opacity .3s, transform .3s; display:inline-block; line-height:1; margin-left:0.4rem; }
+.platform-card-header { padding:1.5rem 1.5rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; position:relative; z-index:1; }
 .platform-icon { font-size:1.6rem; }
-.platform-name { font-family:var(--font-display); font-size:1.6rem; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.platform-name { font-family:var(--font-display); font-size:1.6rem; letter-spacing:0.04em; color:var(--white); line-height:1; transition:color .3s; display:flex; align-items:center; }
 .platform-type { font-family:var(--font-mono); font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.2rem; }
 .platform-body { padding:1.25rem 1.5rem; }
 .platform-desc { font-size:0.97rem; color:var(--text); line-height:1.8; margin-bottom:1rem; }
@@ -258,7 +272,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div class="platform-card-header">
         <div class="platform-icon">🔴</div>
         <div>
-          <div class="platform-name">REDDIT</div>
+          <div class="platform-name">REDDIT<span class="platform-name-arrow">↗</span></div>
           <div class="platform-type" style="color:var(--gold);">Long-form · Threaded Discussion</div>
         </div>
         <div style="margin-left:auto;text-align:right;">
@@ -285,7 +299,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div class="platform-card-header">
         <div class="platform-icon">💜</div>
         <div>
-          <div class="platform-name">DISCORD</div>
+          <div class="platform-name">DISCORD<span class="platform-name-arrow">↗</span></div>
           <div class="platform-type" style="color:var(--purple);">Real-time · Channel-based</div>
         </div>
       </div>
@@ -307,7 +321,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
       <div class="platform-card-header">
         <div class="platform-icon">🏢</div>
         <div>
-          <div class="platform-name">KHOROS</div>
+          <div class="platform-name">KHOROS<span class="platform-name-arrow">↗</span></div>
           <div class="platform-type" style="color:var(--accent2);">Brand Communities · Enterprise</div>
         </div>
       </div>
