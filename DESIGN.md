@@ -130,19 +130,37 @@ The parent grid containers no longer carry `background: var(--border)` or `overf
 
 ---
 
+## Text Rendering
+
+All six files set these properties on `body` for maximum sharpness on retina and OLED displays:
+
+```css
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-rendering: optimizeLegibility;
+```
+
+---
+
 ## Glassmorphism Implementation
 
 All card and surface components use semi-transparent glass instead of solid ink backgrounds:
 
 ```css
 background: rgba(12, 13, 22, 0.7);
-border: 1px solid rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-bottom-color: rgba(255, 255, 255, 0.03);
+border-right-color: rgba(255, 255, 255, 0.03);
 border-radius: 6px;
 backdrop-filter: blur(20px);
 -webkit-backdrop-filter: blur(20px);
 ```
 
+The three-property border simulates a **top-left light source**: the top and left edges catch more light (`0.1` opacity) while the bottom and right fall into shadow (`0.03` opacity).
+
 Applied to: `.skill-card`, `.work-card`, `.stack-card`, `.info-card`, `.hero-stat`, `.contact-item`, `.mf-input`, `.violation-item`, `.action-item`, `.esc-step`, `.case-card`, `.platform-card`, `.abuse-item`, `.tool-item`, `.attack-card`, `.edu-card`, `.cert-item`, `.principle-card`, `.beyond-card`, `.skill-item`, `.stat-item`, `.contact-strip`, `.photo-quick-facts`.
+
+> **Note:** Nav borders use `border-bottom: 1px solid rgba(255,255,255,0.05)` (single edge, no directional override) to avoid simulating a light source on a full-width strip.
 
 ### Navigation Glass
 
@@ -191,7 +209,7 @@ Replaces the old "shimmer sweep" (translating gradient from left to right). Card
 .skill-card::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,108,247,0.1) 0%, transparent 75%);
+  background: radial-gradient(ellipse 150% 120% at 50% -5%, rgba(74,108,247,0.10) 0%, transparent 75%);
   opacity: 0;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -202,19 +220,31 @@ Replaces the old "shimmer sweep" (translating gradient from left to right). Card
 }
 ```
 
+The glow ellipse is `150% 120%` — wider and taller than the card — positioned at `50% -5%` so the brightest point sits just above the card's top edge. This creates an atmospheric bloom rather than a tight cone. Max opacity is `0.10` across all domains.
+
 Domain-specific glow colors:
-- Trust & Safety / default: `rgba(74,108,247,...)` blue
-- Community Management: `rgba(39,196,122,...)` green
-- Red Teaming / LLM: `rgba(224,48,80,...)` jewel red
+- Trust & Safety / default: `rgba(74,108,247,0.10)` blue
+- Community Management: `rgba(39,196,122,0.10)` green
+- Red Teaming / LLM: `rgba(224,48,80,0.10)` jewel red
 
 ### Button Interactions
 
 ```css
-.btn-primary:hover { opacity: 0.9; transform: translateY(-3px); }
+.btn-primary {
+  box-shadow: 0 4px 24px rgba(74,108,247,0.25);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(74,108,247,0.2);
+}
 .btn-secondary:hover { border-color: var(--accent2); transform: translateY(-3px); }
 ```
 
-Buttons lift `3px` on hover (previously 2px). Box shadow on `.btn-primary`: `0 4px 24px rgba(74,108,247,0.25)`.
+Buttons lift `3px` on hover. The `box-shadow` is included in the transition curve so the shadow expands smoothly from a tight `4px 24px` ambient to a broad `20px 40px` bloom as the button rises. Applied to `index.html` and `about.html`.
 
 ---
 

@@ -35,6 +35,7 @@ My-Portfolio/
 ├── llm-training.html        # Deep-dive: LLM Training & Red Teaming work
 ├── nipun.jpg                # Profile photo (used on about.html)
 ├── og-image.png             # Open Graph / social share image (1200×630)
+├── DESIGN.md                # Complete CSS design system reference
 └── README.md                # This file
 ```
 
@@ -57,7 +58,7 @@ My-Portfolio/
 
 - **Hero** — Name display, role tagline, status indicator ("Open to Work"), hero description with left-accent border, CTA buttons, and an animated info card with domain tags
 - **Marquee strip** — Scrolling ticker of skill keywords
-- **Skills** — Six domain cards (Trust & Safety, Content Moderation, Community Management, LLM Training, Red Teaming, AI Evaluation) with shimmer-on-hover effects and inline arrow navigation
+- **Skills** — Six domain cards (Trust & Safety, Content Moderation, Community Management, LLM Training, Red Teaming, AI Evaluation) with soft radial glow hover effects and inline arrow navigation
 - **Featured Work** — Six project/domain cards with custom illustrated thumbnails (CSS-drawn code snippets, annotation frames, evaluation bar charts, moderation queues, community charts, T&S flow diagrams)
 - **About snapshot** — Condensed bio with stats (6+ years, 5 companies, 2 degrees, 3 certs)
 - **Contact** — Email link, LinkedIn, and a hire-me CTA
@@ -79,6 +80,20 @@ Each domain page follows the same structure:
 - Multiple content sections with eyebrow labels, display headings, and detailed breakdowns
 - Domain-specific components (violation grids, enforcement flows, escalation steps, annotation examples, etc.)
 - Footer with back-to-portfolio link
+
+---
+
+## Design System
+
+The visual language is a **Premium Editorial Gallery** aesthetic — dark-first, glassmorphic, with editorial-scale typography and spring-curve motion. Full reference is in [`DESIGN.md`](./DESIGN.md), covering:
+
+- Color palette (14 CSS custom properties, jewel-toned accents)
+- Typography (Bebas Neue display, Crimson Pro body/nav, JetBrains Mono metadata)
+- Glassmorphism implementation (card backgrounds, nav glass, directional borders)
+- Layout system (section padding, open grid gutters)
+- Interaction & motion (soft radial glow hover pattern, spring-curve easing)
+- Background effects (atmospheric radial washes, grain texture, floating orbs)
+- Responsive breakpoints
 
 ---
 
