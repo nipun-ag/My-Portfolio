@@ -36,7 +36,7 @@ All colors are defined as CSS custom properties on `:root`. Values are slightly 
 | `--border` | `#1c1d2e` | Section dividers |
 | `--border2` | `#252638` | Structural inner borders |
 
-Glass cards use `rgba(255,255,255,0.05)` borders (extremely thin white) in place of `--border2`.
+Glass cards use a three-property directional border in place of `--border2` (see Glassmorphism Implementation).
 
 ### Text
 
@@ -183,6 +183,71 @@ border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 ---
 
 ## Interaction & Motion
+
+### Form Field Focus States
+
+Contact form inputs (`.mf-input`) use a three-property spring transition and a visible but restrained focus ring:
+
+```css
+.mf-input {
+  border: 1px solid rgba(255,255,255,0.07); /* softer than card borders — inputs read as recessed */
+  transition: border-color 0.4s cubic-bezier(0.16,1,0.3,1),
+              background   0.4s cubic-bezier(0.16,1,0.3,1),
+              box-shadow   0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.mf-input:focus {
+  border-color: rgba(74,108,247,0.4);      /* --accent at low opacity */
+  background: rgba(22,23,36,0.9);          /* slightly brighter than resting state */
+  box-shadow: 0 0 0 3px rgba(74,108,247,0.06); /* accessibility glow ring */
+  outline: none;
+}
+.mf-input::placeholder { color: rgba(200,204,224,0.5); } /* legible but clearly secondary */
+```
+
+The `0.07` resting border keeps inputs visually recessed relative to cards (`0.1`). Placeholder opacity is `0.5` — high enough to read the hint text, low enough to never be mistaken for filled content. The 3px glow ring provides a keyboard-accessible focus indicator without breaking the dark palette.
+
+### Contact Item Layout
+
+Contact rows (`.contact-item`) are flex rows with the icon+value pair aligned via `.ci-big-val`:
+
+```css
+.contact-item {
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 1.4rem 1.5rem;
+}
+.ci-big-val {
+  display: flex; align-items: center; gap: 0.75rem; /* icon + text baseline */
+  flex: 1;
+}
+```
+
+The SVG icon inside `.ci-big-val` carries `flex-shrink: 0` so it never collapses in narrow viewports. Alignment is defined entirely in CSS — no inline styles on the markup.
+
+### Status Indicator Pattern
+
+Pulsing availability dots are CSS classes, not inline styles, so the animation cannot cause layout shifts:
+
+```css
+/* index.html — used inside .avatar-status */
+.status-pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0; /* prevents dot from collapsing in tight flex rows */
+  animation: pulse 1.5s infinite;
+}
+
+/* about.html — used inside .photo-status */
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0;
+  animation: pulse 1.5s infinite;
+}
+```
+
+The `pulse` keyframe only modulates `opacity` (`1 → 0.3 → 1`) — no size, transform, or position changes — so adjacent text is guaranteed to remain stable. All parent containers use `display: flex; align-items: center` with an explicit `gap` rather than relying on margin.
 
 ### Transition Easing
 

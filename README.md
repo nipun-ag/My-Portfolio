@@ -89,9 +89,12 @@ The visual language is a **Premium Editorial Gallery** aesthetic — dark-first,
 
 - Color palette (14 CSS custom properties, jewel-toned accents)
 - Typography (Bebas Neue display, Crimson Pro body/nav, JetBrains Mono metadata)
-- Glassmorphism implementation (card backgrounds, nav glass, directional borders)
+- Glassmorphism implementation (card backgrounds, nav glass, directional light-source borders)
 - Layout system (section padding, open grid gutters)
-- Interaction & motion (soft radial glow hover pattern, spring-curve easing)
+- Interaction & motion (soft radial glow hover pattern, spring-curve easing, button bloom)
+- Form field focus states (spring transitions, accessibility glow ring, placeholder contrast)
+- Contact item & social bar layout (CSS-only flex alignment, no inline styles)
+- Status indicator pattern (`.status-pulse` / `.status-dot` — layout-shift-safe pulsing dots)
 - Background effects (atmospheric radial washes, grain texture, floating orbs)
 - Responsive breakpoints
 
