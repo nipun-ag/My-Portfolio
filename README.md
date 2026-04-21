@@ -1,4 +1,4 @@
-# Nipun Aggarwal — Portfolio
+# Nipun Aggarwal - Portfolio
 
 Personal portfolio for Nipun Aggarwal, a Trust & Safety professional and AI Red Teaming Analyst with 6+ years of experience in content moderation, LLM evaluation, and community management.
 
@@ -14,12 +14,12 @@ This portfolio presents Nipun's work across five professional domains: Trust & S
 
 ## Tech Stack
 
-- **HTML5** — semantic markup, no frameworks
-- **CSS3** — custom properties, Grid, Flexbox, animations, `backdrop-filter`
-- **Vanilla JavaScript** — scroll-driven tab navigation, no dependencies
-- **Google Fonts** — Bebas Neue, Crimson Pro, JetBrains Mono
-- **Vercel** — hosting and deployment with Analytics and Speed Insights
-- **No build step** — all files are static, shipped as-is
+- **HTML5** - semantic markup, no frameworks
+- **CSS3** - custom properties, Grid, Flexbox, animations, backdrop-filter
+- **Vanilla JavaScript** - scroll-driven tab navigation, no dependencies
+- **Google Fonts** - Bebas Neue, Crimson Pro, JetBrains Mono
+- **Vercel** - hosting and deployment with Analytics and Speed Insights
+- **No build step** - all files are static
 
 ---
 
@@ -58,12 +58,12 @@ My-Portfolio/
 
 ### Homepage (`index.html`)
 
-- **Hero** — Name display, role tagline, status indicator ("Open to Work"), hero description with left-accent border, CTA buttons, and an animated info card with domain tags
-- **Marquee strip** — Scrolling ticker of skill keywords
-- **Skills** — Five domain cards (Trust & Safety, Content Moderation, Community Management, LLM Training, and AI Engineering) with soft radial glow hover effects and inline arrow navigation
-- **Featured Work** — Six project/domain cards with custom illustrated thumbnails (CSS-drawn code snippets, annotation frames, evaluation bar charts, moderation queues, community charts, T&S flow diagrams)
-- **About snapshot** — Condensed bio with stats (6+ years, 5 companies, 5 domains)
-- **Contact** — Email link, LinkedIn, and a hire-me CTA
+- **Hero** - Name, role, status, bio with CTA buttons, animated info card
+- **Marquee** - Scrolling skill keywords
+- **Skills** - Five domain cards with glow hover effects
+- **Featured Work** - Six project cards with custom CSS illustrations
+- **About** - Condensed bio with stats
+- **Contact** - LinkedIn link and contact form
 
 ### About (`about.html`)
 
@@ -87,7 +87,7 @@ Each domain page follows the same structure:
 
 ## Design System
 
-The visual language is a **Premium Editorial Gallery** aesthetic — dark-first, glassmorphic, with editorial-scale typography and spring-curve motion. Full reference is in [`DESIGN.md`](./DESIGN.md), covering:
+The design language draws from premium editorial galleries - dark, glassmorphic, editorial-scale typography with smooth spring motion. Full reference in [`DESIGN.md`](./DESIGN.md):
 
 - Color palette (14 CSS custom properties, jewel-toned accents)
 - Typography (Bebas Neue display, Crimson Pro body/nav, JetBrains Mono metadata)
@@ -96,7 +96,7 @@ The visual language is a **Premium Editorial Gallery** aesthetic — dark-first,
 - Interaction & motion (soft radial glow hover pattern, spring-curve easing, button bloom)
 - Form field focus states (spring transitions, accessibility glow ring, placeholder contrast)
 - Contact item & social bar layout (CSS-only flex alignment, no inline styles)
-- Status indicator pattern (`.status-pulse` / `.status-dot` — layout-shift-safe pulsing dots)
+- Status indicator pattern (layout-shift-safe pulsing dots)
 - Background effects (atmospheric radial washes, grain texture, floating orbs)
 - Responsive breakpoints
 
@@ -131,7 +131,7 @@ To deploy your own fork:
 
 1. Push to GitHub
 2. Import the repository into [vercel.com](https://vercel.com)
-3. Vercel auto-detects it as a static site — no configuration needed
+3. Vercel auto-detects it as a static site, no config needed
 4. Set your custom domain in the Vercel dashboard
 
 ---

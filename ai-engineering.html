@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Engineering — Nipun Aggarwal</title>
+<title>AI Engineering - Nipun Aggarwal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -142,7 +142,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- SECTION 1: PHILOSOPHY -->
 <section class="content-section" id="philosophy">
   <h2 class="sec-heading">DOMAIN-DRIVEN ENGINEERING</h2>
-  <p class="sec-desc">Every API design, every pipeline, every data structure reflects the constraints and patterns I learned at scale. I'm not building systems in isolation — I'm encoding domain knowledge into code.</p>
+  <p class="sec-desc">Everything I build—the APIs, the data pipelines, the system architecture—comes straight from what I learned reviewing thousands of cases at scale. I'm not building in a vacuum. I'm taking real patterns from the trenches and baking them into code.</p>
 
   <div class="philosophy-grid">
     <div class="philosophy-item">
@@ -158,7 +158,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="philosophy-item">
       <div class="philosophy-icon">🛡️</div>
       <div class="philosophy-name">Safety by Default</div>
-      <div class="philosophy-desc">When systems handle user safety, defaults matter. Architectures assume humans will miss edge cases — redundancy, escalation, and audit trails are first-class concerns.</div>
+      <div class="philosophy-desc">When a system controls user safety, defaults matter. I know humans will miss edge cases—I missed plenty—so redundancy, escalation paths, and full audit trails are baked in from day one.</div>
     </div>
     <div class="philosophy-item">
       <div class="philosophy-icon">📊</div>
@@ -226,7 +226,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <div class="arch-num">01</div>
         <div class="arch-text">
           <div class="arch-title">Data Ingestion & Normalization</div>
-          <div class="arch-desc">Content arrives in a thousand formats — Reddit posts, Twitter threads, LLM outputs, user reports. The ingestion layer normalizes input, tokenizes, and creates a canonical internal representation. No system can make smart decisions on noisy data.</div>
+          <div class="arch-desc">Content comes in from everywhere - Reddit, Twitter, LLM outputs, user reports, each in its own format. The first layer standardizes all of it, tokenizes it, creates one clean internal format. You can't make good decisions on garbage data.</div>
         </div>
       </div>
       <div class="arch-layer">
@@ -247,21 +247,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <div class="arch-num">04</div>
         <div class="arch-text">
           <div class="arch-title">Decision Scoring & Thresholding</div>
-          <div class="arch-desc">Models output probabilities; decisions require thresholds. Different violation categories have different cost structures — false positives on hate speech differ from false positives on spam. Configurable thresholds let platforms tune risk tolerance.</div>
+          <div class="arch-desc">Models give you probabilities. Thresholds turn those into yes/no decisions. But the cost of getting it wrong varies wildly - a false positive on hate speech hits different than one on spam. Configurable thresholds let each platform find their own comfort zone.</div>
         </div>
       </div>
       <div class="arch-layer">
         <div class="arch-num">05</div>
         <div class="arch-text">
           <div class="arch-title">Action Enforcement & Escalation</div>
-          <div class="arch-desc">High-confidence violations trigger automated removal. Marginal cases escalate to humans. Tier-based escalation routes specialist cases to teams with appropriate training — CSAM always goes to child safety specialists.</div>
+          <div class="arch-desc">Clear-cut violations get removed automatically. The close calls go to humans. Some cases need specialists - CSAM always gets routed to the child safety team, no exceptions.</div>
         </div>
       </div>
       <div class="arch-layer">
         <div class="arch-num">06</div>
         <div class="arch-text">
           <div class="arch-title">Audit Trail & Explainability</div>
-          <div class="arch-desc">Every decision is logged with reasoning — which models triggered, what context was available, which threshold was applied. Explainability isn't optional when users appeal automated moderation decisions.</div>
+          <div class="arch-desc">Every decision gets logged with full reasoning - which models flagged it, what context we had, what threshold we used. You need that trail when someone appeals. Explainability isn't nice-to-have, it's mandatory.</div>
         </div>
       </div>
     </div>

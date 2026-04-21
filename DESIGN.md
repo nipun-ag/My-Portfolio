@@ -1,4 +1,4 @@
-# Design System — Nipun Aggarwal Portfolio
+# Design System - Nipun Aggarwal Portfolio
 
 Complete design reference for [bynipun.com](https://bynipun.com).
 
@@ -6,13 +6,13 @@ Complete design reference for [bynipun.com](https://bynipun.com).
 
 ## Design Philosophy
 
-The visual language is built around a **Premium Editorial Gallery** aesthetic — the kind of interface found in high-end SaaS products (Vercel, Linear, Stripe) and luxury editorial sites. Key principles:
+The visual language takes cues from premium editorial gallery design - think Vercel, Linear, Stripe. High-end SaaS, luxury editorial. The core principles:
 
-- **Dark-first, high contrast** — near-black backgrounds with carefully layered surface levels
-- **Luxury of space** — generous padding and gutters; content breathes rather than crowds
-- **Glassmorphism depth** — semi-transparent card layers with backdrop-blur create a physical sense of depth without grain
-- **Restrained motion** — soft radial glows replace mechanical sweeps; spring-curve easing over linear
-- **Editorial scale** — display type is enormous (up to 13rem) with tightly negative tracking; metadata stays small and precise
+- **Dark-first, high contrast** - near-black with layered surfaces that feel intentional
+- **Generous spacing** - padding and gutters let content breathe, not crowd
+- **Glassmorphism** - semi-transparent cards with backdrop blur create real depth without texture
+- **Subtle motion** - soft glows instead of sweeps, spring curves instead of linear
+- **Editorial typography** - massive display headlines (up to 13rem) with tight letterspacing, tiny metadata
 
 ---
 
@@ -24,7 +24,7 @@ All colors are defined as CSS custom properties on `:root`. Values are slightly 
 
 | Variable | Hex | Usage |
 |---|---|---|
-| `--bg` | `#07080f` | Page background — the deepest layer |
+| `--bg` | `#07080f` | Page background, the deepest layer |
 | `--ink` | `#0c0d16` | Reference value (cards now use glass rgba) |
 | `--surface` | `#10111c` | Elevated sections |
 | `--surface2` | `#161724` | Deep hover states |
@@ -51,18 +51,18 @@ Glass cards use a three-property directional border in place of `--border2` (see
 
 | Variable | Hex | Previous | Primary usage |
 |---|---|---|---|
-| `--accent` | `#4a6cf7` | `#4f7cff` | Blue — primary CTA, Trust & Safety, nav dot |
-| `--accent2` | `#00b8e8` | `#00c8ff` | Cyan — LLM/AI domain, gradients |
-| `--gold` | `#e8963e` | `#f0a050` | Amber — gaming, experience highlights |
-| `--red` | `#e03050` | `#ff4455` | Jewel red — warnings, violations, red teaming |
-| `--green` | `#27c47a` | `#30d980` | Muted green — Community Management, status |
-| `--purple` | `#8862e0` | `#9b6ef3` | Muted purple — Cognizant, education |
+| `--accent` | `#4a6cf7` | `#4f7cff` | Blue for CTAs, Trust & Safety, nav indicators |
+| `--accent2` | `#00b8e8` | `#00c8ff` | Cyan for AI/LLM sections and gradients |
+| `--gold` | `#e8963e` | `#f0a050` | Amber for highlights and emphasis |
+| `--red` | `#e03050` | `#ff4455` | Deep red for warnings and violations |
+| `--green` | `#27c47a` | `#30d980` | Muted green for Community Management and status |
+| `--purple` | `#8862e0` | `#9b6ef3` | Purple for learning and secondary content |
 
 ### Gradient Pairs
 
 - **Primary CTA:** `linear-gradient(135deg, #4a6cf7, #00b8e8)`
-- **Hero name:** `linear-gradient(90deg, #4a6cf7, #00b8e8)` — gradient text via `-webkit-background-clip`
-- **Stat numbers:** `linear-gradient(135deg, var(--accent), var(--accent2))` — gradient text
+- **Hero name:** `linear-gradient(90deg, #4a6cf7, #00b8e8)` for gradient text effect
+- **Stat numbers:** `linear-gradient(135deg, var(--accent), var(--accent2))` for gradients
 
 ---
 
@@ -70,36 +70,36 @@ Glass cards use a three-property directional border in place of `--border2` (see
 
 Three typefaces, each with a strict role. The combination creates a deliberate tension: architectural condensed display, warm editorial serif, cold precision mono.
 
-### 1. Bebas Neue — Display
+### 1. Bebas Neue - Display
 
 ```css
 --font-display: 'Bebas Neue', sans-serif;
 ```
 
-- **Role:** Hero names, section headings, card titles, timeline roles, stat numbers
-- **Letter-spacing:** `-0.03em` on display-scale headings (high-fashion tightening), `-0.02em` on section headings
+- **Role:** Hero names, section headings, card titles, stats
+- **Letter-spacing:** `-0.03em` for big headlines, `-0.02em` for sections (tight, elegant)
 - **Sizes:** `clamp(5rem, 13vw, 13rem)` hero, `clamp(4rem, 10vw, 10rem)` page titles, `clamp(2.5rem, 5vw, 5.5rem)` sections
 
-### 2. Crimson Pro — Body + Navigation
+### 2. Crimson Pro - Body & Navigation
 
 ```css
 --font-body: 'Crimson Pro', serif;
 ```
 
-- **Role:** All body copy, descriptions, **and navigation links** (`font-weight: 300`, `letter-spacing: 0.04em`)
-- **Nav links change from previous:** was JetBrains Mono uppercase — now Crimson Pro 300 weight for elegance
-- **Body sizes:** `1.1rem` hero desc, `1rem` section desc, `0.95rem`–`0.88rem` card copy
-- **Line height:** `1.6` base, `1.8`–`1.9` prose
+- **Role:** Body copy, descriptions, navigation links (`font-weight: 300`)
+- **Letter-spacing:** `0.04em` on nav for elegance
+- **Body sizes:** `1.1rem` hero, `1rem` sections, `0.95rem-0.88rem` cards
+- **Line height:** `1.6` base, `1.8-1.9` for prose
 
-### 3. JetBrains Mono — Metadata Only
+### 3. JetBrains Mono - Metadata
 
 ```css
 --font-mono: 'JetBrains Mono', monospace;
 ```
 
-- **Role:** Status badges, eyebrow labels, data rows, navigation CTA, breadcrumbs, tags, year markers
-- **Strictly limited** to small UI chrome — not used for navigation links or section labels where Crimson Pro now applies
-- **Sizes:** `0.55rem`–`0.78rem`, always uppercase, letter-spacing `0.1em`–`0.3em`
+- **Role:** Status badges, labels, breadcrumbs, tags
+- **Where:** Only on small UI elements, not body text
+- **Sizes:** `0.55rem-0.78rem`, uppercase, letter-spacing `0.1em-0.3em`
 
 ---
 
@@ -126,7 +126,7 @@ Cards are no longer flush-joined with 1px gaps. All card grids now use open gutt
 | Stat bars | `1px` (seamless) | `1rem` |
 | Cert list | `1px` (seamless) | `0.75rem` |
 
-The parent grid containers no longer carry `background: var(--border)` or `overflow: hidden` — the visual separation now comes from the card's own glass border.
+Grid containers don't have a background anymore. Cards handle their own visual separation through their glass border.
 
 ---
 
@@ -190,7 +190,7 @@ Contact form inputs (`.mf-input`) use a three-property spring transition and a v
 
 ```css
 .mf-input {
-  border: 1px solid rgba(255,255,255,0.07); /* softer than card borders — inputs read as recessed */
+  border: 1px solid rgba(255,255,255,0.07); /* softer than cards so inputs look sunken in */
   transition: border-color 0.4s cubic-bezier(0.16,1,0.3,1),
               background   0.4s cubic-bezier(0.16,1,0.3,1),
               box-shadow   0.4s cubic-bezier(0.16,1,0.3,1);
@@ -204,7 +204,7 @@ Contact form inputs (`.mf-input`) use a three-property spring transition and a v
 .mf-input::placeholder { color: rgba(200,204,224,0.5); } /* legible but clearly secondary */
 ```
 
-The `0.07` resting border keeps inputs visually recessed relative to cards (`0.1`). Placeholder opacity is `0.5` — high enough to read the hint text, low enough to never be mistaken for filled content. The 3px glow ring provides a keyboard-accessible focus indicator without breaking the dark palette.
+The `0.07` border makes inputs look sunken. Placeholders at `0.5` opacity are legible but clearly secondary. The 3px glow on focus is the keyboard indicator without clashing with the dark theme.
 
 ### Contact Item Layout
 
@@ -221,24 +221,15 @@ Contact rows (`.contact-item`) are flex rows with the icon+value pair aligned vi
 }
 ```
 
-The SVG icon inside `.ci-big-val` carries `flex-shrink: 0` so it never collapses in narrow viewports. Alignment is defined entirely in CSS — no inline styles on the markup.
+Icons use `flex-shrink: 0` so they don't collapse on mobile. All alignment is CSS, no inline styles.
 
 ### Status Indicator Pattern
 
 Pulsing availability dots are CSS classes, not inline styles, so the animation cannot cause layout shifts:
 
 ```css
-/* index.html — used inside .avatar-status */
-.status-pulse {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 6px var(--green);
-  flex-shrink: 0; /* prevents dot from collapsing in tight flex rows */
-  animation: pulse 1.5s infinite;
-}
-
-/* about.html — used inside .photo-status */
-.status-dot {
+/* Status indicators on index and about pages */
+.status-pulse, .status-dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--green);
   box-shadow: 0 0 6px var(--green);
@@ -247,27 +238,27 @@ Pulsing availability dots are CSS classes, not inline styles, so the animation c
 }
 ```
 
-The `pulse` keyframe only modulates `opacity` (`1 → 0.3 → 1`) — no size, transform, or position changes — so adjacent text is guaranteed to remain stable. All parent containers use `display: flex; align-items: center` with an explicit `gap` rather than relying on margin.
+The pulse only changes opacity, never size or position, so neighboring text stays stable. Containers use `display: flex; align-items: center` with explicit gaps.
 
 ### Transition Easing
 
-All interactive elements use a premium spring curve:
+All interactive elements use a spring curve:
 
 ```css
 transition: [property] 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-/* hover glows use 0.8s for a softer arrival */
+/* glows use 0.8s for softer arrival */
 ```
 
-This replaces the previous `ease` and linear `0.2s`/`0.3s` timings. The cubic-bezier produces a fast-start, slow-settle "spring" characteristic.
+Fast start, slow settle. Feels responsive but not jarring.
 
 ### Hover Pattern: Soft Glow
 
-Replaces the old "shimmer sweep" (translating gradient from left to right). Cards now use:
+Cards don't shimmer sweep anymore. Instead:
 
-1. **Radial glow** — `::after` pseudo with a radial gradient that fades in via `opacity: 0 → 1`
-2. **Border brightening** — `border-color: rgba(255,255,255,0.1)` on hover
-3. **Box shadow lift** — `box-shadow: 0 8px 48px rgba([accent], 0.10–0.15)` on hover
-4. **Top border fade** — `::before` at 1px height fades from `opacity: 0 → 1` (replaces scaleX sweep)
+1. **Radial glow** - soft glow fades in via opacity on hover
+2. **Border brightens** - border-color gets lighter
+3. **Shadow lifts** - box-shadow expands on hover
+4. **Top border fades in** - 1px line appears at top
 
 ```css
 /* Example: skill card */
@@ -285,12 +276,12 @@ Replaces the old "shimmer sweep" (translating gradient from left to right). Card
 }
 ```
 
-The glow ellipse is `150% 120%` — wider and taller than the card — positioned at `50% -5%` so the brightest point sits just above the card's top edge. This creates an atmospheric bloom rather than a tight cone. Max opacity is `0.10` across all domains.
+The glow is wider and taller than the card itself, positioned just above so it creates an atmospheric bloom. Max opacity stays at `0.10` to keep it subtle.
 
-Domain-specific glow colors:
-- Trust & Safety / default: `rgba(74,108,247,0.10)` blue
-- Community Management: `rgba(39,196,122,0.10)` green
-- Red Teaming / LLM: `rgba(224,48,80,0.10)` jewel red
+Glow colors vary by domain:
+- Trust & Safety: blue
+- Community Management: green
+- Red Teaming / LLM: red
 
 ### Button Interactions
 
@@ -309,7 +300,7 @@ Domain-specific glow colors:
 .btn-secondary:hover { border-color: var(--accent2); transform: translateY(-3px); }
 ```
 
-Buttons lift `3px` on hover. The `box-shadow` is included in the transition curve so the shadow expands smoothly from a tight `4px 24px` ambient to a broad `20px 40px` bloom as the button rises. Applied to `index.html` and `about.html`.
+Buttons lift 3px on hover. The shadow expands as they rise, creating a smooth bloom effect.
 
 ---
 
@@ -331,7 +322,7 @@ Hero entrance animations (fadeUp with staggered delays 0.1s–1.4s) are preserve
 
 ### Atmospheric Radial Washes (replaces grid lines)
 
-Present on all pages via `.grid-bg`. Extremely low opacity — perceptible as depth, not pattern:
+Atmospheric washes on all pages via `.grid-bg`. Low opacity, meant to feel like depth not texture:
 
 ```css
 .grid-bg {
@@ -344,7 +335,7 @@ Present on all pages via `.grid-bg`. Extremely low opacity — perceptible as de
 }
 ```
 
-Three overlapping washes — left blue, right-top cyan, bottom-center purple — create a gentle ambient light effect rather than a grid structure.
+Three overlapping washes create a gentle ambient light rather than grid lines.
 
 ### Grain Texture (index.html only)
 
