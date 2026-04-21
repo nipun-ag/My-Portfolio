@@ -8,7 +8,7 @@ Personal portfolio for Nipun Aggarwal, a Trust & Safety professional and AI Red 
 
 ## About
 
-This portfolio presents Nipun's work across four professional domains: Trust & Safety, Content Moderation, Community Management, and LLM Training/Red Teaming. It is designed to serve as a detailed, domain-specific showcase for hiring managers and collaborators in AI Safety, AI Governance, and platform safety.
+This portfolio presents Nipun's work across five professional domains: Trust & Safety, Content Moderation, Community Management, LLM Training/Red Teaming, and AI Engineering. It is designed to serve as a detailed, domain-specific showcase for hiring managers and collaborators in AI Safety, AI Governance, and platform safety.
 
 ---
 
@@ -33,6 +33,7 @@ My-Portfolio/
 ├── content-moderation.html  # Deep-dive: Content Moderation domain work
 ├── community-management.html # Deep-dive: Community Management domain work
 ├── llm-training.html        # Deep-dive: LLM Training & Red Teaming work
+├── ai-engineering.html      # Deep-dive: AI Engineering domain work
 ├── nipun.jpg                # Profile photo (used on about.html)
 ├── og-image.png             # Open Graph / social share image (1200×630)
 ├── DESIGN.md                # Complete CSS design system reference
@@ -49,6 +50,7 @@ My-Portfolio/
 | `content-moderation.html` | Domain page covering moderation methodology, queue management, policy judgment, sensitive content handling, and tooling experience. |
 | `community-management.html` | Domain page covering platform experience (Reddit, Discord, Khoros), community health metrics, crisis management, sentiment analysis, and weekly reporting. |
 | `llm-training.html` | Domain page covering red teaming methodology, adversarial prompt techniques, output evaluation frameworks, RLHF data annotation, and VLA model training contributions. |
+| `ai-engineering.html` | Domain page covering domain-driven engineering philosophy, automated safety systems, ModEval multi-model evaluation API, sentiment analysis pipelines, and system architecture for scale. |
 
 ---
 
@@ -58,9 +60,9 @@ My-Portfolio/
 
 - **Hero** — Name display, role tagline, status indicator ("Open to Work"), hero description with left-accent border, CTA buttons, and an animated info card with domain tags
 - **Marquee strip** — Scrolling ticker of skill keywords
-- **Skills** — Six domain cards (Trust & Safety, Content Moderation, Community Management, LLM Training, Red Teaming, AI Evaluation) with soft radial glow hover effects and inline arrow navigation
+- **Skills** — Five domain cards (Trust & Safety, Content Moderation, Community Management, LLM Training, and AI Engineering) with soft radial glow hover effects and inline arrow navigation
 - **Featured Work** — Six project/domain cards with custom illustrated thumbnails (CSS-drawn code snippets, annotation frames, evaluation bar charts, moderation queues, community charts, T&S flow diagrams)
-- **About snapshot** — Condensed bio with stats (6+ years, 5 companies, 2 degrees, 3 certs)
+- **About snapshot** — Condensed bio with stats (6+ years, 5 companies, 5 domains)
 - **Contact** — Email link, LinkedIn, and a hire-me CTA
 
 ### About (`about.html`)
@@ -72,7 +74,7 @@ My-Portfolio/
 - Philosophy / working principles (4 cards)
 - Beyond work / personal interests
 
-### Domain Deep-Dives (`trust-safety.html`, `content-moderation.html`, `community-management.html`, `llm-training.html`)
+### Domain Deep-Dives (`trust-safety.html`, `content-moderation.html`, `community-management.html`, `llm-training.html`, `ai-engineering.html`)
 
 Each domain page follows the same structure:
 - Page hero with breadcrumb, large title, intro text, and meta stats
