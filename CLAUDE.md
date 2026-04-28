@@ -2,7 +2,7 @@
 
 ## What This App Is
 
-Personal portfolio for Nipun Aggarwal — Trust & Safety professional and AI Red Teaming Analyst. Six domain pages covering Trust & Safety, Content Moderation, Community Management, and LLM Training/Red Teaming. Pure static site, no backend. Live at [bynipun.com](https://bynipun.com).
+Personal portfolio for Nipun Aggarwal — Trust & Safety professional and AI Red Teaming Analyst. Five domain pages covering Trust & Safety, Content Moderation, Community Management, LLM Training/Red Teaming, and AI Engineering. Pure static site, no backend. Live at [bynipun.com](https://bynipun.com).
 
 ## Tech Stack
 
@@ -93,7 +93,7 @@ Format: `type: description`
 
 ## Current Project State
 
-- 6 pages live: index, about, and 4 domain deep-dives
+- 7 pages live: index, about, and 5 domain deep-dives
 - Premium Editorial Gallery dark theme
 - Glassmorphism cards with directional light-source borders
 - Soft radial glow hover pattern

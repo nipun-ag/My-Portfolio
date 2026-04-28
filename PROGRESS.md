@@ -12,9 +12,10 @@
 
 ## 2026-04-29
 
-Created full documentation system: CLAUDE.md, docs/ARCHITECTURE.md, PROGRESS.md. Trimmed README.md. No code changes made.
+Created full documentation system: CLAUDE.md, docs/ARCHITECTURE.md, PROGRESS.md. Trimmed README.md to public-facing essentials.
 
-- **CLAUDE.md** — 105-line codebase reference with conventions, common patterns, and current project state
-- **docs/ARCHITECTURE.md** — Complete technical reference covering file structure, local dev, deployment, CSS custom properties, glassmorphism pattern, and form field focus states
+- **CLAUDE.md** — Codebase reference with conventions, common patterns, file structure, and current project state (105 lines, under 120-line limit)
+- **docs/ARCHITECTURE.md** — Complete technical reference: file structure, local dev, deployment, CSS custom properties, glassmorphism pattern, form field focus states, responsive design
 - **README.md** — Trimmed to intro, About, Tech Stack, and Design System summary (removed detailed sections moved to ARCHITECTURE.md and CLAUDE.md)
-- **.gitignore** — Added .claude/ to version control exclusions
+- **.gitignore** — Created with .claude/, .DS_Store, Thumbs.db
+- Updated references throughout to reflect 5 domain pages (added ai-engineering.html)

@@ -10,6 +10,7 @@ My-Portfolio/
 ├── content-moderation.html   # Content Moderation domain deep-dive
 ├── community-management.html # Community Management domain deep-dive
 ├── llm-training.html         # LLM Training & Red Teaming domain deep-dive
+├── ai-engineering.html       # AI Engineering domain deep-dive
 ├── nipun.jpg                 # Profile photo (used on about.html)
 ├── og-image.png              # Open Graph / social share image (1200×630)
 ├── DESIGN.md                 # Complete CSS design system reference
@@ -45,7 +46,7 @@ Full biographical deep-dive. Contains:
 
 ---
 
-## Domain Pages (trust-safety.html, content-moderation.html, community-management.html, llm-training.html)
+## Domain Pages (trust-safety.html, content-moderation.html, community-management.html, llm-training.html, ai-engineering.html)
 
 Each domain page follows identical structure:
 - **Page hero** — Breadcrumb, large title, intro text, meta stats
