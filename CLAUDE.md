@@ -81,6 +81,33 @@ Personal portfolio for Nipun Aggarwal — Trust & Safety professional and AI Red
 - Check CSS variable names before adding new styles
 - Task touches multiple pages → check all affected files first
 
+## Never Do These Without Asking First
+
+- Add new fonts or external dependencies
+- Change CSS variable names
+- Modify the glassmorphism border pattern
+- Add JavaScript frameworks or libraries
+- Change Vercel deployment configuration
+- Rename any HTML files (breaks internal links)
+
+## Self-Updating Meta Instruction
+
+Trigger this automatically when:
+- A feature is fully working and tested
+- A bug is fixed and confirmed
+- You are about to switch to a different task
+- The user says "done", "ship it", "looks good", "push it", "that works", or any similar confirmation phrase
+
+Do not wait for explicit wrap up or end session instructions.
+
+After every session:
+1. Update CLAUDE.md current state section (keep under 120 lines)
+2. Add a dated entry to PROGRESS.md (what changed and why)
+3. Update DESIGN.md if any visual or CSS changes were made
+4. Update docs/ARCHITECTURE.md if any structural changes made
+5. Never append session notes to README.md
+6. Run git add . && git commit -m "[type]: description" && git push
+
 ## Git Commits
 
 Format: `type: description`
