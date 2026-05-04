@@ -91,6 +91,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .project-tag{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;color:var(--muted);border:1px solid var(--border2);padding:0.25rem 0.6rem;border-radius:2px;}
 .project-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.1em;color:var(--accent2);text-decoration:none;position:relative;z-index:1;transition:color 0.2s;}
 .project-link:hover{color:var(--white);}
+.inline-link{color:var(--accent2);text-decoration:none;font-weight:600;}
+.inline-link:hover{text-decoration:underline;}
 
 /* AUTOMATION GRID */
 .automation-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2rem;}
@@ -163,7 +165,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <span style="color:var(--accent2)">AI Engineering</span>
   </div>
   <h1 class="page-title">AI<br>ENGINEERING</h1>
-  <p class="page-intro">Systems & Tooling. Building the automated safety and sentiment pipelines that reflect the instincts I developed reviewing thousands of real-world cases. Domain-driven engineering applied to platform integrity.</p>
+  <p class="page-intro">I spent six years reviewing harmful content at scale. Then I started building tools to automate what I used to do manually. Everything here came out of that — real domain problems, real pipelines, real deployments.</p>
   <div class="page-hero-meta">
     <div class="meta-item"><span class="meta-label">Focus</span><span class="meta-val">Automation · Multi-Model · Scale</span></div>
     <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">Python · Flask · OpenRouter · HuggingFace</span></div>
@@ -185,7 +187,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="philosophy">
   <div class="sec-eyebrow">ENGINEERING PHILOSOPHY</div>
   <h2 class="sec-heading">PHILOSOPHY</h2>
-  <p class="sec-desc">Everything I build comes from real-world patterns and constraints. These aren't abstract principles—they're codified lessons from reviewing thousands of cases.</p>
+  <p class="sec-desc">Everything I build started as a manual process first. These principles are just patterns I kept running into while doing the work.</p>
 
   <div class="philosophy-grid">
     <div class="philosophy-item">
@@ -201,7 +203,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="philosophy-item">
       <div class="philosophy-icon">🛡️</div>
       <div class="philosophy-name">Safety by Default</div>
-      <div class="philosophy-desc">When a system controls user safety, defaults matter. I know humans will miss edge cases—I missed plenty—so redundancy, escalation paths, and full audit trails are baked in from day one.</div>
+      <div class="philosophy-desc">When a system controls user safety, defaults matter. I know humans will miss edge cases, I missed plenty, so redundancy, escalation paths, and full audit trails are baked in from day one.</div>
     </div>
     <div class="philosophy-item">
       <div class="philosophy-icon">📊</div>
@@ -211,7 +213,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="philosophy-item">
       <div class="philosophy-icon">🤖</div>
       <div class="philosophy-name">AI-Assisted Development</div>
-      <div class="philosophy-desc">I'm not a traditional developer. I use AI as a force multiplier — Claude for architecture and planning, DeepSeek and Qwen for execution, specialized models for specific tasks. The systems I build are real and production-deployed, built with honest tooling.</div>
+      <div class="philosophy-desc">I'm not a traditional coder and I don't pretend to be. I use Claude to plan and architect, DeepSeek and Qwen via Aider for the actual code, and I pick the cheapest model that can do the job. What I ship is real and live. That's what matters.</div>
     </div>
   </div>
 </section>
@@ -220,7 +222,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="stack">
   <div class="sec-eyebrow">STACK & TOOLS</div>
   <h2 class="sec-heading">WHAT I BUILD WITH</h2>
-  <p class="sec-desc">The full toolkit — from model APIs to deployment infra. Each tool earns its place by solving a specific problem.</p>
+  <p class="sec-desc">Everything I actually use, with no padding. If it's on this list, I've shipped something with it.</p>
 
   <div class="stack-grid">
     <div class="stack-card">
@@ -231,7 +233,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="stack-card">
       <div class="stack-label">Multi-Model Orchestration</div>
       <div class="stack-name">OpenRouter · Aider CLI</div>
-      <div class="stack-desc">Route tasks to the right model — Claude Sonnet for planning, DeepSeek and Qwen for coding execution via Aider. Cost-aware model selection.</div>
+      <div class="stack-desc">Claude for planning and architecture, DeepSeek and Qwen for code via Aider CLI. OpenRouter keeps it cheap. I match the model to the task, not to a preference.</div>
     </div>
     <div class="stack-card">
       <div class="stack-label">AI APIs</div>
@@ -246,12 +248,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="stack-card">
       <div class="stack-label">UX / Prototyping</div>
       <div class="stack-name">Google Stitch · Claude Design</div>
-      <div class="stack-desc">Prototype and iterate UI with AI tools before writing a line of code.</div>
+      <div class="stack-desc">I figure out the layout in Stitch or Claude Design before touching the codebase. Saves a lot of back and forth.</div>
     </div>
     <div class="stack-card">
       <div class="stack-label">Scraping & Automation</div>
       <div class="stack-name">Playwright · BeautifulSoup</div>
-      <div class="stack-desc">Browser automation and DOM scraping for job board pipelines and data collection.</div>
+      <div class="stack-desc">Playwright for browser automation, BeautifulSoup for parsing. This is how the Outreach tool scrapes job boards every day.</div>
     </div>
     <div class="stack-card">
       <div class="stack-label">Version Control</div>
@@ -275,7 +277,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="projects">
   <div class="sec-eyebrow">FEATURED PROJECTS</div>
   <h2 class="sec-heading">FEATURED PROJECTS</h2>
-  <p class="sec-desc">Two production-deployed tools built to solve real domain problems. Both live.</p>
+  <p class="sec-desc">Two things I built because I needed them. Both are live and running.</p>
 
   <div class="projects-list">
     <!-- MODEVAL PROJECT -->
@@ -287,7 +289,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <div class="project-title">ModEval</div>
         </div>
       </div>
-      <p class="project-desc">Context-aware moderation across 5 different models and 10 violation categories. Given a piece of content and violation type, ModEval returns consistency scores, confidence distributions, and actionable disagreement patterns.</p>
+      <p class="project-desc">Runs content through up to 9 moderation models at once, normalizes the outputs, and shows where they agree and where they disagree. Built because I kept asking which moderation model to trust and nobody had a good answer.</p>
       <div class="project-tags">
         <span class="project-tag">Python</span>
         <span class="project-tag">Flask</span>
@@ -306,7 +308,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <div class="project-title">Outreach</div>
         </div>
       </div>
-      <p class="project-desc">End-to-end job application automation. Scrapes job boards and company career pages with Playwright and BeautifulSoup, filters for relevant roles, stores results in Google Sheets, calls Claude API to tailor resume copy per job, and auto-fills application forms. Currently private, being revamped for public release.</p>
+      <p class="project-desc">Scrapes job boards and company career pages daily, filters for relevant roles, pulls them into Google Sheets, then uses Claude API to tailor my resume for each one. Also auto-fills the application form. Built it for myself, revamping it to make it public.</p>
       <div class="project-tags">
         <span class="project-tag">Playwright</span>
         <span class="project-tag">BeautifulSoup</span>
@@ -324,28 +326,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="automation">
   <div class="sec-eyebrow">AUTOMATION WORK</div>
   <h2 class="sec-heading">BUILDING WITH AI</h2>
-  <p class="sec-desc">Using Python, browser automation, and AI APIs to eliminate manual work. These aren't toy scripts — they run against real job boards and submit real applications.</p>
+  <p class="sec-desc">I built the Outreach tool because job hunting is repetitive and most of the steps can be automated. Here's how it actually works.</p>
 
   <div class="automation-grid">
     <div class="automation-card">
       <div class="automation-icon">🔍</div>
       <div class="automation-title">Job Discovery Pipeline</div>
-      <div class="automation-body">Playwright-driven scrapers hit job boards and company career pages on a schedule. BeautifulSoup parses listings, filters by relevance criteria, and deduplicates against already-seen roles. New matches land in Google Sheets automatically.</div>
+      <div class="automation-body">Playwright opens job boards and career pages on a schedule, BeautifulSoup parses the listings, and anything relevant that I haven't seen before gets added to a Google Sheet. No manual searching.</div>
     </div>
     <div class="automation-card">
       <div class="automation-icon">🤖</div>
       <div class="automation-title">Resume Tailoring via Claude</div>
-      <div class="automation-body">For each new job, the pipeline calls Claude API with the job description and base resume. Claude rewrites the summary and highlights relevant experience. No manual editing — the tailored version is ready to submit.</div>
+      <div class="automation-body">For every new listing, I send the job description and my base resume to Claude API. It rewrites the summary and adjusts the highlights to match. By the time I look at it, it's already tailored.</div>
     </div>
     <div class="automation-card">
       <div class="automation-icon">✍️</div>
       <div class="automation-title">Auto-Fill Automation</div>
-      <div class="automation-body">Playwright navigates to the application page and fills form fields automatically — name, contact info, experience, tailored resume content. Handles most standard application portals.</div>
+      <div class="automation-body">Playwright navigates to the application page and fills in the fields. Name, contact info, experience, the tailored resume copy. Works on most standard job portals.</div>
     </div>
     <div class="automation-card">
       <div class="automation-icon">📊</div>
       <div class="automation-title">Outreach Dashboard</div>
-      <div class="automation-body">All scraped jobs, application status, and tailored resumes surface in a custom frontend at <a href="https://outreach.bynipun.com" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;font-weight:600;">outreach.bynipun.com</a>. Built the same way as ModEval — plain HTML/CSS/JS, no frameworks.</div>
+      <div class="automation-body">All of it surfaces in a custom frontend at <a href="https://outreach.bynipun.com" target="_blank" rel="noopener noreferrer" class="inline-link">outreach.bynipun.com</a>. Same stack as ModEval, plain HTML/CSS/JS.</div>
     </div>
   </div>
 </section>
@@ -354,7 +356,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="architecture">
   <div class="sec-eyebrow">SYSTEM DESIGN</div>
   <h2 class="sec-heading">SYSTEM ARCHITECTURE</h2>
-  <p class="sec-desc">How automated safety and sentiment systems are designed for reliability, explainability, and scale. Each layer reflects a specific domain requirement.</p>
+  <p class="sec-desc">This is how ModEval is structured under the hood. Six layers, each one solving a specific problem I ran into while building it.</p>
 
   <div class="architecture-box">
     <div class="arch-header">⚙️ Core Layers</div>
@@ -409,31 +411,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="workflow">
   <div class="sec-eyebrow">HOW I WORK</div>
   <h2 class="sec-heading">MULTI-MODEL WORKFLOW</h2>
-  <p class="sec-desc">A practical approach to building with AI — using each model for what it's actually good at.</p>
+  <p class="sec-desc">This is how I actually build things. Not a philosophy, just what works.</p>
 
   <div class="workflow-flow">
     <div class="workflow-card">
       <div class="workflow-step">Step 01</div>
       <div class="workflow-label">Claude Sonnet</div>
-      <div class="workflow-body"><strong>PLAN</strong><br>Architecture decisions, task breakdown, prompt design. Claude handles anything requiring reasoning about structure or intent.</div>
+      <div class="workflow-body"><strong>PLAN</strong><br>Architecture, task breakdown, prompt design. Anything where I need to think through structure before writing a line of code.</div>
     </div>
     <div class="workflow-arrow">→</div>
     <div class="workflow-card">
       <div class="workflow-step">Step 02</div>
       <div class="workflow-label">DeepSeek · Qwen</div>
-      <div class="workflow-body"><strong>BUILD</strong><br>Code execution via Aider CLI. Cheaper models handle implementation once the plan is clear. OpenRouter routes to the best available option.</div>
+      <div class="workflow-body"><strong>BUILD</strong><br>Once the plan is clear, DeepSeek and Qwen handle the code via Aider CLI. OpenRouter keeps costs down. I don't use expensive models for things cheaper ones can do.</div>
     </div>
     <div class="workflow-arrow">→</div>
     <div class="workflow-card">
       <div class="workflow-step">Step 03</div>
       <div class="workflow-label">Stitch · Claude Design</div>
-      <div class="workflow-body"><strong>DESIGN</strong><br>UI prototyping before any code is written. Iterate on layout and interaction in the design tool, then implement.</div>
+      <div class="workflow-body"><strong>DESIGN</strong><br>I prototype the UI in Stitch or Claude Design before writing any code. Faster to iterate there than in the browser.</div>
     </div>
     <div class="workflow-arrow">→</div>
     <div class="workflow-card">
       <div class="workflow-step">Step 04</div>
       <div class="workflow-label">GitHub · Render · Vercel</div>
-      <div class="workflow-body"><strong>SHIP</strong><br>Push to main, auto-deploy fires. Doppler keeps secrets out of the repo. Both production apps are always live.</div>
+      <div class="workflow-body"><strong>SHIP</strong><br>Push to main, Vercel or Render picks it up automatically. Doppler handles the API keys. Both apps stay live with no manual steps.</div>
     </div>
   </div>
 </section>
