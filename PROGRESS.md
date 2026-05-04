@@ -10,6 +10,24 @@
 
 ---
 
+## 2026-05-04
+
+Rebuilt ai-engineering.html from thin 3-section project page into dense 6-section domain page.
+
+- **New sections** — Added Stack & Tools, Automation, Workflow (total 6 sections with proper scroll tracking)
+- **Hero meta stats** — Updated to Focus, Stack, Tools Live, Philosophy (4 items instead of 3)
+- **Philosophy section** — Added 5th card (AI-Assisted Development), changed grid from 2x2 to 3-column layout with eyebrow label
+- **Stack & Tools section** — 9 tool cards in 3-column glassmorphism grid with category labels and cyan hover glows
+- **Projects section** — Changed to single-column layout (.projects-list flex class), kept ModEval, removed Reddit Sentiment Analyzer, added Outreach job automation tool with full details
+- **Automation section** — 4 pipeline stage cards (Job Discovery, Resume Tailoring, Auto-Fill, Dashboard) in 2-column grid
+- **Workflow section** — 4-step horizontal flow with → arrows between cards at desktop, stacking vertically at 900px with hidden arrows
+- **Architecture section** — Added "SYSTEM DESIGN" eyebrow label, kept all 6 existing layers unchanged
+- **Duplicate script removed** — Removed duplicate /_vercel/insights/script.js (line 287), kept single instance
+- **Responsive design** — Stack grid 3→2 cols at 900px, philosophy/automation 3/2→1 col, workflow flex→column with hidden arrows
+- **No breaking changes** — All CSS variable names preserved, fonts used correctly, all tabs track scroll position
+
+---
+
 ## 2026-04-29
 
 Created full documentation system: CLAUDE.md, docs/ARCHITECTURE.md, PROGRESS.md. Trimmed README.md to public-facing essentials.

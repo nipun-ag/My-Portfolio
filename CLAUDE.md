@@ -22,7 +22,7 @@ Personal portfolio for Nipun Aggarwal — Trust & Safety professional and AI Red
 | `content-moderation.html` | Content Moderation domain deep-dive |
 | `community-management.html` | Community Management domain deep-dive |
 | `llm-training.html` | LLM Training & Red Teaming deep-dive |
-| `css/ or inline styles` | All styling via CSS custom properties |
+| `ai-engineering.html` | AI Engineering domain deep-dive (6 sections) |
 | `DESIGN.md` | Complete design system reference |
 
 ## Coding Conventions
@@ -39,40 +39,22 @@ Personal portfolio for Nipun Aggarwal — Trust & Safety professional and AI Red
 
 ## What NOT to Touch
 
-- CSS variable names — used across all 6 HTML files
-- Font imports — Bebas Neue, Crimson Pro, JetBrains Mono
-- Vercel Analytics and Speed Insights script injections
-- OG meta tags on index.html — configured for social sharing
-- The glassmorphism border pattern (three-property directional border) — visually critical, easy to break
-- Grain texture on body::after (index.html only)
-- Floating orb animations in homepage hero
+- CSS variable names, font imports, OG meta tags, glassmorphism border pattern
+- Vercel Analytics/Speed Insights script injections
+- Grain texture (body::after on index) and floating orbs (hero)
 
-## Where to Find Things
+## Reference
 
-- Technical structure, deployment, local dev → `docs/ARCHITECTURE.md`
-- Visual design system → `DESIGN.md`
-- Change log → `PROGRESS.md`
-- Public description → `README.md`
+- **docs/ARCHITECTURE.md** — Tech details, deployment, local dev
+- **DESIGN.md** — CSS design system and component specs
+- **PROGRESS.md** — Change log and deferred features
+- **README.md** — Public-facing description
 
-## Common Task Patterns
+## Common Tasks
 
-### Adding a new section to an existing page
-1. Read the full HTML file first
-2. Read DESIGN.md for relevant component specs
-3. Use existing CSS classes where possible
-4. Follow glassmorphism pattern for any new cards
-5. Test responsive at 900px breakpoint
-
-### Adding a new domain page
-1. Copy structure from an existing domain page
-2. Update breadcrumb, hero title, meta tags
-3. Add link in index.html and about.html navigation
-4. Update docs/ARCHITECTURE.md file structure
-
-### Updating copy or content
-1. Edit only the relevant HTML file
-2. No CSS changes needed for copy updates
-3. Commit with "content: description of change"
+- **New section:** Read file + DESIGN.md, use CSS classes, follow glassmorphism, test at 900px
+- **New domain page:** Copy existing page structure, update breadcrumb/meta/links, update ARCHITECTURE.md
+- **Copy updates:** Edit HTML only, commit with `content:` prefix
 
 ## Before Starting Any Task
 
@@ -121,12 +103,9 @@ Format: `type: description`
 ## Current Project State
 
 - 7 pages live: index, about, and 5 domain deep-dives
-- Premium Editorial Gallery dark theme
-- Glassmorphism cards with directional light-source borders
-- Soft radial glow hover pattern
-- Spring-curve easing on all interactions
-- Atmospheric radial background washes on all pages
-- Grain texture on homepage only
-- Floating orbs in homepage hero
-- Vercel Analytics and Speed Insights active
-- Deployed at bynipun.com
+- AI Engineering page: 6-tab structure (Philosophy, Stack & Tools, Projects, Automation, Architecture, Workflow)
+- Premium Editorial Gallery dark theme with glassmorphism
+- Soft radial glow hover pattern, spring-curve easing
+- Atmospheric radial washes + grain texture (homepage only) + floating hero orbs
+- Vercel auto-deploy on main branch with Analytics and Speed Insights
+- Live at bynipun.com
