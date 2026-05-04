@@ -1,5 +1,15 @@
 # Change Log & Project Progress
 
+## 2026-05-05 (Session 2)
+
+Completed major content refinement pass on ai-engineering.html. Shifted all sections from tool-specific documentation to teachable principles and patterns.
+
+- **#automation section** — Generalized messaging from Outreach-focused to broader automation pipeline patterns (5 card updates)
+- **Browser Automation card** — Refined body text for clarity on browser interaction vs HTTP scraping
+- **#architecture section** — Replaced ModEval-specific 6-layer system with "PRODUCTION VS TOY" 4-principle framework (Handles Failure, Configurable, Logs What It Does, Stays Live Without Babysitting)
+- **#workflow section** — Removed all tool/model names, replaced with process categories (High-End Models, Cheaper Models, AI Design Tools, Automated Deployment)
+- **Result** — Page now teaches how to build and think about systems, not how to use specific tools
+
 ## 2026-05-05
 
 Refined #automation section messaging from tool-specific examples to generalized pipeline patterns.
