@@ -1,5 +1,18 @@
 # Change Log & Project Progress
 
+## 2026-05-05
+
+Refined #automation section messaging from tool-specific examples to generalized pipeline patterns.
+
+- **Section description** — Changed from job-hunting context to broader automation pipeline philosophy
+- **Card 1** — "Job Discovery Pipeline" → "Scheduled Scraping Pipelines" (generalized to any scheduled scraping task)
+- **Card 2** — "Resume Tailoring via Claude" → "AI in the Pipeline" (abstracted to any reasoning-heavy step)
+- **Card 3** — "Auto-Fill Automation" → "Browser Automation" (reframed around Playwright capabilities)
+- **Card 4** — "Outreach Dashboard" → "Bringing It Together" (removed URL, focused on integration pattern)
+- **Result** — Automation section now teaches patterns, not products. Visitors see how pipelines work, not how Outreach works.
+
+---
+
 ## Deferred Features
 
 - **Did You Know tab equivalent for portfolio** — Planned tab section showing interesting facts or recent work snippets
