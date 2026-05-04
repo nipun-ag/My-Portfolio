@@ -354,52 +354,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- SECTION 5: ARCHITECTURE -->
 <section class="content-section" id="architecture">
   <div class="sec-eyebrow">SYSTEM DESIGN</div>
-  <h2 class="sec-heading">SYSTEM ARCHITECTURE</h2>
-  <p class="sec-desc">This is how ModEval is structured under the hood. Six layers, each one solving a specific problem I ran into while building it.</p>
+  <h2 class="sec-heading">HOW I THINK ABOUT SYSTEMS</h2>
+  <p class="sec-desc">Principles I keep coming back to when building backend pipelines and automation systems. Not rules, just patterns that keep things from breaking.</p>
 
   <div class="architecture-box">
-    <div class="arch-header">⚙️ Core Layers</div>
+    <div class="arch-header">⚙️ Core Principles</div>
     <div class="arch-content">
       <div class="arch-layer">
         <div class="arch-num">01</div>
         <div class="arch-text">
-          <div class="arch-title">Data Ingestion & Normalization</div>
-          <div class="arch-desc">Content comes in from everywhere - Reddit, Twitter, LLM outputs, user reports, each in its own format. The first layer standardizes all of it, tokenizes it, creates one clean internal format. You can't make good decisions on garbage data.</div>
+          <div class="arch-title">Separation of Concerns</div>
+          <div class="arch-desc">Each part of a system should do one thing. Ingestion, processing, decision, output -- kept separate so any layer can be swapped, tested, or debugged without touching the rest. Systems that mix concerns together are hard to fix when something goes wrong.</div>
         </div>
       </div>
       <div class="arch-layer">
         <div class="arch-num">02</div>
         <div class="arch-text">
-          <div class="arch-title">Multi-Model Evaluation</div>
-          <div class="arch-desc">A single model is never enough. ModEval queries 5 independent safety classifiers simultaneously, capturing disagreement patterns. Consensus indicates high-confidence violations; disagreement signals edge cases requiring human review.</div>
+          <div class="arch-title">Context Over Raw Scores</div>
+          <div class="arch-desc">Raw model outputs and data points don't mean much on their own. Good systems enrich before they act -- pulling in history, environment, and prior signals to give the decision layer something useful to work with.</div>
         </div>
       </div>
       <div class="arch-layer">
         <div class="arch-num">03</div>
         <div class="arch-text">
-          <div class="arch-title">Context Enrichment</div>
-          <div class="arch-desc">Raw model scores lack context. The system retrieves historical account data, community norms, user reports, and violator intent signals. A word that's slur in one community might be reclaimed language in another.</div>
+          <div class="arch-title">Configurable Thresholds, Not Hardcoded Rules</div>
+          <div class="arch-desc">The cost of being wrong varies by situation. Systems should expose knobs rather than bake in assumptions. What counts as a match, a flag, or a trigger should be adjustable without touching the underlying logic.</div>
         </div>
       </div>
       <div class="arch-layer">
         <div class="arch-num">04</div>
         <div class="arch-text">
-          <div class="arch-title">Decision Scoring & Thresholding</div>
-          <div class="arch-desc">Models give you probabilities. Thresholds turn those into yes/no decisions. But the cost of getting it wrong varies wildly - a false positive on hate speech hits different than one on spam. Configurable thresholds let each platform find their own comfort zone.</div>
-        </div>
-      </div>
-      <div class="arch-layer">
-        <div class="arch-num">05</div>
-        <div class="arch-text">
-          <div class="arch-title">Action Enforcement & Escalation</div>
-          <div class="arch-desc">Clear-cut violations get removed automatically. The close calls go to humans. Some cases need specialists - CSAM always gets routed to the child safety team, no exceptions.</div>
-        </div>
-      </div>
-      <div class="arch-layer">
-        <div class="arch-num">06</div>
-        <div class="arch-text">
-          <div class="arch-title">Audit Trail & Explainability</div>
-          <div class="arch-desc">Every decision gets logged with full reasoning - which models flagged it, what context we had, what threshold we used. You need that trail when someone appeals. Explainability isn't nice-to-have, it's mandatory.</div>
+          <div class="arch-title">Every Decision Leaves a Trail</div>
+          <div class="arch-desc">Logging isn't optional. If you can't reconstruct what happened and why, you can't debug it, challenge it, or improve it. I build audit trails in from the start, not as an afterthought.</div>
         </div>
       </div>
     </div>
