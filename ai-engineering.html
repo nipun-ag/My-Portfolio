@@ -401,26 +401,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <div class="workflow-flow">
     <div class="workflow-card">
       <div class="workflow-step">Step 01</div>
-      <div class="workflow-label">Claude Sonnet</div>
-      <div class="workflow-body"><strong>PLAN</strong><br>Architecture, task breakdown, prompt design. Anything where I need to think through structure before writing a line of code.</div>
+      <div class="workflow-label">High-End Models</div>
+      <div class="workflow-body">Planning, architecture, anything that needs real reasoning. I use the most capable models here because getting the structure right saves time everywhere else.</div>
     </div>
     <div class="workflow-arrow">→</div>
     <div class="workflow-card">
       <div class="workflow-step">Step 02</div>
-      <div class="workflow-label">DeepSeek · Qwen</div>
-      <div class="workflow-body"><strong>BUILD</strong><br>Once the plan is clear, DeepSeek and Qwen handle the code via Aider CLI. OpenRouter keeps costs down. I don't use expensive models for things cheaper ones can do.</div>
+      <div class="workflow-label">Cheaper Models</div>
+      <div class="workflow-body">Once the plan is clear, I switch to cheaper models for the actual code. The reasoning is already done. Execution doesn't need the most expensive tool in the box.</div>
     </div>
     <div class="workflow-arrow">→</div>
     <div class="workflow-card">
       <div class="workflow-step">Step 03</div>
-      <div class="workflow-label">Stitch · Claude Design</div>
-      <div class="workflow-body"><strong>DESIGN</strong><br>I prototype the UI in Stitch or Claude Design before writing any code. Faster to iterate there than in the browser.</div>
+      <div class="workflow-label">AI Design Tools</div>
+      <div class="workflow-body">I prototype the UI before writing any code. Faster to iterate in a design tool than in the browser, and I arrive at the codebase knowing what I'm building.</div>
     </div>
     <div class="workflow-arrow">→</div>
     <div class="workflow-card">
       <div class="workflow-step">Step 04</div>
-      <div class="workflow-label">GitHub · Render · Vercel</div>
-      <div class="workflow-body"><strong>SHIP</strong><br>Push to main, Vercel or Render picks it up automatically. Doppler handles the API keys. Both apps stay live with no manual steps.</div>
+      <div class="workflow-label">Automated Deployment</div>
+      <div class="workflow-body">Push to main, auto-deploy fires. API keys managed outside the repo. Once it's configured, it stays live with no manual steps.</div>
     </div>
   </div>
 </section>
