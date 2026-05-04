@@ -325,28 +325,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <section class="content-section" id="automation">
   <div class="sec-eyebrow">AUTOMATION WORK</div>
   <h2 class="sec-heading">BUILDING WITH AI</h2>
-  <p class="sec-desc">I built the Outreach tool because job hunting is repetitive and most of the steps can be automated. Here's how it actually works.</p>
+  <p class="sec-desc">I build automation pipelines that connect scraping, AI, and external APIs into end-to-end workflows. No manual steps, no babysitting. The job search pipeline is the clearest example of how I put this together.</p>
 
   <div class="automation-grid">
     <div class="automation-card">
       <div class="automation-icon">🔍</div>
-      <div class="automation-title">Job Discovery Pipeline</div>
-      <div class="automation-body">Playwright opens job boards and career pages on a schedule, BeautifulSoup parses the listings, and anything relevant that I haven't seen before gets added to a Google Sheet. No manual searching.</div>
+      <div class="automation-title">Scheduled Scraping Pipelines</div>
+      <div class="automation-body">Playwright and BeautifulSoup running on a schedule, hitting target pages, parsing what matters, deduplicating against what's already been seen, and pushing clean data somewhere useful. Built this for job boards but the pattern works for anything.</div>
     </div>
     <div class="automation-card">
       <div class="automation-icon">🤖</div>
-      <div class="automation-title">Resume Tailoring via Claude</div>
-      <div class="automation-body">For every new listing, I send the job description and my base resume to Claude API. It rewrites the summary and adjusts the highlights to match. By the time I look at it, it's already tailored.</div>
+      <div class="automation-title">AI in the Pipeline</div>
+      <div class="automation-body">I wire AI APIs into automation workflows to handle the steps that need actual reasoning. Summarizing, rewriting, classifying, extracting structure from unstructured text. The job search pipeline uses Claude for resume tailoring but the same pattern applies anywhere.</div>
     </div>
     <div class="automation-card">
       <div class="automation-icon">✍️</div>
-      <div class="automation-title">Auto-Fill Automation</div>
-      <div class="automation-body">Playwright navigates to the application page and fills in the fields. Name, contact info, experience, the tailored resume copy. Works on most standard job portals.</div>
+      <div class="automation-title">Browser Automation</div>
+      <div class="automation-body">Playwright handles anything that needs a real browser. Form filling, navigation, clicking through flows, extracting data from pages that block simple scraping. If a human can do it in a browser, Playwright can automate it.</div>
     </div>
     <div class="automation-card">
       <div class="automation-icon">📊</div>
-      <div class="automation-title">Outreach Dashboard</div>
-      <div class="automation-body">All of it surfaces in a custom frontend at <a href="https://outreach.bynipun.com" target="_blank" rel="noopener noreferrer" class="inline-link">outreach.bynipun.com</a>. Same stack as ModEval, plain HTML/CSS/JS.</div>
+      <div class="automation-title">Bringing It Together</div>
+      <div class="automation-body">The pipeline feeds a custom frontend where everything surfaces in one place. Scraping, AI processing, and a UI on top, all connected. That's the pattern I follow: automate the data flow, then build something to make it usable.</div>
     </div>
   </div>
 </section>
