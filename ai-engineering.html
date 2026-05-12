@@ -302,7 +302,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <span class="project-tag">HuggingFace</span>
         <span class="project-tag">Ensemble Learning</span>
       </div>
-      <button class="action-button" onclick="openModal('modeval')">WATCH LIVE PROJECT ↗</button>
+      <a href="https://modeval.bynipun.com" target="_blank" rel="noopener noreferrer" class="action-button">WATCH LIVE PROJECT ↗</a>
     </div>
 
     <!-- OUTREACH PROJECT -->
@@ -464,10 +464,7 @@ window.addEventListener('scroll',()=>{
 function setTab(el){tabs.forEach(t=>t.classList.remove('active'));el.classList.add('active');}
 
 function openModal(type){
-  if(type==='modeval'){
-    modalTitle.textContent='MODEVAL · LIVE PROJECT';
-    modalBody.innerHTML='<iframe class="modal-iframe" src="https://modeval.bynipun.com"></iframe>';
-  }else if(type==='outreach'){
+  if(type==='outreach'){
     modalTitle.textContent='JS-AUTOMATION · DEMO VIDEO';
     const video=document.createElement('video');
     video.className='modal-video';
