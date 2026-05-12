@@ -104,6 +104,9 @@ Format: `type: description`
 
 - 7 pages live: index, about, and 5 domain deep-dives
 - AI Engineering page: 6-tab structure (Philosophy, Stack & Tools, Projects, Automation, Architecture, Workflow)
+- Proof of Work section uses action buttons + modal/lightbox for project demos
+- Stack & Tools updated with AI Models, IDEs & Editors, merged Deployment & Secrets
+- index.html hero and footer cleaned up (no "Self-Built" badge or "built from scratch" line)
 - Premium Editorial Gallery dark theme with glassmorphism
 - Soft radial glow hover pattern, spring-curve easing
 - Atmospheric radial washes + grain texture (homepage only) + floating hero orbs

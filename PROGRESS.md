@@ -1,5 +1,18 @@
 # Change Log & Project Progress
 
+## 2026-05-13
+
+Major refactor of AI Engineering page Proof of Work section, Stack & Tools updates, and homepage cleanup.
+
+- **Proof of Work section refactored** — ModEval and Outreach cards unified to consistent structure with action buttons
+- **ModEval button** — Opens live site directly in new tab (no longer uses modal)
+- **Outreach button** — Opens video demo in modal/lightbox
+- **Modal system** — Closes via backdrop click, X button, or Escape key; video stops playing when modal closes
+- **Stack & Tools updated** — Multi-Model Orchestration replaced with AI Models card (Planning vs Execution split), new IDEs & Editors card added, Secrets Management merged into Deployment card, Frontend card updated to include React and Next.js
+- **AI Engineering page footer** — Fixed to match other domain pages (single "Back to Portfolio" link, proper CSS classes)
+- **Homepage hero** — Removed "SELF-BUILT USING AI" badge
+- **Homepage footer** — Removed "Designed and built from scratch using AI" line
+
 ## 2026-05-05 (Session 2)
 
 Completed major content refinement pass on ai-engineering.html. Shifted all sections from tool-specific documentation to teachable principles and patterns.
