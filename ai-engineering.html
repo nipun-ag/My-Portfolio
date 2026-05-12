@@ -91,6 +91,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .project-tag{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;color:var(--muted);border:1px solid var(--border2);padding:0.25rem 0.6rem;border-radius:2px;}
 .project-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.1em;color:var(--accent2);text-decoration:none;position:relative;z-index:1;transition:color 0.2s;}
 .project-link:hover{color:var(--white);}
+.action-button{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--accent2);cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);position:relative;z-index:1;}
+.action-button:hover{background:rgba(0,184,232,0.08);border-color:var(--accent2);}
 .inline-link{color:var(--accent2);text-decoration:none;font-weight:600;}
 .inline-link:hover{text-decoration:underline;}
 
@@ -125,14 +127,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .workflow-label{font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.8rem;position:relative;z-index:1;}
 .workflow-body{font-size:0.95rem;color:var(--text);line-height:1.6;position:relative;z-index:1;}
 
-.page-footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
-.footer-back{font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
-.footer-back:hover{color:var(--accent2);}
-.footer-next{font-family:var(--font-mono);font-size:0.74rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);text-decoration:none;transition:opacity .2s;}
-.footer-next:hover{opacity:0.8;}
+/* MODAL / LIGHTBOX */
+.modal-backdrop{position:fixed;inset:0;z-index:9998;background:rgba(7,8,15,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:none;}
+.modal-box{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;width:90%;max-width:900px;background:var(--surface);border:1px solid var(--border2);border-radius:8px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5);display:none;}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid var(--border);}
+.modal-title{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.modal-close{font-family:var(--font-mono);font-size:0.8rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0.25rem 0.5rem;transition:color 0.2s;}
+.modal-close:hover{color:var(--white);}
+.modal-body{padding:0;overflow:hidden;}
+.modal-iframe{width:100%;height:600px;border:none;}
+.modal-video{width:100%;display:block;max-height:600px;background:#000;}
 
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);}
+.modal-backdrop.active,.modal-box.active{display:block;}
+
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .page-hero,.content-section{padding-left:1.5rem;padding-right:1.5rem;}
@@ -295,7 +302,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <span class="project-tag">HuggingFace</span>
         <span class="project-tag">Ensemble Learning</span>
       </div>
-      <a href="https://modeval.bynipun.com" target="_blank" rel="noopener noreferrer" class="project-link">View Project ↗</a>
+      <button class="action-button" onclick="openModal('modeval')">WATCH LIVE PROJECT ↗</button>
     </div>
 
     <!-- OUTREACH PROJECT -->
@@ -308,16 +315,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         </div>
       </div>
       <p class="project-desc">Scrapes job boards and company career pages daily, filters for relevant roles, pulls them into Google Sheets, then uses Claude API to tailor my resume for each one. Also auto-fills the application form. Built it for myself, revamping it to make it public.</p>
-      <div class="project-video" style="margin:1.5rem 0;position:relative;z-index:1;">
-        <div style="font-family:var(--font-mono);font-size:0.70rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:0.75rem;">Product Demo</div>
-        <video
-          width="100%"
-          controls
-          preload="metadata"
-          style="border-radius:6px;border:1px solid rgba(255,255,255,0.08);display:block;max-height:400px;background:#000;">
-          <source src="js_Product_demo.mp4" type="video/mp4">
-        </video>
-      </div>
       <div class="project-tags">
         <span class="project-tag">Playwright</span>
         <span class="project-tag">BeautifulSoup</span>
@@ -326,6 +323,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <span class="project-tag">Python</span>
         <span class="project-tag">Automation</span>
       </div>
+      <button class="action-button" onclick="openModal('outreach')">WATCH DEMO VIDEO ↗</button>
     </div>
   </div>
 </section>
@@ -439,15 +437,63 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <a href="index.html" class="footer-next">Back to Domains →</a>
 </div>
 
+<!-- MODAL LIGHTBOX -->
+<div class="modal-backdrop" id="modalBackdrop"></div>
+<div class="modal-box" id="modalBox">
+  <div class="modal-header">
+    <div class="modal-title" id="modalTitle"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body" id="modalBody"></div>
+</div>
+
 <script>
 const sections=['philosophy','stack','projects','automation','architecture','workflow'];
 const tabs=document.querySelectorAll('.tab-btn');
+const modalBackdrop=document.getElementById('modalBackdrop');
+const modalBox=document.getElementById('modalBox');
+const modalTitle=document.getElementById('modalTitle');
+const modalBody=document.getElementById('modalBody');
+
 window.addEventListener('scroll',()=>{
   let current='';
   sections.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)current=id;});
   tabs.forEach(t=>{t.classList.remove('active');if(t.getAttribute('href')==='#'+current)t.classList.add('active');});
 });
+
 function setTab(el){tabs.forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+
+function openModal(type){
+  if(type==='modeval'){
+    modalTitle.textContent='MODEVAL · LIVE PROJECT';
+    modalBody.innerHTML='<iframe class="modal-iframe" src="https://modeval.bynipun.com"></iframe>';
+  }else if(type==='outreach'){
+    modalTitle.textContent='OUTREACH · DEMO VIDEO';
+    const video=document.createElement('video');
+    video.className='modal-video';
+    video.controls=true;
+    video.autoplay=true;
+    const source=document.createElement('source');
+    source.src='https://github.com/user-attachments/assets/2567ba5c-0b3c-4a64-b128-ab57bd1a9520';
+    source.type='video/mp4';
+    video.appendChild(source);
+    modalBody.innerHTML='';
+    modalBody.appendChild(video);
+  }
+  modalBackdrop.classList.add('active');
+  modalBox.classList.add('active');
+}
+
+function closeModal(){
+  modalBackdrop.classList.remove('active');
+  modalBox.classList.remove('active');
+  const video=modalBody.querySelector('video');
+  if(video){video.pause();video.src='';}
+  modalBody.innerHTML='';
+}
+
+modalBackdrop.addEventListener('click',closeModal);
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeModal();});
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
