@@ -141,6 +141,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 .modal-backdrop.active,.modal-box.active{display:block;}
 
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-back {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-back:hover { color: var(--accent2); }
+
+.footer-next {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-next:hover { color: var(--accent2); }
+
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .page-hero,.content-section{padding-left:1.5rem;padding-right:1.5rem;}
